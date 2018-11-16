@@ -1,0 +1,37 @@
+﻿{
+  "elections_poll": [
+    {
+      "institute": "IBOPE",
+      "round": 1,
+      "date": "2018-09-18",
+      "candidates": [
+        {
+          "name": "Bolsonaro",
+          "score": 27.88,
+          "gender": {
+            "male": 61.48255814,
+            "female": 38.51744186
+          },
+          "age_intervals": {
+            "age_16_24": 18.07747489,
+            "age_25_34": 26.39885222,
+            "age_35_44": 22.59684362,
+            "age_45_54": 14.84935438,
+            "above_55": 18.07747489
+          },
+          "education_status": {
+            "elementary_school": 25.83241859,
+            "high_school": 46.50567142,
+            "higher_education": 27.66190999
+          },
+          "regions": {
+            "southeast": 55.67765568,
+            "northeast": 13.85281385,
+            "south": 14.48551449,
+            "north_midwest": 15.98401598
+          }
+        }
+      ]
+    }
+  ]
+}

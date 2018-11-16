@@ -1,0 +1,16 @@
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.exe.config
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.exe
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.pdb
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.dll
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.xml
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.csprojResolveAssemblyReference.cache
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.exe
+c:\users\familia\documents\visual studio 2015\Projects\Demographics.Facebook\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.pdb
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.exe.config
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.exe
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.pdb
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.csprojResolveAssemblyReference.cache
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.exe
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.pdb
