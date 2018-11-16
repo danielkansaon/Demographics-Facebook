@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Demographics.Facebook.Processing.Models
 {
-    public class BrazilElection
+    public class PresidentialElection
     {
+        public PresidentialElection()
+        {
+            elections_poll = new List<ElectionPoll>();
+        }
+
         public List<ElectionPoll> elections_poll { get; set; }
     }
 }

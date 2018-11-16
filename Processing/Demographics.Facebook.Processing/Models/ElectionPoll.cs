@@ -7,6 +7,11 @@ namespace Demographics.Facebook.Processing.Models
 {
     public class ElectionPoll
     {
+        public ElectionPoll()
+        {
+            candidates = new List<Candidate>();
+        }
+
         public string institute { get; set; }
 
         public int round { get; set; }

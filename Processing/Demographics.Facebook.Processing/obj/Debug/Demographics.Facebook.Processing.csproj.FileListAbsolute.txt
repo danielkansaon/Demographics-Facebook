@@ -11,6 +11,6 @@ C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demogra
 C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Demographics.Facebook.Processing.pdb
 C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.csprojResolveAssemblyReference.cache
+C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.csproj.ResolveComReference.cache
 C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.exe
 C:\Users\Familia\Documents\Projetos\GIT\Demographics-Facebook\Processing\Demographics.Facebook.Processing\obj\Debug\Demographics.Facebook.Processing.pdb
