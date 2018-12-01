@@ -61,6 +61,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\1-DataFolha-20171130.xlsx" />
+    <None Include="Data\1-DataFolha-20180607.xlsx" />
+    <None Include="Data\1-DataFolha-20180821.xlsx" />
+    <None Include="Data\1-DataFolha-20180910.xlsx" />
+    <None Include="Data\1-DataFolha-20180918.xlsx" />
+    <None Include="Data\1-DataFolha-20180928.xlsx" />
+    <None Include="Data\1-DataFolha-20181002.xlsx" />
+    <None Include="Data\1-DataFolha-20181004.xlsx" />
+    <None Include="Data\1-DataFolha-20181006.xlsx" />
+    <None Include="Data\1-IBOPE-20171022.xlsx" />
+    <None Include="Data\1-IBOPE-20180624.xlsx" />
+    <None Include="Data\1-IBOPE-20180819.xlsx" />
+    <None Include="Data\1-IBOPE-20180903.xlsx" />
+    <None Include="Data\1-IBOPE-20180910.xlsx" />
+    <None Include="Data\1-IBOPE-20180918.xlsx" />
+    <None Include="Data\1-IBOPE-20180924.xlsx" />
+    <None Include="Data\1-IBOPE-20180930.xlsx" />
+    <None Include="Data\1-IBOPE-20181002.xlsx" />
+    <None Include="Data\1-IBOPE-20181006.xlsx" />
+    <None Include="Data\1-Resultado-20181007.xlsx" />
+    <None Include="Data\2-DataFolha-20181010.xlsx" />
+    <None Include="Data\2-DataFolha-20181018.xlsx" />
+    <None Include="Data\2-DataFolha-20181025.xlsx" />
+    <None Include="Data\2-DataFolha-20181027.xlsx" />
+    <None Include="Data\2-IBOPE-20181014.xlsx" />
+    <None Include="Data\2-IBOPE-20181023.xlsx" />
+    <None Include="Data\2-IBOPE-20181027.xlsx" />
+    <None Include="Data\2-Resultado-20181028.xlsx" />
     <None Include="Json\PresidentialElection.json" />
     <None Include="packages.config" />
   </ItemGroup>

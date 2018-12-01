@@ -1,1 +1,2 @@
-﻿pathfolder="C:\Users\Familia\Downloads\election"
+﻿pathfolderexternal=""
+pathfolderinternal="\Data"

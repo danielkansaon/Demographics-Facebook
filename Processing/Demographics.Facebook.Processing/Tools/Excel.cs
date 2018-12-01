@@ -64,8 +64,8 @@ namespace Demographics.Facebook.Processing.Tools
                     i++;
                 }
 
-                election.institute = Path.GetFileName(path).Split('-')[0];
-                election.date = DateTime.ParseExact(Path.GetFileName(path).Split('-')[1].Replace(".xlsx", ""), "yyyyMMdd", null);
+                election.institute = Path.GetFileName(path).Split('-')[1];
+                election.date = DateTime.ParseExact(Path.GetFileName(path).Split('-')[2].Replace(".xlsx", ""), "yyyyMMdd", null);
                 election.round = i <= 16 ? 2 : 1;
 
                 return election;

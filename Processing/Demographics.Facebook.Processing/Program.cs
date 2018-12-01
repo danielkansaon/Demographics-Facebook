@@ -34,7 +34,11 @@ namespace Demographics.Facebook.Processing
         static void Config()
         {
             var lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\..\\..\\" + "config.txt");
+
             PathConfig = lines[0].Split('=')[1].Replace("\"", "");
+
+            if (string.IsNullOrEmpty(PathConfig))            
+                PathConfig = Directory.GetCurrentDirectory() + "\\..\\.." +  lines[1].Split('=')[1].Replace("\"", "");            
         }
 
         static void Save(string text)
