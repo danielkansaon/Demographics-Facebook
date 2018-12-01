@@ -3,8 +3,8 @@ import read_facebook as facebook
 import read_elections as election
 import pandas as pd
 
-xticks_DataFolha = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05",  "10-08",  "10-15",  "10-22",  "10-26",  "10-29"]
-xticks_Ibope = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05",  "10-08",  "10-15",  "10-22",  "10-26",  "10-29"]
+xticks_facebook = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05", "10-06", "10-08", "10-15",  "10-22",  "10-26", "10-27", "10-29"]
+xticks = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05", "10-06",  "10-08",  "10-15",  "10-22",  "10-26", "10-27",  "10-29"]
 
 def plot_gender():
     facebook.readJson()
@@ -28,7 +28,7 @@ def plot_gender():
     plt.plot('x', '17_male_dtfolha', data=df, marker='o', color="green", ls='-', alpha=0.4, label='DataFolha')
     plt.plot('x', '17_male_ibope', data=df, marker='o', color="red", linestyle='dashed', alpha=0.4, label='IBOPE')
     plt.plot('x', '17_male_facebook', data=df, marker='o', color="blue", alpha=0.4)
-    plt.xticks(range(0, count_x), xticks_DataFolha)
+    plt.xticks(range(0, count_x), xticks)
     G1.set_ylim(15,75)
 
     G2 = plt.subplot(222)
@@ -36,21 +36,21 @@ def plot_gender():
     plt.plot('x', '17_female_dtfolha', data=df, marker='o', color="green", ls='-', alpha=0.4, label='DataFolha')
     plt.plot('x', '17_female_ibope', data=df, marker='o', color="red", alpha=0.4, label='IBOPE')
     plt.plot('x', '17_female_facebook', data=df, marker='o', color="blue", alpha=0.4)
-    plt.xticks(range(0, count_x), xticks_Ibope)
+    plt.xticks(range(0, count_x), xticks)
     G2.set_ylim(15,75)
 
     G3 = plt.subplot(223)
     plt.plot('x', '13_male_dtfolha', data=df, marker='o', color="green", ls='-', alpha=0.4, label='DataFolha')
     plt.plot('x', '13_male_ibope', data=df, marker='o', color="red", alpha=0.4, label='IBOPE')
     plt.plot('x', '13_male_facebook', data=df, marker='o', color="blue", alpha=0.4)
-    plt.xticks(range(0, count_x), xticks_DataFolha)
+    plt.xticks(range(0, count_x), xticks)
     G3.set_ylim(15,75)
 
     G4 = plt.subplot(224)
     plt.plot('x', '13_female_dtfolha', data=df, marker='o', color="green", ls='-', alpha=0.4, label='DataFolha')
     plt.plot('x', '13_female_ibope', data=df, marker='o', color="red", alpha=0.4, label='IBOPE')
     plt.plot('x', '13_female_facebook', data=df, marker='o', color="blue", alpha=0.4, label='Facebook')
-    plt.xticks(range(0, count_x), xticks_Ibope)
+    plt.xticks(range(0, count_x), xticks)
     G4.set_ylim(15,75)
     plt.legend()
 
