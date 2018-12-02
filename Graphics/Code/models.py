@@ -1,6 +1,6 @@
 class Data:
     def __init__(self):
-        self.candidate = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'),]
+        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula')]
 
 class Candidate:    
    def __init__(self, name):
@@ -61,4 +61,4 @@ class Candidate:
         self.dfolha_medio =[]
         self.dfolha_fundamental =[] 
         
-vector_data = Data()
+data_reader = Data()
