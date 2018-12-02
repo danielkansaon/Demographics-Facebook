@@ -2,46 +2,6 @@ import json
 import os
 import models
 
-# Bolsonaro
-vec_facebook_17_male =[]
-vec_facebook_17_female =[]
-
-vec_facebook_17_16a24 =[]
-vec_facebook_17_25a34 =[]
-vec_facebook_17_35a44 =[]
-vec_facebook_17_45a54 =[]
-vec_facebook_17_55 =[]
-
-# Haddad
-vec_facebook_13_male =[]
-vec_facebook_13_female =[]
-
-vec_facebook_13_16a24 =[]
-vec_facebook_13_25a34 =[]
-vec_facebook_13_35a44 =[]
-vec_facebook_13_45a54 =[]
-vec_facebook_13_55 =[]
-
-# Lula
-vec_facebook_lula_male =[]
-vec_facebook_lula_female =[]
-
-vec_facebook_12_16a24 =[]
-vec_facebook_12_25a34 =[]
-vec_facebook_12_35a44 =[]
-vec_facebook_12_45a54 =[]
-vec_facebook_12_55 =[]
-
-# Ciro
-vec_facebook_12_male =[]
-vec_facebook_12_female =[]
-
-vec_facebook_12_16a24 =[]
-vec_facebook_12_25a34 =[]
-vec_facebook_12_35a44 =[]
-vec_facebook_12_45a54 =[]
-vec_facebook_12_55 =[]
-
 age_intervals = {     
     'adolescent' :{'age_min': 13, 'age_max': 17},
     'young_1' :{'age_min': 18, 'age_max': 24},
@@ -50,7 +10,9 @@ age_intervals = {
     'mid_aged_2' :{'age_min': 45, 'age_max': 54},        
     'old_1': {'age_min': 55, 'age_max': 64},
     'old_2': {'age_min': 65}                              
-    }    
+}    
+
+regions = ["northeast", "south", "southeast", "midwest", "north"]
 
 presids_dict = {
         3:"Fernando Haddad",
@@ -93,14 +55,30 @@ def readJson():
                     if(collected_date == "18_10_06" or collected_date == "18_10_27"):
                         models.data_reader.candidates[i].facebook_male.append(models.data_reader.candidates[i].facebook_male[-1])                
                         models.data_reader.candidates[i].facebook_female.append(models.data_reader.candidates[i].facebook_female[-1])
+
                         models.data_reader.candidates[i].facebook_16a24.append( models.data_reader.candidates[i].facebook_16a24[-1])
                         models.data_reader.candidates[i].facebook_25a34.append( models.data_reader.candidates[i].facebook_25a34[-1])
                         models.data_reader.candidates[i].facebook_35a44.append( models.data_reader.candidates[i].facebook_35a44[-1])
                         models.data_reader.candidates[i].facebook_45a54.append( models.data_reader.candidates[i].facebook_45a54[-1])
                         models.data_reader.candidates[i].facebook_55.append( models.data_reader.candidates[i].facebook_55[-1])
+
+                        models.data_reader.candidates[i].facebook_nordeste.append(models.data_reader.candidates[i].facebook_nordeste[-1])
+                        models.data_reader.candidates[i].facebook_sul.append(models.data_reader.candidates[i].facebook_sul[-1])
+                        models.data_reader.candidates[i].facebook_sudeste.append( models.data_reader.candidates[i].facebook_sudeste[-1])
+                        models.data_reader.candidates[i].facebook_norte_coeste.append(models.data_reader.candidates[i].facebook_norte_coeste[-1])
                     else:
                         models.data_reader.candidates[i].facebook_male.append(0)
                         models.data_reader.candidates[i].facebook_female.append(0)
+                        models.data_reader.candidates[i].facebook_16a24.append(0)
+                        models.data_reader.candidates[i].facebook_25a34.append(0)
+                        models.data_reader.candidates[i].facebook_35a44.append(0)
+                        models.data_reader.candidates[i].facebook_45a54.append(0)
+                        models.data_reader.candidates[i].facebook_55.append(0)
+
+                        models.data_reader.candidates[i].facebook_nordeste.append(0)
+                        models.data_reader.candidates[i].facebook_sul.append(0)
+                        models.data_reader.candidates[i].facebook_sudeste.append(0)
+                        models.data_reader.candidates[i].facebook_norte_coeste.append(0)
                 else:
                     models.data_reader.candidates[i].facebook_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male'] * 100)
                     models.data_reader.candidates[i].facebook_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female'] * 100)
@@ -132,67 +110,10 @@ def readJson():
                             else:
                                 models.data_reader.candidates[i].facebook_55.append(json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group]*100)
                                 adicionarIdoso = False
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        # if(presid_key == '16'):        
-        #     for collected_date in collected_dates:             
-        #         if(collected_date == "18_10_06" or collected_date == "18_10_27"):                    
-        #             vec_facebook_17_male.append(vec_facebook_17_male[len(vec_facebook_17_male) - 1])
-        #             vec_facebook_17_female.append(vec_facebook_17_female[len(vec_facebook_17_female) - 1])                
-        #         else:
-        #             vec_facebook_17_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male'] * 100)
-        #             vec_facebook_17_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female'] * 100)
-        # elif(presid_key == '3'):        
-        #     for collected_date in collected_dates:                
-        #         if(collected_date == "18_10_06" or collected_date == "18_10_27"):
-        #             vec_facebook_13_male.append(vec_facebook_13_male[len(vec_facebook_13_male) - 1])
-        #             vec_facebook_13_female.append(vec_facebook_13_female[len(vec_facebook_13_female) - 1])
-        #         else:
-        #             vec_facebook_13_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male']* 100)
-        #             vec_facebook_13_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female']* 100)
-        # elif(presid_key == '4'):        
-        #     for collected_date in collected_dates:   
-        #         if(collected_date == "18_10_06" or collected_date == "18_10_27"):        
-        #             vec_facebook_lula_male.append(vec_facebook_lula_male[len(vec_facebook_lula_male) - 1])
-        #             vec_facebook_lula_female.append(vec_facebook_lula_female[len(vec_facebook_lula_female) - 1])
-        #         else:  
-        #             vec_facebook_lula_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male']* 100)
-        #             vec_facebook_lula_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female']* 100)
-        # elif(presid_key == '110'):        
-        #     for collected_date in collected_dates:   
-        #         if(collected_date == "18_10_06" or collected_date == "18_10_27"):        
-        #             vec_facebook_12_male.append(vec_facebook_12_male[len(vec_facebook_12_male) - 1])
-        #             vec_facebook_12_female.append(vec_facebook_12_female[len(vec_facebook_12_female) - 1])
-        #         else:
-        #             if(collected_date != '17_11_28'):
-        #                 vec_facebook_12_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male']* 100)
-        #                 vec_facebook_12_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female']* 100)
-        #             else:
-        #                 vec_facebook_12_male.append(0)
-        #                 vec_facebook_12_female.append(0)
-            
-            # for age_group in age_intervals:
-            #     print '\t\tPercent value: %.2f' % (json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group]*100)          
                     
+                    models.data_reader.candidates[i].facebook_nordeste.append(json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['northeast'] * 100)
+                    models.data_reader.candidates[i].facebook_sul.append(json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['south'] * 100)
+                    models.data_reader.candidates[i].facebook_sudeste.append(json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['southeast'] * 100)
+                    models.data_reader.candidates[i].facebook_norte_coeste.append(json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['midwest'] * 100)
+                    models.data_reader.candidates[i].facebook_norte_coeste[0] += (json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['north'] * 100)
+                        
