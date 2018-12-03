@@ -1,6 +1,6 @@
 class Data:
     def __init__(self):
-        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula')]
+        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Alckmin')]
 
 def return_index(name):
     if(name == 'Jair Bolsonaro'):
@@ -11,6 +11,10 @@ def return_index(name):
         return 2
     elif(name == 'Lula'):
         return 3
+    elif(name == 'Marina Silva'):
+        return 4
+    elif(name == 'Alckmin'):
+        return 5
     return -1
     
 class Candidate:    
