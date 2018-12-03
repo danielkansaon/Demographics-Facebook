@@ -72,6 +72,7 @@ def readJson():
                         models.data_reader.candidates[i].facebook_norte_coeste.append(models.data_reader.candidates[i].facebook_norte_coeste[-1])
 
                         models.data_reader.candidates[i].facebook_likes.append(models.data_reader.candidates[i].facebook_likes[-1])
+                        models.data_reader.candidates[i].facebook_talking_about.append(models.data_reader.candidates[i].facebook_talking_about[-1])
                     else:
                         models.data_reader.candidates[i].facebook_male.append(0)
                         models.data_reader.candidates[i].facebook_female.append(0)
@@ -86,6 +87,7 @@ def readJson():
                         models.data_reader.candidates[i].facebook_sudeste.append(0)
                         models.data_reader.candidates[i].facebook_norte_coeste.append(0)
                         models.data_reader.candidates[i].facebook_likes.append(0)
+                        models.data_reader.candidates[i].facebook_talking_about.append(0)
                 else:
                     models.data_reader.candidates[i].facebook_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male'] * 100)
                     models.data_reader.candidates[i].facebook_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female'] * 100)
@@ -125,4 +127,6 @@ def readJson():
                     models.data_reader.candidates[i].facebook_norte_coeste[-1] += (json_line[presid_key][collected_date]['percent_values_dict']['brazilian_regions']['north'] * 100)
 
                     models.data_reader.candidates[i].facebook_likes.append(json_line[presid_key][collected_date]['num_likes'])
+                    models.data_reader.candidates[i].facebook_talking_about.append(json_line[presid_key][collected_date]['talking_about'])
+
                         

@@ -40,6 +40,8 @@ class Candidate:
 
         self.facebook_likes = []
 
+        self.facebook_talking_about = []
+
         #IBOPE
         self.ibope_male = []
         self.ibope_female = []  

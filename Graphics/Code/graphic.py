@@ -370,3 +370,31 @@ def plot_like():
           fancybox=True, shadow=True, ncol=5)
 
     plt.show()
+
+def talking_about():
+    
+    df = pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_bolsonaro].facebook_talking_about)), 
+            'bolsonaro_talking': models.data_reader.candidates[i_bolsonaro].facebook_talking_about, 'ciro_talking': models.data_reader.candidates[i_ciro].facebook_talking_about,
+            'haddad_talking': models.data_reader.candidates[i_haddad].facebook_talking_about, 'marina_talking': models.data_reader.candidates[i_marina].facebook_talking_about,
+            'alckmin_talking': models.data_reader.candidates[i_alckmin].facebook_talking_about, 'lula_talking': models.data_reader.candidates[i_lula].facebook_talking_about
+        })
+
+    count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_talking_about)
+
+    plt.suptitle('Talking About')  
+    G1 = plt.subplot(1,1,1)
+    plt.plot('x', 'bolsonaro_talking', data=df, marker='o', color="green", ls='-', alpha=0.4, label='Jair Bolsonaro')
+    plt.plot('x', 'haddad_talking', data=df, marker='o', color="red", alpha=0.4, label='Fernando Haddad')  
+    plt.plot('x', 'ciro_talking', data=df, marker='o', color="orange", alpha=0.4, label='Ciro Gomes')
+    plt.plot('x', 'alckmin_talking', data=df, marker='o', color="blue", alpha=0.4, label='Alckmin')
+    plt.plot('x', 'marina_talking', data=df, marker='o', color="black", alpha=0.4, label='Marina Silva')
+    plt.plot('x', 'lula_talking', data=df, marker='o', color="brown", alpha=0.4, label='Lula')
+    
+    plt.xticks(range(0, count_x), xticks)
+    # G1.set_ylim(0,8500000)
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10),
+          fancybox=True, shadow=True, ncol=5)
+
+    plt.show()
