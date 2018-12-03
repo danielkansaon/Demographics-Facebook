@@ -1,6 +1,6 @@
 class Data:
     def __init__(self):
-        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Alckmin')]
+        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Geraldo Alckmin')]
 
 def return_index(name):
     if(name == 'Jair Bolsonaro'):
@@ -13,7 +13,7 @@ def return_index(name):
         return 3
     elif(name == 'Marina Silva'):
         return 4
-    elif(name == 'Alckmin'):
+    elif(name == 'Geraldo Alckmin'):
         return 5
     return -1
     
@@ -106,18 +106,6 @@ def complete_data_zero():
             c.ibope_45a54.append(0)
             c.ibope_55.append(0)
 
-            c.ibope_16a24.append(0)
-            c.ibope_25a34.append(0)
-            c.ibope_35a44.append(0)
-            c.ibope_45a54.append(0)
-            c.ibope_55.append(0)
-
-            c.dfolha_16a24.append(0)
-            c.dfolha_25a34.append(0)
-            c.dfolha_35a44.append(0)
-            c.dfolha_45a54.append(0)
-            c.dfolha_55.append(0)
-
             c.dfolha_norte_coeste.append(0)  
             c.dfolha_nordeste.append(0) 
             c.dfolha_sudeste.append(0) 
@@ -132,7 +120,7 @@ def complete_data_zero():
             c.ibope_medio.append(0)
             c.ibope_superior.append(0) 
 
-            c.dfolha_fundamental.append(c.dfolha_fundamental)  
-            c.dfolha_medio.append(c.dfolha_medio)
-            c.dfolha_superior.append(c.dfolha_superior) 
+            c.dfolha_fundamental.append(0)  
+            c.dfolha_medio.append(0)
+            c.dfolha_superior.append(0) 
 

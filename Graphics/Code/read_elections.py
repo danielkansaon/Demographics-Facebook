@@ -54,7 +54,7 @@ def read_json():
                         models.data_reader.candidates[i].ibope_male.append(models.data_reader.candidates[i].ibope_male[-1])
                         models.data_reader.candidates[i].ibope_female.append(models.data_reader.candidates[i].ibope_female[-1])
 
-                        models.data_reader.candidates[i].ibope_16a24.append( models.data_reader.candidates[i].ibope_16a24[-1])    
+                        models.data_reader.candidates[i].ibope_16a24.append(models.data_reader.candidates[i].ibope_16a24[-1])    
                         models.data_reader.candidates[i].ibope_25a34.append(models.data_reader.candidates[i].ibope_25a34[-1])    
                         models.data_reader.candidates[i].ibope_35a44.append(models.data_reader.candidates[i].ibope_35a44[-1])    
                         models.data_reader.candidates[i].ibope_45a54.append(models.data_reader.candidates[i].ibope_45a54[-1])

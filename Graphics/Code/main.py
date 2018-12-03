@@ -14,6 +14,8 @@ def main():
     # graphic.plot_region()
     # graphic.plot_like()
     # graphic.talking_about()
+    # graphic.plot_age()
+    graphic.plot_education()
 
 if __name__ == "__main__":
     main()
