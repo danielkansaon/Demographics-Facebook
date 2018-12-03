@@ -936,7 +936,7 @@ def plot_education():
     # plt.show()
 
 
-    # Jair Bolsonaro
+    # Ciro Gomes
     plt.suptitle('Education')  
     G1 = plt.subplot(3,3,1)
     plt.ylabel('Ciro Gomes', multialignment='center', color='gray', fontsize=12)
@@ -1017,5 +1017,11 @@ def plot_education():
     plt.xticks(range(0, count_x), xticks)
     G9.set_ylim(0,75)
     plt.legend()
-  
+    
+    # for i in range(len(r4)):
+    # plt.text(x = 2 , y = 50, s = 't', size = 6)
+    # plt.style.use('seaborn-darkgrid')
+    # plt.savefig('PNG/#199_Matplotlib_style_sheet.png', dpi=96, bbox_inches='tight')
+
+
     plt.show()
