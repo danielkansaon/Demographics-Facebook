@@ -2,6 +2,7 @@ from matplotlib.ticker import FuncFormatter
 import read_elections as election
 import read_facebook as facebook
 import matplotlib.pyplot as plt
+from scipy.stats import spearmanr
 import pandas as pd
 import models
 import os
@@ -30,6 +31,22 @@ dic_lines = {
 def formatter_millions(x):
     return '%1.0f' % (x/1000000)
 
+def calculate_correlattion(ibope, dfolha, facebook):
+    # del ibope [9]
+    # del ibope [14]
+    # del dfolha [9]
+    # del dfolha [14]
+    v = []
+
+    corrI, p_valueI = spearmanr(ibope, facebook)
+    corrF, p_valueF = spearmanr(dfolha, facebook)
+    v.append(corrI)
+    v.append(corrF)
+    v.append(p_valueI)
+    v.append(p_valueF)
+
+    return v
+
 def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY, hspace=0):    
 
     fig = plt.figure(figsize=(figsizeX, figsizeY))    
@@ -39,7 +56,9 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     maxProtesto2 = 0
     maxElenao = 0
     maxLula = 0
-    num = 1    
+    num = 1 
+
+    vLabels = []
 
     for d in data_frame:
         G = fig.add_subplot(line, col, num)
@@ -58,7 +77,8 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 # , marker='o'
 
             plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
-            
+            vLabels.append(g)
+
             # Encontrando ponto gráfico
             if(maxProtesto2 < d[g].values[11]):
                 maxProtesto2 = d[g].values[11]
@@ -66,7 +86,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 maxElenao = d[g].values[6]
             if(maxLula < d[g].values[3]):
                 maxLula = d[g].values[3]
-
+            
             if(set_result_aux == True):     
                 if(d[g].values[9] > 0):
                     plt.scatter(9, d[g].values[9], color='darkorange', s=130, alpha=1) 
@@ -86,8 +106,10 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
             else:               
                 plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 9)  
 
+        result_corr = calculate_correlattion(d[vLabels[0]].values, d[vLabels[1]].values, d[vLabels[2]].values) 
         plt.xticks(range(0, count_x), xticks)   
-        plt.legend()            
+        plt.legend()        
+           
         count_subtitle += 1
 
         if(count_subtitle == col):
@@ -98,6 +120,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         set_result_aux = True
         maxProtesto2 = 0
         maxElenao = 0
+        vLabels = []
         maxLula = 0
         num += 1
     
@@ -326,11 +349,11 @@ def plot_region():
     })]
 
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
-    plot_graph("region_bolsonaro.png", data_frame_bolsonaro, 2, 2, 5, 80, count_x, "Jair Bolsonaro", False, True, True, 18, 10)
+    plot_graph("region_bolsonaro.png", data_frame_bolsonaro, 2, 2, 5, 70, count_x, "Jair Bolsonaro", False, True, True, 18, 10)
     plot_graph("region_haddad.png", data_frame_haddad, 2, 2, 5, 80, count_x, "Fernando Haddad", False, True, True, 18, 10)
-    plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 80, count_x, "Lula", False, True, True, 18, 10)
-    plot_graph("region_ciro.png", data_frame_ciro, 2, 2, 5, 80, count_x, "Ciro Gomes", False, True, True, 18, 10)
-    plot_graph("region_marina.png", data_frame_marina, 2, 2, 5, 80, count_x, "Marina Silva", False, True, True, 18, 10)
+    plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
+    plot_graph("region_ciro.png", data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10)
+    plot_graph("region_marina.png", data_frame_marina, 2, 2, 5, 70, count_x, "Marina Silva", False, True, True, 18, 10)
     plot_graph("region_alckmin.png", data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10)
 
 def plot_like():
