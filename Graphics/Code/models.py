@@ -2,6 +2,12 @@ class Data:
     def __init__(self):
         self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Geraldo Alckmin')]
 
+    
+# xticks_facebook = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05", "10-06", "10-08", "10-15",  "10-22",  "10-26", "10-27", "10-29"]
+# xticks_dataf = ["17-11-30",  "06-07",  "08-21",  "09-10",  "09-18",  "09-28",  "10-02",  "10-04", "10-06", "10-07", "10-10", "10-18",  "10-25",  "10-27", "10-28"]
+# xticks_ibope = ["17-10-22",  "06-24",  "08-19",  "09-10",  "09-18",  "09-24",  "09-30",  "10-02", "10-06", "10-07", "10-07", "10-14",  "10-23",  "10-27", "10-28"]
+
+
 def return_index(name):
     if(name == 'Jair Bolsonaro'):
         return 0
