@@ -39,29 +39,29 @@ namespace Demographics.Facebook.Processing
                             election.elections_poll.Add(_excel.Read(item));
                     }
                 }
-
-                string json = JsonConvert.SerializeObject(election);
-                Save(json);
-
-                Console.WriteLine(json);
-                Console.ReadKey();
             }
+
+            string json = JsonConvert.SerializeObject(election);
+            Save(json);
+
+            Console.WriteLine(json);
+            Console.ReadKey();
         }
 
         static void Config()
         {
-                var lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\..\\..\\" + "config.txt");
+            var lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\..\\..\\" + "config.txt");
 
-                PathConfig = lines[0].Split('=')[1].Replace("\"", "");
+            PathConfig = lines[0].Split('=')[1].Replace("\"", "");
 
-                if (string.IsNullOrEmpty(PathConfig))
-                    PathConfig = Directory.GetCurrentDirectory() + "\\..\\.." + lines[1].Split('=')[1].Replace("\"", "");
-            }
+            if (string.IsNullOrEmpty(PathConfig))
+                PathConfig = Directory.GetCurrentDirectory() + "\\..\\.." + lines[1].Split('=')[1].Replace("\"", "");
+        }
 
-            static void Save(string text)
+        static void Save(string text)
         {
-                string complemento = comLula == true ? "ComLula" : "SemLula";
-                File.WriteAllText(Directory.GetCurrentDirectory() + "\\..\\..\\Json\\" + $"PresidentialElection-{complemento}.json", text);
-            }
+            string complemento = comLula == true ? "ComLula" : "SemLula";
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\..\\..\\Json\\" + $"PresidentialElection-{complemento}.json", text);
         }
     }
+}

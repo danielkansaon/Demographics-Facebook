@@ -89,6 +89,8 @@
     <None Include="Data\2-IBOPE-20181023.xlsx" />
     <None Include="Data\2-IBOPE-20181027.xlsx" />
     <None Include="Data\2-Resultado-20181028.xlsx" />
+    <None Include="Json\PresidentialElection-ComLula.json" />
+    <None Include="Json\PresidentialElection-SemLula.json" />
     <None Include="Json\PresidentialElection.json" />
     <None Include="packages.config" />
   </ItemGroup>
