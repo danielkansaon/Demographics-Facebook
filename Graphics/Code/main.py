@@ -10,8 +10,8 @@ def main():
     
     loadJson()
     # Plotando Gender
-    # graphic.plot_gender()
-    graphic.plot_region()
+    graphic.plot_gender()
+    # graphic.plot_region()
     # graphic.plot_age()
     # graphic.plot_education()
 
