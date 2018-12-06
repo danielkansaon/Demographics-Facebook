@@ -55,6 +55,8 @@ def return_index(presid_key):
         return 4
     elif(presid_key == '7'):
         return 5
+    elif(presid_key == '12'):
+        return 6
     return -1
 
 def readJson():

@@ -1,12 +1,16 @@
 class Data:
     def __init__(self):
-        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Geraldo Alckmin')]
+        self.candidates = [Candidate('Jair Bolsonaro'), Candidate('Fernando Haddad'), Candidate('Ciro Gomes'), Candidate('Lula'), Candidate('Marina Silva'), Candidate('Geraldo Alckmin'), Candidate('Alvaro Dias')]
 
     
 # xticks_facebook = ["17-11",  "18-07",  "08-06",  "09-10",  "09-17",  "09-24",  "10-01",  "10-05", "10-06", "10-08", "10-15",  "10-22",  "10-26", "10-27", "10-29"]
 # xticks_dataf = ["17-11-30",  "06-07",  "08-21",  "09-10",  "09-18",  "09-28",  "10-02",  "10-04", "10-06", "10-07", "10-10", "10-18",  "10-25",  "10-27", "10-28"]
 # xticks_ibope = ["17-10-22",  "06-24",  "08-19",  "09-10",  "09-18",  "09-24",  "09-30",  "10-02", "10-06", "10-07", "10-07", "10-14",  "10-23",  "10-27", "10-28"]
 
+
+# xticks_facebook = ["17-10-22", "17-11-28", "17-11-30", "18-06-07", "18-06-24", "18-07-09", "18-08-06", "18-08-19", "18-08-21", "18-09-10", "18-09-17", "18-09-18", 
+# "18-09-24", "18-09-28", "18-09-30", "18-10-01", "18-10-02", "18-10-04", "18-10-05", "18-10-06", "18-10-07", "18-10-08", "18-10-10", "18-10-14", "18-10-15",
+# "18-10-18", "18-10-22", "18-10-23", "18-10-25", "18-10-26", "18-10-27", "18-10-28", "18-10-29"]
 
 def return_index(name):
     if(name == 'Jair Bolsonaro'):
@@ -21,6 +25,8 @@ def return_index(name):
         return 4
     elif(name == 'Geraldo Alckmin'):
         return 5
+    elif(name == 'Alvaro Dias'):
+        return 6
     return -1
     
 class Candidate:    

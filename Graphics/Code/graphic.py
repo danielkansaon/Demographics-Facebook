@@ -15,6 +15,7 @@ i_lula = models.return_index("Lula")
 i_ciro = models.return_index("Ciro Gomes")
 i_marina = models.return_index("Marina Silva")
 i_alckmin = models.return_index("Geraldo Alckmin")
+i_alvaro = models.return_index("Alvaro Dias")
 
 dic_color = {
         "DataFolha":"green",
@@ -31,11 +32,7 @@ dic_lines = {
 def formatter_millions(x):
     return '%1.0f' % (x/1000000)
 
-def calculate_correlattion(ibope, dfolha, facebook):
-    # del ibope [9]
-    # del ibope [14]
-    # del dfolha [9]
-    # del dfolha [14]
+def calculate_correlattion(ibope, dfolha, facebook, resultado):
     v = []
 
     corrI, p_valueI = spearmanr(ibope, facebook)
@@ -91,7 +88,10 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 if(d[g].values[9] > 0):
                     plt.scatter(9, d[g].values[9], color='darkorange', s=130, alpha=1) 
                     plt.text(x = 9 - 0.5 , y =  d[g].values[9] + 3, s = "1º round", size = 9)
-
+                elif(d[g].values[9] > 0 or d[g].values[8] > 0):
+                    plt.scatter(9, 2, color='darkorange', s=110, alpha=1) 
+                    plt.text(x = 9 - 0.5 , y = 5, s = "1º round", size = 9)
+                    
                 if(d[g].values[14] > 0):
                     plt.scatter(14, d[g].values[14], color='darkorange', s=130, alpha=1)
                     plt.text(x = 14 - 0.5 , y =  d[g].values[14] + 3, s = "2º round", size = 9)
@@ -106,7 +106,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
             else:               
                 plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 9)  
 
-        result_corr = calculate_correlattion(d[vLabels[0]].values, d[vLabels[1]].values, d[vLabels[2]].values) 
+        # result_corr = calculate_correlattion(d[vLabels[0]].values, d[vLabels[1]].values, d[vLabels[2]].values) 
         plt.xticks(range(0, count_x), xticks)   
         plt.legend()        
            
@@ -160,17 +160,6 @@ def plot_gender():
         }),
         pd.DataFrame(
         {
-            'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-            'Lula-Male-DataFolha': models.data_reader.candidates[i_lula].dfolha_male, 'Lula-Male-IBOPE': models.data_reader.candidates[i_lula].ibope_male,
-            'Lula-Male-Facebook': models.data_reader.candidates[i_lula].facebook_male
-        }),
-        pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-            'Lula-Female-DataFolha': models.data_reader.candidates[i_lula].dfolha_female, 'Lula-Female-IBOPE': models.data_reader.candidates[i_lula].ibope_female,
-            'Lula-Female-Facebook': models.data_reader.candidates[i_lula].facebook_female
-        })]
-
-    data_frame_2 = [pd.DataFrame(
-        {
             'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
             'Ciro Gomes-Male-DataFolha': models.data_reader.candidates[i_ciro].dfolha_male, 'Ciro Gomes-Male-IBOPE': models.data_reader.candidates[i_ciro].ibope_male,
             'Ciro Gomes-Male-Facebook': models.data_reader.candidates[i_ciro].facebook_male
@@ -180,7 +169,21 @@ def plot_gender():
             'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
             'Ciro Gomes-Female-DataFolha': models.data_reader.candidates[i_ciro].dfolha_female, 'Ciro Gomes-Female-IBOPE': models.data_reader.candidates[i_ciro].ibope_female,
             'Ciro Gomes-Female-Facebook': models.data_reader.candidates[i_ciro].facebook_female
-        }),
+        })
+        # ,
+        # pd.DataFrame(
+        # {
+        #     'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
+        #     'Lula-Male-DataFolha': models.data_reader.candidates[i_lula].dfolha_male, 'Lula-Male-IBOPE': models.data_reader.candidates[i_lula].ibope_male,
+        #     'Lula-Male-Facebook': models.data_reader.candidates[i_lula].facebook_male
+        # }),
+        # pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
+        #     'Lula-Female-DataFolha': models.data_reader.candidates[i_lula].dfolha_female, 'Lula-Female-IBOPE': models.data_reader.candidates[i_lula].ibope_female,
+        #     'Lula-Female-Facebook': models.data_reader.candidates[i_lula].facebook_female
+        # })
+        ]
+
+    data_frame_2 = [
         pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_male)), 
@@ -202,6 +205,16 @@ def plot_gender():
         pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_male)), 
             'Geraldo Alckmin-Female-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_female, 'Geraldo Alckmin-Female-IBOPE': models.data_reader.candidates[i_alckmin].ibope_female,
             'Geraldo Alckmin-Female-Facebook': models.data_reader.candidates[i_alckmin].facebook_female
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+            'Alvaro Dias-Male-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_male, 'Alvaro Dias-Male-IBOPE': models.data_reader.candidates[i_alvaro].ibope_male,
+            'Alvaro Dias-Male-Facebook': models.data_reader.candidates[i_alvaro].facebook_male
+        }),
+        pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+            'Alvaro Dias-Female-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_female, 'Alvaro Dias-Female-IBOPE': models.data_reader.candidates[i_alvaro].ibope_female,
+            'Alvaro Dias-Female-Facebook': models.data_reader.candidates[i_alvaro].facebook_female
         })]
            
     count_x = len(models.data_reader.candidates[0].dfolha_male)
@@ -328,7 +341,7 @@ def plot_region():
     data_frame_alckmin = [pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_sudeste)), 
-            'Geraldo Alckmin-Sudeste-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sudeste, 'Ciro Gomes-Sudeste-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sudeste,
+            'Geraldo Alckmin-Sudeste-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sudeste, 'Geraldo Alckmin-Sudeste-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sudeste,
             'Geraldo Alckmin-Sudeste-Facebook': models.data_reader.candidates[i_alckmin].facebook_sudeste
         }),
         pd.DataFrame(
@@ -348,13 +361,37 @@ def plot_region():
             'Geraldo Alckmin-Sul-Facebook': models.data_reader.candidates[i_alckmin].facebook_sul
     })]
 
+    data_frame_alvaro = [pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
+            'Alvaro Dias-Sudeste-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sudeste, 'Alvaro Dias-Sudeste-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sudeste,
+            'Alvaro Dias-Sudeste-Facebook': models.data_reader.candidates[i_alvaro].facebook_sudeste
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
+            'Alvaro Dias-Nordeste-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_nordeste, 'Alvaro Dias-Nordeste-IBOPE': models.data_reader.candidates[i_alvaro].ibope_nordeste,
+            'Alvaro Dias-Nordeste-Facebook': models.data_reader.candidates[i_alvaro].facebook_nordeste
+        }),
+        pd.DataFrame({
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
+            'Alvaro Dias-Norte/Centro Oeste-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_norte_coeste, 'Geraldo Alckmin-Norte/Centro Oeste-IBOPE': models.data_reader.candidates[i_alvaro].ibope_norte_coeste,
+            'Alvaro Dias-Norte/Centro Oeste-Facebook': models.data_reader.candidates[i_alvaro].facebook_norte_coeste
+        }),
+        pd.DataFrame({
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
+            'Alvaro Dias-Sul-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sul, 'Alvaro Dias-Sul-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sul,
+            'Alvaro Dias-Sul-Facebook': models.data_reader.candidates[i_alvaro].facebook_sul
+    })]
+
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
     plot_graph("region_bolsonaro.png", data_frame_bolsonaro, 2, 2, 5, 70, count_x, "Jair Bolsonaro", False, True, True, 18, 10)
-    plot_graph("region_haddad.png", data_frame_haddad, 2, 2, 5, 80, count_x, "Fernando Haddad", False, True, True, 18, 10)
-    plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
+    plot_graph("region_haddad.png", data_frame_haddad, 2, 2, 5, 90, count_x, "Fernando Haddad", False, True, True, 18, 10)    
     plot_graph("region_ciro.png", data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10)
     plot_graph("region_marina.png", data_frame_marina, 2, 2, 5, 70, count_x, "Marina Silva", False, True, True, 18, 10)
     plot_graph("region_alckmin.png", data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10)
+    plot_graph("region_alvaro.png", data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10)
+    # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
 
 def plot_like():
         
@@ -363,7 +400,8 @@ def plot_like():
             'x': range(0, len(models.data_reader.candidates[i_bolsonaro].facebook_likes)), 
             'bolsonaro_like': models.data_reader.candidates[i_bolsonaro].facebook_likes, 'ciro_like': models.data_reader.candidates[i_ciro].facebook_likes,
             'haddad_like': models.data_reader.candidates[i_haddad].facebook_likes, 'marina_like': models.data_reader.candidates[i_marina].facebook_likes,
-            'alckmin_like': models.data_reader.candidates[i_alckmin].facebook_likes, 'lula_like': models.data_reader.candidates[i_lula].facebook_likes
+            'alckmin_like': models.data_reader.candidates[i_alckmin].facebook_likes, 'lula_like': models.data_reader.candidates[i_lula].facebook_likes,
+            'alvaro_like': models.data_reader.candidates[i_alvaro].facebook_likes
         })
 
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_likes)
@@ -374,8 +412,9 @@ def plot_like():
     plt.plot('x', 'haddad_like', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_like', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
     plt.plot('x', 'alckmin_like', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
-    plt.plot('x', 'marina_like', data=df, marker='o', color="black", alpha=0.7, label='Marina Silva')
+    plt.plot('x', 'marina_like', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_like', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
+    plt.plot('x', 'alvaro_like', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
     
     plt.xticks(range(0, count_x), xticks)
 
@@ -405,7 +444,8 @@ def talking_about():
             'x': range(0, len(models.data_reader.candidates[i_bolsonaro].facebook_talking_about)), 
             'bolsonaro_talking': models.data_reader.candidates[i_bolsonaro].facebook_talking_about, 'ciro_talking': models.data_reader.candidates[i_ciro].facebook_talking_about,
             'haddad_talking': models.data_reader.candidates[i_haddad].facebook_talking_about, 'marina_talking': models.data_reader.candidates[i_marina].facebook_talking_about,
-            'alckmin_talking': models.data_reader.candidates[i_alckmin].facebook_talking_about, 'lula_talking': models.data_reader.candidates[i_lula].facebook_talking_about
+            'alckmin_talking': models.data_reader.candidates[i_alckmin].facebook_talking_about, 'lula_talking': models.data_reader.candidates[i_lula].facebook_talking_about,
+            'alvaro_talking': models.data_reader.candidates[i_alvaro].facebook_talking_about
         })
 
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_talking_about)
@@ -417,8 +457,9 @@ def talking_about():
     plt.plot('x', 'haddad_talking', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_talking', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
     plt.plot('x', 'alckmin_talking', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
-    plt.plot('x', 'marina_talking', data=df, marker='o', color="black", alpha=0.7, label='Marina Silva')
-    plt.plot('x', 'lula_talking', data=df, marker='o', color="brown", alpha=0.7, label='Lula')    
+    plt.plot('x', 'marina_talking', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
+    plt.plot('x', 'lula_talking', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
+    plt.plot('x', 'alvaro_talking', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')    
     plt.xticks(range(0, count_x), xticks)
 
     #Eventos    
@@ -629,14 +670,46 @@ def plot_age():
             'Geraldo Alckmin-Acima de 55-Facebook': models.data_reader.candidates[i_alckmin].facebook_55          
     })]
 
+    data_frame_alckmin = [pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
+            'Alvaro Dias-16 a 24-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_16a24, 'Alvaro Dias-16 a 24-IBOPE': models.data_reader.candidates[i_alvaro].ibope_16a24,
+            'Alvaro Dias-16 a 24-Facebook': models.data_reader.candidates[i_alvaro].facebook_16a24            
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
+            'Alvaro Dias-25 a 34-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_25a34, 'Alvaro Dias-25 a 34-IBOPE': models.data_reader.candidates[i_alvaro].ibope_25a34,
+            'Alvaro Dias-25 a 34-Facebook': models.data_reader.candidates[i_alvaro].facebook_25a34            
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
+            'Alvaro Dias-35 a 44-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_35a44, 'Alvaro Dias-35 a 44-IBOPE': models.data_reader.candidates[i_alvaro].ibope_35a44,
+            'Alvaro Dias-35 a 44-Facebook': models.data_reader.candidates[i_alvaro].facebook_35a44            
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
+            'Alvaro Dias-45 a 54-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_45a54, 'Alvaro Dias-45 a 54-IBOPE': models.data_reader.candidates[i_alvaro].ibope_45a54,
+            'Alvaro Dias-45 a 54-Facebook': models.data_reader.candidates[i_alvaro].facebook_45a54          
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
+            'Alvaro Dias-Acima de 55-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_55, 'Alvaro Dias-Acima de 55-IBOPE': models.data_reader.candidates[i_alvaro].ibope_55,
+            'Alvaro Dias-Acima de 55-Facebook': models.data_reader.candidates[i_alvaro].facebook_55          
+    })]
+
     count_x = len(models.data_reader.candidates[i_bolsonaro].dfolha_16a24)
 
     plot_graph("age_bolsonaro.png", data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 0.4)
-    plot_graph("age_haddad.png", data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)
-    plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
+    plot_graph("age_haddad.png", data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)    
     plot_graph("age_ciro.png", data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 0.4)
     plot_graph("age_marina.png", data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 0.4)
     plot_graph("age_alckmin.png", data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 0.4)
+    plot_graph("age_alvaro.png", data_frame_alckmin, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
    
 def plot_education():   
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_fundamental)
@@ -678,26 +751,24 @@ def plot_education():
             'Fernando Haddad-Ensino Superior-DataFolha': models.data_reader.candidates[i_haddad].dfolha_superior, 'Fernando Haddad-Ensino Superior-IBOPE': models.data_reader.candidates[i_haddad].ibope_superior,
             'Fernando Haddad-Ensino Superior-Facebook': models.data_reader.candidates[i_haddad].facebook_superior
         }),
-        pd.DataFrame(
-        {
-            'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-            'Lula-Ensino Fundamental-DataFolha': models.data_reader.candidates[i_lula].dfolha_fundamental, 'Lula-Ensino Fundamental-IBOPE': models.data_reader.candidates[i_lula].ibope_fundamental,
-            'Lula-Ensino Fundamental-Facebook': models.data_reader.candidates[i_lula].facebook_fundamental
-        }),
-        pd.DataFrame(
-        {
-            'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-            'Lula-Ensino Médio-DataFolha': models.data_reader.candidates[i_lula].dfolha_medio, 'Lula-Ensino Médio-IBOPE': models.data_reader.candidates[i_lula].ibope_medio,
-            'Lula-Ensino Médioo-Facebook': models.data_reader.candidates[i_lula].facebook_medio
-        }),
-        pd.DataFrame(
-        {
-            'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-            'Lula-Ensino Superior-DataFolha': models.data_reader.candidates[i_lula].dfolha_superior, 'Lula-Ensino Superior-IBOPE': models.data_reader.candidates[i_lula].ibope_superior,
-            'Lula-Ensino Superior-Facebook': models.data_reader.candidates[i_lula].facebook_superior
-        })]
-
-    data_frame2 =[
+        # pd.DataFrame(
+        # {
+        #     'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
+        #     'Lula-Ensino Fundamental-DataFolha': models.data_reader.candidates[i_lula].dfolha_fundamental, 'Lula-Ensino Fundamental-IBOPE': models.data_reader.candidates[i_lula].ibope_fundamental,
+        #     'Lula-Ensino Fundamental-Facebook': models.data_reader.candidates[i_lula].facebook_fundamental
+        # }),
+        # pd.DataFrame(
+        # {
+        #     'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
+        #     'Lula-Ensino Médio-DataFolha': models.data_reader.candidates[i_lula].dfolha_medio, 'Lula-Ensino Médio-IBOPE': models.data_reader.candidates[i_lula].ibope_medio,
+        #     'Lula-Ensino Médioo-Facebook': models.data_reader.candidates[i_lula].facebook_medio
+        # }),
+        # pd.DataFrame(
+        # {
+        #     'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
+        #     'Lula-Ensino Superior-DataFolha': models.data_reader.candidates[i_lula].dfolha_superior, 'Lula-Ensino Superior-IBOPE': models.data_reader.candidates[i_lula].ibope_superior,
+        #     'Lula-Ensino Superior-Facebook': models.data_reader.candidates[i_lula].facebook_superior
+        # })
         pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
@@ -715,7 +786,10 @@ def plot_education():
             'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
             'Ciro Gomes-Ensino Superior-DataFolha': models.data_reader.candidates[i_ciro].dfolha_superior, 'Ciro Gomes-Ensino Superior-IBOPE': models.data_reader.candidates[i_ciro].ibope_superior,
             'Ciro Gomes-Ensino Superior-Facebook': models.data_reader.candidates[i_ciro].facebook_superior
-        }),
+        })
+        ]
+
+    data_frame2 =[
         pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_male)), 
@@ -751,6 +825,24 @@ def plot_education():
             'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_male)), 
             'Geraldo Alckmin-Ensino Superior-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_superior, 'Geraldo Alckmin-Ensino Superior-IBOPE': models.data_reader.candidates[i_alckmin].ibope_superior,
             'Geraldo Alckmin-Ensino Superior-Facebook': models.data_reader.candidates[i_alckmin].facebook_superior
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+            'Alvaro Dias-Ensino Fundamental-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_fundamental, 'Alvaro Dias-Ensino Fundamental-IBOPE': models.data_reader.candidates[i_alvaro].ibope_fundamental,
+            'Alvaro Dias-Ensino Fundamental-Facebook': models.data_reader.candidates[i_alvaro].facebook_fundamental
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+            'Alvaro Dias-Ensino Médio-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_medio, 'Alvaro Dias-Ensino Médio-IBOPE': models.data_reader.candidates[i_alvaro].ibope_medio,
+            'Alvaro Dias-Ensino Médio-Facebook': models.data_reader.candidates[i_alvaro].facebook_medio
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+            'Alvaro Dias-Ensino Superior-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_superior, 'Alvaro Dias-Ensino Superior-IBOPE': models.data_reader.candidates[i_alvaro].ibope_superior,
+            'Alvaro Dias-Ensino Superior-Facebook': models.data_reader.candidates[i_alvaro].facebook_superior
         })
         ]
     
