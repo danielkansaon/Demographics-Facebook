@@ -1,11 +1,13 @@
 from matplotlib.ticker import FuncFormatter
 import read_elections as election
+from scipy.stats import spearmanr
 import read_facebook as facebook
 import matplotlib.pyplot as plt
-from scipy.stats import spearmanr
 import pandas as pd
+import data_frames
 import models
 import os
+
 
 xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n05", "10\n06",  "10\n08",  "10\n15",  "10\n22",  "10\n26", "10\n27",  "10\n29"]
 
@@ -670,7 +672,7 @@ def plot_age():
             'Geraldo Alckmin-Acima de 55-Facebook': models.data_reader.candidates[i_alckmin].facebook_55          
     })]
 
-    data_frame_alckmin = [pd.DataFrame(
+    data_frame_alvaro = [pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_16a24)), 
             'Alvaro Dias-16 a 24-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_16a24, 'Alvaro Dias-16 a 24-IBOPE': models.data_reader.candidates[i_alvaro].ibope_16a24,
@@ -708,7 +710,7 @@ def plot_age():
     plot_graph("age_ciro.png", data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 0.4)
     plot_graph("age_marina.png", data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 0.4)
     plot_graph("age_alckmin.png", data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 0.4)
-    plot_graph("age_alvaro.png", data_frame_alckmin, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
+    plot_graph("age_alvaro.png", data_frame_alvaro, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
     # plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
    
 def plot_education():   
