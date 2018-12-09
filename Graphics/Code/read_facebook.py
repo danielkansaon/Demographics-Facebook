@@ -221,7 +221,7 @@ def load_census():
             models.data_distribuition.census_age_25a34.append(models.data_distribuition.census_age_25a34[-1])
             models.data_distribuition.census_age_35a44.append(models.data_distribuition.census_age_35a44[-1])
             models.data_distribuition.census_age_45a54.append(models.data_distribuition.census_age_45a54[-1])
-            models.data_distribuition.facebook_age_acima55.append(models.data_distribuition.facebook_age_acima55[-1])         
+            models.data_distribuition.census_age_acima55.append(models.data_distribuition.census_age_acima55[-1])         
         else:
             models.data_distribuition.facebook_gender_male.append(census_dict['genders']['male'][collected_date] * 100)
             models.data_distribuition.facebook_gender_female.append(census_dict['genders']['female'][collected_date] * 100)
@@ -249,12 +249,12 @@ def load_census():
                 elif(age_group != "adolescent"):
                     if(adicionarIdoso == False):                                
                         models.data_distribuition.facebook_age_acima55[-1] = (models.data_distribuition.facebook_age_acima55[-1] + census_dict['age_intervals'][age_group][collected_date] * 100)
+                        models.data_distribuition.census_age_acima55[-1] = (models.data_distribuition.census_age_acima55[-1] + census_dict['age_intervals'][age_group]['census'] * 100)
                         adicionarIdoso = True
                     else:
                         models.data_distribuition.facebook_age_acima55.append(census_dict['age_intervals'][age_group][collected_date] * 100) 
-                        adicionarIdoso = False
-
-                    models.data_distribuition.facebook_age_acima55.append(census_dict['age_intervals'][age_group]['census'] * 100) 
+                        models.data_distribuition.census_age_acima55.append(census_dict['age_intervals'][age_group]['census'] * 100)
+                        adicionarIdoso = False                     
 
             models.data_distribuition.facebook_region_sudeste.append(census_dict['brazilian_regions']['southeast'][collected_date] * 100) 
             models.data_distribuition.facebook_region_nordeste.append(census_dict['brazilian_regions']['northeast'][collected_date] * 100) 
