@@ -32,6 +32,8 @@ education_status = ['UNDERGRAD','ALUM','SOME_COLLEGE','ASSOCIATE_DEGREE', 'high_
 
 regions = ["northeast", "south", "southeast", "midwest", "north"]
 
+collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05", "18_10_06",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_27", "18_10_29"]
+
 presids_dict = {
         3:"Fernando Haddad",
         4:"Luiz Inácio Lula da Silva",
@@ -61,8 +63,8 @@ def return_index(presid_key):
 
 def readJson():
     input_file = open(os.getcwd() + '\Graphics\Data\\audiencia_presidenciaveis.json')
-    collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05", "18_10_06",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_27", "18_10_29"]
-           
+    load_census()
+               
     for line in input_file:
         json_line = json.loads(line.strip())
 
@@ -131,8 +133,8 @@ def readJson():
                         #16 a 24
                         if(age_group == "adolescent" or age_group == "young_1"):
                             if(adicionarJovem == False):
-                                 models.data_reader.candidates[i].facebook_16a24[-1] = (models.data_reader.candidates[i].facebook_16a24[-1] + json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)                           
-                                 adicionarJovem = True
+                                models.data_reader.candidates[i].facebook_16a24[-1] = (models.data_reader.candidates[i].facebook_16a24[-1] + json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)
+                                adicionarJovem = True
                             else:
                                 models.data_reader.candidates[i].facebook_16a24.append(json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)    
                                 adicionarJovem = False
@@ -182,3 +184,86 @@ def readJson():
                             else:
                                 models.data_reader.candidates[i].facebook_superior.append(json_line[presid_key][collected_date]['percent_values_dict']['education_status'][edu] * 100)
                                 AdicionarSuperior = False
+
+
+def load_census():
+    json_file = open(os.getcwd() + '\Graphics\Data\\census_data.json')
+    census_dict = json.loads(json_file.readline())
+    adicionarIdoso = True
+
+    for collected_date in collected_dates:   
+        
+        if(collected_date == "18_10_06" or collected_date == "18_10_27"):
+            models.data_distribuition.facebook_gender_male.append(models.data_distribuition.facebook_gender_male[-1])
+            models.data_distribuition.facebook_gender_female.append(models.data_distribuition.facebook_gender_female[-1])
+
+            models.data_distribuition.facebook_age_16a24.append(models.data_distribuition.facebook_age_16a24[-1])     
+            models.data_distribuition.facebook_age_25a34.append(models.data_distribuition.facebook_age_25a34[-1])
+            models.data_distribuition.facebook_age_35a44.append(models.data_distribuition.facebook_age_35a44[-1])
+            models.data_distribuition.facebook_age_45a54.append(models.data_distribuition.facebook_age_45a54[-1]) 
+            models.data_distribuition.facebook_age_acima55.append(models.data_distribuition.facebook_age_acima55[-1]) 
+            
+            models.data_distribuition.facebook_region_sudeste.append(models.data_distribuition.facebook_region_sudeste[-1]) 
+            models.data_distribuition.facebook_region_nordeste.append(models.data_distribuition.facebook_region_nordeste[-1]) 
+            models.data_distribuition.facebook_region_norte_centro_oeste.append(models.data_distribuition.facebook_region_norte_centro_oeste[-1])
+            models.data_distribuition.facebook_region_sul.append(models.data_distribuition.facebook_region_sul[-1]) 
+
+            #CENSUS
+            models.data_distribuition.census_gender_male.append(models.data_distribuition.census_gender_male[-1])
+            models.data_distribuition.census_gender_female.append(models.data_distribuition.census_gender_female[-1])
+
+            models.data_distribuition.census_region_sudeste.append(models.data_distribuition.census_region_sudeste[-1]) 
+            models.data_distribuition.census_region_nordeste.append(models.data_distribuition.census_region_nordeste[-1]) 
+            models.data_distribuition.census_region_norte_centro_oeste.append(models.data_distribuition.census_region_norte_centro_oeste[-1])
+            models.data_distribuition.census_region_sul.append(models.data_distribuition.census_region_sul[-1]) 
+            
+            models.data_distribuition.census_age_16a24.append(models.data_distribuition.census_age_16a24[-1])
+            models.data_distribuition.census_age_25a34.append(models.data_distribuition.census_age_25a34[-1])
+            models.data_distribuition.census_age_35a44.append(models.data_distribuition.census_age_35a44[-1])
+            models.data_distribuition.census_age_45a54.append(models.data_distribuition.census_age_45a54[-1])
+            models.data_distribuition.facebook_age_acima55.append(models.data_distribuition.facebook_age_acima55[-1])         
+        else:
+            models.data_distribuition.facebook_gender_male.append(census_dict['genders']['male'][collected_date] * 100)
+            models.data_distribuition.facebook_gender_female.append(census_dict['genders']['female'][collected_date] * 100)
+            models.data_distribuition.census_gender_male.append(census_dict['genders']['female']['census'] * 100)
+            models.data_distribuition.census_gender_female.append(census_dict['genders']['female']['census'] * 100)
+            
+            for age_group in age_intervals:                        
+                #16 a 24
+                if(age_group == "young_1"):                          
+                    models.data_distribuition.facebook_age_16a24.append(census_dict['age_intervals'][age_group][collected_date] * 100)
+                    models.data_distribuition.census_age_16a24.append(census_dict['age_intervals'][age_group]['census'] * 100)                                  
+                #25 a 34
+                elif(age_group == "young_2"):
+                    models.data_distribuition.facebook_age_25a34.append(census_dict['age_intervals'][age_group][collected_date] * 100)
+                    models.data_distribuition.census_age_25a34.append(census_dict['age_intervals'][age_group]['census'] * 100)
+                #35 a 44
+                elif(age_group == "mid_aged_1"):
+                    models.data_distribuition.facebook_age_35a44.append(census_dict['age_intervals'][age_group][collected_date] * 100)  
+                    models.data_distribuition.census_age_35a44.append(census_dict['age_intervals'][age_group]['census'] * 100)
+                #45 a 54
+                elif(age_group == "mid_aged_2"):
+                    models.data_distribuition.facebook_age_45a54.append(census_dict['age_intervals'][age_group][collected_date] * 100) 
+                    models.data_distribuition.census_age_45a54.append(census_dict['age_intervals'][age_group]['census'] * 100)
+                #Acima 55
+                elif(age_group != "adolescent"):
+                    if(adicionarIdoso == False):                                
+                        models.data_distribuition.facebook_age_acima55[-1] = (models.data_distribuition.facebook_age_acima55[-1] + census_dict['age_intervals'][age_group][collected_date] * 100)
+                        adicionarIdoso = True
+                    else:
+                        models.data_distribuition.facebook_age_acima55.append(census_dict['age_intervals'][age_group][collected_date] * 100) 
+                        adicionarIdoso = False
+
+                    models.data_distribuition.facebook_age_acima55.append(census_dict['age_intervals'][age_group]['census'] * 100) 
+
+            models.data_distribuition.facebook_region_sudeste.append(census_dict['brazilian_regions']['southeast'][collected_date] * 100) 
+            models.data_distribuition.facebook_region_nordeste.append(census_dict['brazilian_regions']['northeast'][collected_date] * 100) 
+            models.data_distribuition.facebook_region_norte_centro_oeste.append(census_dict['brazilian_regions']['north'][collected_date] * 100)
+            models.data_distribuition.facebook_region_norte_centro_oeste[-1] += (census_dict['brazilian_regions']['midwest'][collected_date] * 100) 
+            models.data_distribuition.facebook_region_sul.append(census_dict['brazilian_regions']['south'][collected_date] * 100) 
+
+            models.data_distribuition.census_region_sudeste.append(census_dict['brazilian_regions']['southeast']['census'] * 100) 
+            models.data_distribuition.census_region_nordeste.append(census_dict['brazilian_regions']['northeast']['census'] * 100) 
+            models.data_distribuition.census_region_norte_centro_oeste.append(census_dict['brazilian_regions']['north']['census'] * 100)
+            models.data_distribuition.census_region_norte_centro_oeste[-1] += (census_dict['brazilian_regions']['midwest']['census'] * 100) 
+            models.data_distribuition.census_region_sul.append(census_dict['brazilian_regions']['south']['census'] * 100) 

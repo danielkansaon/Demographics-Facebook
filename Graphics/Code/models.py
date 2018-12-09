@@ -29,6 +29,45 @@ def return_index(name):
         return 6
     return -1
     
+class Distribuition:
+    def __init__(self):
+        self.census_gender_male = []
+        self.census_gender_female = []
+
+        self.census_education_fundamental = []
+        self.census_education_medio = []
+        self.census_education_superior = []
+
+        self.census_region_sudeste = []
+        self.census_region_norte_centro_oeste = []
+        self.census_region_nordeste = []
+        self.census_region_sul = []
+
+        self.census_age_16a24 = []
+        self.census_age_25a34 = []
+        self.census_age_35a44 = []
+        self.census_age_45a54 = []
+        self.census_age_acima55 = []
+
+        #FACEBOOK
+        self.facebook_gender_male = []
+        self.facebook_gender_female = []
+
+        self.facebook_education_fundamental = []
+        self.facebook_education_medio = []
+        self.facebook_education_superior = []
+
+        self.facebook_region_sudeste = []
+        self.facebook_region_norte_centro_oeste = []
+        self.facebook_region_nordeste = []
+        self.facebook_region_sul = []
+
+        self.facebook_age_16a24 = []
+        self.facebook_age_25a34 = []
+        self.facebook_age_35a44 = []
+        self.facebook_age_45a54 = []
+        self.facebook_age_acima55 = []
+
 class Candidate:    
    def __init__(self, name):
         self.name = name
@@ -95,7 +134,8 @@ class Candidate:
         self.dfolha_fundamental =[] 
 
         self.dfolha_score =[]
-        
+
+data_distribuition = Distribuition()      
 data_reader = Data()
 
 def complete_data_zero():

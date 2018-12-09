@@ -23,8 +23,7 @@ dic_color = {
         "IBOPE":"red",
         "Facebook": "blue",
         "Variation (DataFolha)":"green",
-        "Variation (IBOPE)":"red",
-
+        "Variation (IBOPE)":"red"
 }
 
 dic_lines = {
@@ -80,6 +79,7 @@ def get_error_graph(v_facebook, v_ibope, v_dfolha):
 
 
 def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY, plot_error = True, plot_event = True, hspace=0):    
+    
     fig = plt.figure(figsize=(figsizeX, figsizeY))    
     set_result_aux = set_result
     subtitle_aux = set_subtitle    
@@ -114,7 +114,13 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 
             #Plotando Linhas
             if(plot_error == True):
-                plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
+                if 'Distribuition' in label[2]:
+                    if 'Facebook' in label[2]:
+                        plt.plot('x', g, data=d, color='lightskyblue', ls='--', alpha=1, linewidth=2.0, label='Distribuition Facebook')
+                    else:
+                        plt.plot('x', g, data=d, color='darkgoldenrod', ls='--', alpha=1, linewidth=2.0, label='Distribuition Census')
+                else:
+                    plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
             else:
                 plt.plot('x', g, data=d, marker='v', color=dic_color[label[2]], linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
                 plt.axhline(y=0, color='blue', linestyle='-', alpha=0.9)
@@ -123,22 +129,23 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 text_2Round = str(round(d[g].values[14],1)) + " %"
                 legend_result = "Error Facebook %"
 
-                if(m_before_1round < d[g].values[8]):
-                    m_before_1round = d[g].values[8]
-                if(m_before_2round < d[g].values[13]):
-                    m_before_2round =  d[g].values[13]
-            
-                if(m_before_1round > d[g].values[8]):
-                    m_before_1round = d[g].values[8]
-                if(m_before_2round > d[g].values[13]):
-                    m_before_2round =  d[g].values[13]
-
-            if 'Facebook' in g:
-                v_facebook = d[g].values
-            if 'DataFolha' in g:
-                v_dfolha = d[g].values
-            if 'IBOPE' in g:
-                v_ibope = d[g].values
+                if(d[g].values[8] >= 0):
+                    if(m_before_1round < d[g].values[8]):
+                        m_before_1round = d[g].values[8]
+                    if(m_before_2round < d[g].values[13]):
+                        m_before_2round =  d[g].values[13]
+                else:
+                    if(m_before_1round > d[g].values[8]):
+                        m_before_1round = d[g].values[8]
+                    if(m_before_2round > d[g].values[13]):
+                        m_before_2round =  d[g].values[13]  
+            if 'Distribuition' not in g:
+                if 'Facebook' in g:
+                    v_facebook = d[g].values
+                if 'DataFolha' in g:
+                    v_dfolha = d[g].values
+                if 'IBOPE' in g:
+                    v_ibope = d[g].values
 
             v_labels.append(g)
 
@@ -158,18 +165,17 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 set_result_aux = False
             
         #Plotando Erro Pesquisas
-        if(m_before_1round > 0):
-            plt.scatter(8, m_before_1round,  color ='slategrey', s=130, alpha=1, label="Worst Error Pools %")
-            plt.text(x = 8 - 0.5 , y = m_before_1round + 3, s = str(round(m_before_1round - d[g].values[9], 1)) + " %", size = 10)         
-        if(m_before_2round > 0):
+        if(m_before_1round != 0):
+            plt.scatter(8, m_before_1round,  color ='slategrey', s=130, alpha=1, label="Worst Error Pool %")
+            plt.text(x = 8 - 0.5 , y = m_before_1round + 4, s = str(round(m_before_1round - d[g].values[9], 1)) + " %", size = 10)         
+        if(m_before_2round != 0):
             plt.scatter(13, m_before_2round,  color ='slategrey', s=130, alpha=1) 
-            plt.text(x = 13 - 0.5 , y = m_before_2round + 3, s = str(round(m_before_2round - d[g].values[14],1)) + " %", size = 10)
+            plt.text(x = 13 - 0.5 , y = m_before_2round + 4, s = str(round(m_before_2round - d[g].values[14],1)) + " %", size = 10)
             
         m_before_1round = 0
         m_before_2round = 0
-        
-            
-        if(plot_error == True):
+                    
+        if(plot_error == True and len(v_facebook) > 0):
             a, b = get_error_graph(v_facebook, v_ibope, v_dfolha)
 
             vector_dFrame.append(pd.DataFrame(
@@ -179,7 +185,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
             }))
 
         if(plot_event):
-            plot_graph_events(range_fim)    
+            plot_graph_events(range_fim)
                
         plt.xticks(range(0, count_x), xticks)   
         plt.legend()        
@@ -206,21 +212,34 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 def plot_gender():   
            
     count_x = len(models.data_reader.candidates[0].dfolha_male)
-    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 15, 80, count_x, "Gender", True, False, True, 19, 10)
+    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10)
     plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 19, 10, False, False)
-    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 15, 80, count_x, "Gender", True, False, True, 19, 10)
+    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10)
     plot_graph("gender_2_error.png", error_2, 3, 2, -40, 70, count_x, "Variation Compared to Facebook", True, False, True, 19, 10, False, False)
     
 
 def plot_region():
         
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
-    plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 5, 70, count_x, "Jair Bolsonaro", False, True, True, 18, 10)
-    plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 5, 90, count_x, "Fernando Haddad", False, True, True, 18, 10)    
-    plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10)
-    plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 70, count_x, "Marina Silva", False, True, True, 18, 10)
-    plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10)
-    plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10)
+
+    error_1 = plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 5, 70, count_x, "Jair Bolsonaro", False, True, True, 18, 10)
+    plot_graph("region_bolsonaro_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_2 = plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 5, 90, count_x, "Fernando Haddad", False, True, True, 18, 10)
+    plot_graph("region_haddad_error.png", error_2, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_3 = plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10)
+    plot_graph("region_ciro_error.png", error_3, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_4 = plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 70, count_x, "Marina Silva", False, True, True, 18, 10)
+    plot_graph("region_marina_error.png", error_4, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10)
+    plot_graph("region_alckmin_error.png", error_5, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10)
+    plot_graph("region_alvaro_error.png", error_6, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
     # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
 
 def plot_like():
@@ -315,16 +334,38 @@ def talking_about():
 def plot_age():
     count_x = len(models.data_reader.candidates[i_bolsonaro].dfolha_16a24)
 
-    plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 0.4)
-    plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)    
-    plot_graph("age_ciro.png", GFrame.Age.data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 0.4)
-    plot_graph("age_marina.png", GFrame.Age.data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 0.4)
-    plot_graph("age_alckmin.png", GFrame.Age.data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 0.4)
-    plot_graph("age_alvaro.png", GFrame.Age.data_frame_alvaro, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
+    error_1 = plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_bolsonaro_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)    
+    
+    error_2 = plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)  
+    # plot_graph("age_haddad_error.png", error_2, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)   
+
+    error_3 = plot_graph("age_ciro.png", GFrame.Age.data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_ciro_error.png", error_3, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)
+
+    error_4 = plot_graph("age_marina.png", GFrame.Age.data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_marina_error.png", error_4, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)
+
+    error_5 = plot_graph("age_alckmin.png", GFrame.Age.data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_alckmin_error.png", error_5, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)
+
+    error_6 = plot_graph("age_alvaro.png", GFrame.Age.data_frame_alvaro, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_alvaro_error.png", error_6, 3, 2, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False, 0.4)
     # plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
+
+    # plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)    
+    # plot_graph("age_ciro.png", GFrame.Age.data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_marina.png", GFrame.Age.data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_alckmin.png", GFrame.Age.data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 0.4)
+    # plot_graph("age_alvaro.png", GFrame.Age.data_frame_alvaro, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 0.4)
+    # # plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
    
 def plot_education():   
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_fundamental)
 
-    plot_graph("education_1.png", GFrame.Education.data_frame, 3, 3, 0, 75, count_x, "Education", True, False, True, 18, 10)
-    plot_graph("education_2.png", GFrame.Education.data_frame2, 3, 3, 0, 75, count_x, "Education", True, False, True, 18, 10)   
+    error_1 = plot_graph("education_1.png", GFrame.Education.data_frame, 3, 3, 0, 75, count_x, "Education", True, False, True, 18, 10)
+    plot_graph("education_1_error.png", error_1, 3, 3, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False)
+
+    error_2 = plot_graph("education_2.png", GFrame.Education.data_frame2, 3, 3, 0, 75, count_x, "Education", True, False, True, 18, 10)  
+    plot_graph("education_2_error.png", error_2, 3, 3, -50, 50, count_x, "Variation Compared to Facebook", True, False, True, 18, 10, False, False) 
