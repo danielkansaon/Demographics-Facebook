@@ -132,12 +132,14 @@ def readJson():
                     for age_group in age_intervals:                        
                         #16 a 24
                         if(age_group == "adolescent" or age_group == "young_1"):
-                            if(adicionarJovem == False):
-                                models.data_reader.candidates[i].facebook_16a24[-1] = (models.data_reader.candidates[i].facebook_16a24[-1] + json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)
-                                adicionarJovem = True
-                            else:
+                            if(age_group != "adolescent"):
                                 models.data_reader.candidates[i].facebook_16a24.append(json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)    
-                                adicionarJovem = False
+                                # if(adicionarJovem == False):
+                                #     models.data_reader.candidates[i].facebook_16a24[-1] = (models.data_reader.candidates[i].facebook_16a24[-1] + json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)
+                                #     adicionarJovem = True
+                                # else:
+                                #     models.data_reader.candidates[i].facebook_16a24.append(json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group] *100)    
+                                #     adicionarJovem = False
                         #25 a 34
                         elif(age_group == "young_2"):
                             models.data_reader.candidates[i].facebook_25a34.append(json_line[presid_key][collected_date]['percent_values_dict']['age_intervals'][age_group]*100)
