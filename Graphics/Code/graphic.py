@@ -243,43 +243,43 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     set_result_aux = False
                                
         if(plot_error == True and len(v_facebook) > 0):
-            error_dfolha, error_ibope = get_variation_graph(v_facebook, v_ibope, v_dfolha)            
+            variation_dfolha, variation_ibope = get_variation_graph(v_facebook, v_ibope, v_dfolha)            
             
-            calc_2round_pool = [-100]*15
-            calc_1round_pool = [-100]*15
+            v_error_pool_2round = [-100]*15
+            v_error_pool_1round = [-100]*15
 
             if(v_ibope[14] == 0 or v_dfolha[14] == 0):
-                calc_2round_pool[1] = 0
+                v_error_pool_2round[1] = 0
             elif(v_ibope[9] == 0 or v_dfolha[9] == 0):
-                calc_1round_pool[1] = 0
+                v_error_pool_1round[1] = 0
             else:   
-                calc_2round_pool[1] = ((v_ibope[13] - v_ibope[14]) / v_ibope[14]) * 100
-                calc_2round_pool[0] = error_ibope[13]
-                calc_1round_pool[1] = ((v_ibope[8] - v_ibope[9]) / v_ibope[9]) * 100
-                calc_1round_pool[0] = error_ibope[8]
+                v_error_pool_2round[1] = ((v_ibope[13] - v_ibope[14]) / v_ibope[14]) * 100
+                v_error_pool_2round[0] = variation_ibope[13]
+                v_error_pool_1round[1] = ((v_ibope[8] - v_ibope[9]) / v_ibope[9]) * 100
+                v_error_pool_1round[0] = variation_ibope[8]
 
-                if(calc_1round_pool[1] >= 0):
-                    if(calc_1round_pool[1] < ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
-                        calc_1round_pool[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
-                        calc_1round_pool[0] = error_dfolha[8]
+                if(v_error_pool_1round[1] >= 0):
+                    if(v_error_pool_1round[1] < ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
+                        v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
+                        v_error_pool_1round[0] = variation_dfolha[8]
 
-                    if(calc_2round_pool[1] < ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ) :
-                        calc_2round_pool[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
-                        calc_2round_pool[0] = error_dfolha[13]
+                    if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ) :
+                        v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
+                        v_error_pool_2round[0] = variation_dfolha[13]
                 else:
-                    if(calc_1round_pool[1] > ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
-                        calc_1round_pool[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
-                        calc_1round_pool[0] = error_dfolha[8]
+                    if(v_error_pool_1round[1] > ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
+                        v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
+                        v_error_pool_1round[0] = variation_dfolha[8]
 
-                    if(calc_2round_pool[1] > ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ):
-                        calc_2round_pool[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
-                        calc_2round_pool[0] = error_dfolha[13]
+                    if(v_error_pool_2round[1] > ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ):
+                        v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
+                        v_error_pool_2round[0] = variation_dfolha[13]
 
             vector_dFrame.append(pd.DataFrame(
             {
                 'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_male)), 
-                label[0] + "-" + label[1] + "-Variation (DataFolha)": error_dfolha, label[0] + "-" + label[1] + "-Variation (IBOPE)": error_ibope,
-                "calc_1round_pool": calc_1round_pool, "calc_2round_pool" : calc_2round_pool
+                label[0] + "-" + label[1] + "-Variation (DataFolha)": variation_dfolha, label[0] + "-" + label[1] + "-Variation (IBOPE)": variation_ibope,
+                "calc_1round_pool": v_error_pool_1round, "calc_2round_pool" : v_error_pool_2round
             }))
 
         if(plot_error == True):
@@ -442,9 +442,9 @@ def talking_about():
 def plot_age():
     count_x = len(models.data_reader.candidates[i_bolsonaro].dfolha_16a24)
 
-    bbox_to_anchor=(1.2, -0.21),
+    # bbox_to_anchor=(1.2, -0.21),
 
-    error_1 = plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
+    error_1 = plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 100, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
     plot_graph("age_bolsonaro_error.png", error_1, 3, 2, -100, 200, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)    
     
     error_2 = plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)  
