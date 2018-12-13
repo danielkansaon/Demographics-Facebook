@@ -20,6 +20,8 @@ i_marina = models.return_index("Marina Silva")
 i_alckmin = models.return_index("Geraldo Alckmin")
 i_alvaro = models.return_index("Alvaro Dias")
 
+v_index = [i_bolsonaro, i_haddad, i_ciro, i_marina, i_alckmin, i_marina, i_alvaro]
+
 error_facebook_1round = []
 error_dfolha_1round = []
 error_ibope_1round = []
@@ -34,6 +36,15 @@ dic_color = {
         "Facebook": "blue",
         "Variation (DataFolha)":"green",
         "Variation (IBOPE)":"red"
+}
+
+dic_index = {
+        i_bolsonaro:"jair_bolsonaro",
+        i_haddad:"fernando_haddad",
+        i_ciro: "ciro_gomes",
+        i_marina:"marina_silva",
+        i_alckmin:"geraldo_alckmin",
+        i_alvaro:"alvaro_dias"
 }
 
 dic_lines = {
@@ -60,8 +71,8 @@ def calculate_correlattion(ibope, dfolha, facebook, resultado):
 def plot_graph_events(range_fim, graph_error = False):
 
     if(graph_error == True):
-        plt.text(x = 9 - 0.8, y = range_fim - (range_fim * 0.22), s = "End\n1º Round", size = 9)
-        plt.text(x = 14 - 0.8, y = range_fim -(range_fim * 0.22), s = "End\n2º Round", size = 9)  
+        plt.text(x = 9 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1º Round", size = 9)
+        plt.text(x = 14 - 0.8, y = range_fim -(range_fim * 0.20), s = "End\n2º Round", size = 9)  
         plt.axvline(x=9, color='gray', linestyle='--', alpha=0.5)
         plt.axvline(x=14, color='gray', linestyle='--', alpha=0.5)
     else:
@@ -103,8 +114,8 @@ def get_error_agregatte(v_facebook, v_ibope, v_dfolha):
     if(v_ibope[14] != 0 and v_ibope[14] != -100):
         error_facebook_2round.append((abs((v_facebook[13] - v_ibope[14])) / v_ibope[14]) * 100)
         error_ibope_2round.append((abs((v_ibope[13] - v_ibope[14])) / v_ibope[14]) * 100)
-        error_dfolha_2round.append((abs((v_dfolha[13] - v_dfolha[14])) / v_dfolha[14]) * 100)    
-
+        error_dfolha_2round.append((abs((v_dfolha[13] - v_dfolha[14])) / v_dfolha[14]) * 100)   
+    
 def plot_table_error(name):
     fig = plt.figure()
 
@@ -203,7 +214,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                         plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
                 else:
                     # marker='v',
-                    plt.plot('x', g, data=d, color=dic_color[label[2]], linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
+                    plt.plot('x', g, data=d, color=dic_color[label[2]], marker='X', linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
                     plt.axhline(y=0, color='blue', linestyle='-', alpha=0.9)
 
                     # text_1Round = str(round(d[g].values[9],1)) + " %"
@@ -225,14 +236,14 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 #Setando Resultado
                 if(set_result_aux == True):  
                     if(plot_error == False):                        
-                        if(d[g].values[9] != -100 and d[g].values[9] != 0):
+                        if(d[g].values[9] != 0 and d[g].values[9] != -100):
                             plt.scatter(9, y = 0, color='lightskyblue', s=130, alpha=1, label="Error Facebook %") 
                             plt.text(x = 9 - 0.5 , y = 4, s = str(round(d[g].values[9],1)) + " %", size = 10)
                         if(d[g].values[14] != -100 and d[g].values[14] != 0):
                             plt.scatter(14, 0, color='lightskyblue', s=130, alpha=1)
                             plt.text(x = 14 - 0.5 , y = 4, s = str(round(d[g].values[14],1)) + " %", size = 10)
                        
-                    if(d[g].values[9] != -100 and d[g].values[9] != 0):
+                    if(d[g].values[9] != -100 ):
                         plt.scatter(9, d[g].values[9], color='darkorange', s=130, alpha=1, label=legend_result) 
                         plt.text(x = 9 - 0.5 , y =  d[g].values[9] + 3, s = text_1Round, size = 10)
                             
@@ -242,6 +253,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     
                     set_result_aux = False
                                
+        #Calculando Error                               
         if(plot_error == True and len(v_facebook) > 0):
             variation_dfolha, variation_ibope = get_variation_graph(v_facebook, v_ibope, v_dfolha)            
             
@@ -263,7 +275,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                         v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
                         v_error_pool_1round[0] = variation_dfolha[8]
 
-                    if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ) :
+                    if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ):
                         v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
                         v_error_pool_2round[0] = variation_dfolha[13]
                 else:
@@ -281,9 +293,6 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 label[0] + "-" + label[1] + "-Variation (DataFolha)": variation_dfolha, label[0] + "-" + label[1] + "-Variation (IBOPE)": variation_ibope,
                 "calc_1round_pool": v_error_pool_1round, "calc_2round_pool" : v_error_pool_2round
             }))
-
-        if(plot_error == True):
-            get_error_agregatte(v_facebook, v_ibope, v_dfolha)
 
         if(plot_event):
             plot_graph_events(range_fim)
@@ -310,9 +319,6 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     plt.suptitle(firstitle) 
     plt.savefig(name, dpi=100)
     
-    if(plot_error == True):
-        plot_table_error(name)
-
     return vector_dFrame
     # plot_graph_error(name.replace(".png","") + "_error.png", vector_dFrame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY)
     # plt.legend(loc='upper center', bbox_to_anchor=(-0.1, -0.21), shadow=True, ncol=2)    
@@ -323,32 +329,45 @@ def plot_gender():
     error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19)
     plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.19, False, False)
     error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19)
-    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 70, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False)
-    
+    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False)    
+
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_female, models.data_reader.candidates[i].ibope_female, models.data_reader.candidates[i].dfolha_female)
+        plot_table_error("gender_" + dic_index[i] + "_error.png")
+   
 
 def plot_region():
         
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
 
     error_1 = plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 5, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 75, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 90, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
 
     error_2 = plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 5, 90, count_x, "Fernando Haddad", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
 
     error_3 = plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_ciro_error.png", error_3, 2, 2, -50, 125, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    plot_graph("region_ciro_error.png", error_3, 2, 2, -50, 125, count_x, "Ciro Gomes - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
 
     error_4 = plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 60, count_x, "Marina Silva", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_marina_error.png", error_4, 2, 2, -50, 150, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    plot_graph("region_marina_error.png", error_4, 2, 2, -50, 150, count_x, "Marina Silva - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
 
     error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_alckmin_error.png", error_5, 2, 2, -50, 100, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    plot_graph("region_alckmin_error.png", error_5, 2, 2, -50, 100, count_x, "Geraldo Alckmin - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
 
     error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 130, count_x, "Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
-
+    plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    
     # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
+
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_nordeste, models.data_reader.candidates[i].ibope_nordeste, models.data_reader.candidates[i].dfolha_nordeste)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_norte_coeste, models.data_reader.candidates[i].ibope_norte_coeste, models.data_reader.candidates[i].dfolha_norte_coeste)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_sul, models.data_reader.candidates[i].ibope_sul, models.data_reader.candidates[i].dfolha_sul)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_sudeste, models.data_reader.candidates[i].ibope_sudeste, models.data_reader.candidates[i].dfolha_sudeste)
+        plot_table_error("region_" + dic_index[i] + "_error.png")
+
 
 def plot_like():
         
@@ -445,23 +464,31 @@ def plot_age():
     # bbox_to_anchor=(1.2, -0.21),
 
     error_1 = plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 100, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
-    plot_graph("age_bolsonaro_error.png", error_1, 3, 2, -100, 200, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)    
+    plot_graph("age_bolsonaro_error.png", error_1, 3, 2, -100, 200, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)    
     
     error_2 = plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)  
-    plot_graph("age_haddad_error.png", error_2, 3, 2, -90, 250, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)   
+    plot_graph("age_haddad_error.png", error_2, 3, 2, -90, 250, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)   
 
     error_3 = plot_graph("age_ciro.png", GFrame.Age.data_frame_ciro, 3, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
-    plot_graph("age_ciro_error.png", error_3, 3, 2, -80, 200, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)
+    plot_graph("age_ciro_error.png", error_3, 3, 2, -80, 200, count_x, "Ciro Gomes - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)
 
     error_4 = plot_graph("age_marina.png", GFrame.Age.data_frame_marina, 3, 2, 0, 60, count_x, "Marina Silva", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
-    plot_graph("age_marina_error.png", error_4, 3, 2, -70, 100, count_x, "Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)
+    plot_graph("age_marina_error.png", error_4, 3, 2, -70, 100, count_x, "Marina Silva - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)
 
     error_5 = plot_graph("age_alckmin.png", GFrame.Age.data_frame_alckmin, 3, 2, 0, 60, count_x, "Geraldo Alckmin", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
-    plot_graph("age_alckmin_error.png", error_5, 3, 2, -50, 75, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)
+    plot_graph("age_alckmin_error.png", error_5, 3, 2, -50, 75, count_x, "Geraldo Alckmin - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)
 
     error_6 = plot_graph("age_alvaro.png", GFrame.Age.data_frame_alvaro, 3, 2, 0, 60, count_x, "Alvaro Dias", False, True, True, 18, 10, 1.2, -0.21, True, True, 0.4)
-    plot_graph("age_alvaro_error.png", error_6, 3, 2, -150, 200, count_x, "Variation Polls", True, False, True, 18, 10, 1.2, -0.21, False, False, 0.4)
+    plot_graph("age_alvaro_error.png", error_6, 3, 2, -150, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, 1.2, -0.21, False, False, 0.4)
     # plot_graph("age_lula.png", data_frame_lula, 3, 2, 0, 60, count_x, "Lula", False, True, True, 18, 10, 0.4)
+
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_16a24, models.data_reader.candidates[i].ibope_16a24, models.data_reader.candidates[i].dfolha_16a24)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_25a34, models.data_reader.candidates[i].ibope_25a34, models.data_reader.candidates[i].dfolha_25a34)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_35a44, models.data_reader.candidates[i].ibope_35a44, models.data_reader.candidates[i].dfolha_35a44)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_45a54, models.data_reader.candidates[i].ibope_45a54, models.data_reader.candidates[i].dfolha_45a54)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_55, models.data_reader.candidates[i].ibope_55, models.data_reader.candidates[i].dfolha_55)
+        plot_table_error("age_" + dic_index[i] + "_error.png")
 
     # plot_graph("age_bolsonaro.png", GFrame.Age.data_frame_bolsonaro, 3, 2, 0, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, 0.4)
     # plot_graph("age_haddad.png", GFrame.Age.data_frame_haddad, 3, 2, 0, 60, count_x, "Fernando Haddad", False, True, True, 18, 10, 0.4)    
@@ -479,3 +506,9 @@ def plot_education():
 
     error_2 = plot_graph("education_2.png", GFrame.Education.data_frame2, 3, 3, 0, 75, count_x, "Education", True, False, True, 18, 10, -0.7, -0.19)  
     plot_graph("education_2_error.png", error_2, 3, 3, -100, 150, count_x, "Variation Polls", True, False, True, 18, 10, -0.7, -0.21, False, False, False) 
+
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_fundamental, models.data_reader.candidates[i].ibope_fundamental, models.data_reader.candidates[i].dfolha_fundamental)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_medio, models.data_reader.candidates[i].ibope_medio, models.data_reader.candidates[i].dfolha_medio)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_superior, models.data_reader.candidates[i].ibope_superior, models.data_reader.candidates[i].dfolha_superior)
+        plot_table_error("education_" + dic_index[i] + "_error.png")
