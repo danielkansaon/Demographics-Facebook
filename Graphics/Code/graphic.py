@@ -49,7 +49,7 @@ dic_index = {
 
 dic_lines = {
     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
-    {"x": 2.7, "negative": 0.6, "plus": 4, "text": "Judgment\n   Lula "}, 
+    {"x": 2.7, "negative": 0.9, "plus": 4, "text": "Judgment\n   Lula "}, 
     {"x": 10.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
 }
 
@@ -71,8 +71,8 @@ def calculate_correlattion(ibope, dfolha, facebook, resultado):
 def plot_graph_events(range_fim, graph_error = False):
 
     if(graph_error == True):
-        plt.text(x = 9 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1º Round", size = 9)
-        plt.text(x = 14 - 0.8, y = range_fim -(range_fim * 0.20), s = "End\n2º Round", size = 9)  
+        plt.text(x = 9 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1º Round", size = 11)
+        plt.text(x = 14 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n2º Round", size = 11)  
         plt.axvline(x=9, color='gray', linestyle='--', alpha=0.5)
         plt.axvline(x=14, color='gray', linestyle='--', alpha=0.5)
     else:
@@ -80,9 +80,9 @@ def plot_graph_events(range_fim, graph_error = False):
                 plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
                 if(dic["text"] == "Judgment\n   Lula "):
-                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 8, s = dic["text"], size = 9)  
+                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 8, s = dic["text"], size = 11)  
                 else:               
-                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 9)
+                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 11)
 
 def get_variation_graph(v_facebook, v_ibope, v_dfolha):
     v_facebook_ibope = []
@@ -184,22 +184,22 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
             if(g == 'calc_1round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
                     plt.scatter(8, d[g].values[0], color ='slategrey', s=130, alpha=1, label="Error Pool %")
-                    plt.text(x = 8 - 0.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 10)         
+                    plt.text(x = 8 - 0.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 11)         
 
             elif(g == 'calc_2round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
                     plt.scatter(13, d[g].values[0], color ='slategrey', s=130, alpha=1) 
-                    plt.text(x = 13 - 0.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 10)    
+                    plt.text(x = 13 - 0.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
             else:
                 label = g.split("-")
                             
                 if(all_subtitle == False and pos <= col):
-                    plt.title(label[1], fontsize=12, color='black', loc='center')
+                    plt.title(label[1], fontsize=15, color='black', loc='center')
                 elif(all_subtitle == True):
-                    plt.title(label[1], fontsize=12, color='black', loc='center')           
+                    plt.title(label[1], fontsize=15, color='black', loc='center')           
 
                 if(set_subtitle == True):                
-                    plt.ylabel(label[0], multialignment='center', color='gray', fontsize=12)                
+                    plt.ylabel(label[0], multialignment='center', color='black', fontsize=14)                
                     set_subtitle = False
                     # , marker='o'
 
@@ -238,18 +238,18 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     if(plot_error == False):                        
                         if(d[g].values[9] != 0 and d[g].values[9] != -100):
                             plt.scatter(9, y = 0, color='lightskyblue', s=130, alpha=1, label="Error Facebook %") 
-                            plt.text(x = 9 - 0.5 , y = 4, s = str(round(d[g].values[9],1)) + " %", size = 10)
+                            plt.text(x = 9 - 0.5 , y = 4, s = str(round(d[g].values[9],1)) + " %", size = 11)
                         if(d[g].values[14] != -100 and d[g].values[14] != 0):
                             plt.scatter(14, 0, color='lightskyblue', s=130, alpha=1)
-                            plt.text(x = 14 - 0.5 , y = 4, s = str(round(d[g].values[14],1)) + " %", size = 10)
+                            plt.text(x = 14 - 0.5 , y = 4, s = str(round(d[g].values[14],1)) + " %", size = 11)
                        
                     if(d[g].values[9] != -100 ):
                         plt.scatter(9, d[g].values[9], color='darkorange', s=130, alpha=1, label=legend_result) 
-                        plt.text(x = 9 - 0.5 , y =  d[g].values[9] + 3, s = text_1Round, size = 10)
+                        plt.text(x = 9 - 0.5 , y =  d[g].values[9] + 3, s = text_1Round, size = 11)
                             
                     if(d[g].values[14] != -100 and d[g].values[14] != 0):
                         plt.scatter(14, d[g].values[14], color='darkorange', s=130, alpha=1)
-                        plt.text(x = 14 - 0.5 , y =  d[g].values[14] + 3, s = text_2Round, size = 10)
+                        plt.text(x = 14 - 0.5 , y =  d[g].values[14] + 3, s = text_2Round, size = 11)
                     
                     set_result_aux = False
                                
@@ -315,7 +315,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 
     # plt.subplots_adjust(top=18)
 
-    plt.legend(loc='upper center', bbox_to_anchor=(legend_posX, legend_posY), fancybox=True, shadow=True, ncol=5, prop={'size':'12'})
+    plt.legend(loc='upper center', bbox_to_anchor=(legend_posX, legend_posY), fancybox=True, shadow=True, ncol=5, prop={'size':'13'})
     plt.suptitle(firstitle) 
     plt.savefig(name, dpi=100)
     
@@ -326,15 +326,15 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 def plot_gender():   
            
     count_x = len(models.data_reader.candidates[0].dfolha_male)
-    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19)
+    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.19)
     plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.19, False, False)
     error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19)
     plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False)    
 
-    for i in v_index:
-        get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
-        get_error_agregatte(models.data_reader.candidates[i].facebook_female, models.data_reader.candidates[i].ibope_female, models.data_reader.candidates[i].dfolha_female)
-        plot_table_error("gender_" + dic_index[i] + "_error.png")
+    # for i in v_index:
+    #     get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
+    #     get_error_agregatte(models.data_reader.candidates[i].facebook_female, models.data_reader.candidates[i].ibope_female, models.data_reader.candidates[i].dfolha_female)
+    #     plot_table_error("gender_" + dic_index[i] + "_error.png")
    
 
 def plot_region():
