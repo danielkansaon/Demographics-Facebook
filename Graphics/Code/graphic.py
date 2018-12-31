@@ -30,6 +30,9 @@ error_facebook_2round = []
 error_dfolha_2round = []
 error_ibope_2round = []
 
+pos_result_1_round = 9
+pos_result_2_round = 14
+
 dic_color = {
         "DataFolha":"green",
         "IBOPE":"red",
@@ -69,12 +72,11 @@ def calculate_correlattion(ibope, dfolha, facebook, resultado):
     return v
 
 def plot_graph_events(range_fim, graph_error = False):
-
     if(graph_error == True):
-        plt.text(x = 9 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1º Round", size = 11)
-        plt.text(x = 14 - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n2º Round", size = 11)  
-        plt.axvline(x=9, color='gray', linestyle='--', alpha=0.5)
-        plt.axvline(x=14, color='gray', linestyle='--', alpha=0.5)
+        plt.text(x = pos_result_1_round - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1º Round", size = 11)
+        plt.text(x = pos_result_2_round - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n2º Round", size = 11)  
+        plt.axvline(x=pos_result_1_round, color='gray', linestyle='--', alpha=0.5)
+        plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5)
     else:
         for dic in dic_lines["points"]:
                 plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
@@ -106,15 +108,15 @@ def get_variation_graph(v_facebook, v_ibope, v_dfolha):
     return v_facebook_dfolha, v_facebook_ibope
     
 def get_error_agregatte(v_facebook, v_ibope, v_dfolha):    
-    if(v_ibope[9] != 0 and v_ibope[9] != -100):
-        error_facebook_1round.append((abs((v_facebook[9] - v_ibope[9])) / v_ibope[9]) * 100)
-        error_ibope_1round.append((abs((v_ibope[8] - v_ibope[9])) / v_ibope[9]) * 100)
-        error_dfolha_1round.append((abs((v_dfolha[8] - v_dfolha[9])) / v_dfolha[9]) * 100)
+    if(v_ibope[pos_result_1_round] != 0 and v_ibope[pos_result_1_round] != -100):
+        error_facebook_1round.append((abs((v_facebook[pos_result_1_round] - v_ibope[pos_result_1_round])) / v_ibope[pos_result_1_round]) * 100)
+        error_ibope_1round.append((abs((v_ibope[pos_result_1_round - 1] - v_ibope[pos_result_1_round])) / v_ibope[pos_result_1_round]) * 100)
+        error_dfolha_1round.append((abs((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round])) / v_dfolha[pos_result_1_round]) * 100)
 
-    if(v_ibope[14] != 0 and v_ibope[14] != -100):
-        error_facebook_2round.append((abs((v_facebook[13] - v_ibope[14])) / v_ibope[14]) * 100)
-        error_ibope_2round.append((abs((v_ibope[13] - v_ibope[14])) / v_ibope[14]) * 100)
-        error_dfolha_2round.append((abs((v_dfolha[13] - v_dfolha[14])) / v_dfolha[14]) * 100)   
+    if(v_ibope[pos_result_2_round] != 0 and v_ibope[pos_result_2_round] != -100):
+        error_facebook_2round.append((abs((v_facebook[pos_result_2_round - 1] - v_ibope[pos_result_2_round])) / v_ibope[pos_result_2_round]) * 100)
+        error_ibope_2round.append((abs((v_ibope[pos_result_2_round - 1] - v_ibope[pos_result_2_round])) / v_ibope[pos_result_2_round]) * 100)
+        error_dfolha_2round.append((abs((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round])) / v_dfolha[pos_result_2_round]) * 100)   
     
 def plot_table_error(name):
     fig = plt.figure()
@@ -159,6 +161,63 @@ def plot_table_error(name):
     #         cell.set_linewidth(0)
     #     # gg = key[0]
 
+# Draw circle result in grpah
+def draw_result_graph(plot_error, d, g, text_1Round, text_2Round, legend_result):
+    if(plot_error == False):                        
+        if(d[g].values[pos_result_1_round] != 0 and d[g].values[pos_result_1_round] != -100):
+            plt.scatter(pos_result_1_round, y = 0, color='lightskyblue', s=130, alpha=1, label="Error Facebook %") 
+            plt.text(x = pos_result_1_round - 0.5 , y = 4, s = str(round(d[g].values[pos_result_1_round],1)) + " %", size = 11)
+        if(d[g].values[pos_result_2_round] != -100 and d[g].values[pos_result_2_round] != 0):
+            plt.scatter(pos_result_2_round, 0, color='lightskyblue', s=130, alpha=1)
+            plt.text(x = pos_result_2_round - 0.5 , y = 4, s = str(round(d[g].values[pos_result_2_round],1)) + " %", size = 11)   
+
+    if(d[g].values[pos_result_1_round] != -100):
+        plt.scatter(pos_result_1_round, d[g].values[pos_result_1_round], color='darkorange', s=130, alpha=1, label=legend_result) 
+        plt.text(x = pos_result_1_round - 0.5 , y =  d[g].values[pos_result_1_round] + 3, s = text_1Round, size = 11)
+            
+    if(d[g].values[pos_result_2_round] != -100 and d[g].values[pos_result_2_round] != 0):
+        plt.scatter(pos_result_2_round, d[g].values[pos_result_2_round], color='darkorange', s=130, alpha=1)
+        plt.text(x = pos_result_2_round - 0.5 , y =  d[g].values[pos_result_2_round] + 3, s = text_2Round, size = 11)
+
+def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):                             
+    variation_dfolha, variation_ibope = get_variation_graph(v_facebook, v_ibope, v_dfolha)
+
+    v_error_pool_2round = [-100]*15
+    v_error_pool_1round = [-100]*15
+
+    if(v_ibope[pos_result_2_round] == 0 or v_dfolha[pos_result_2_round] == 0):
+        v_error_pool_2round[1] = 0
+    elif(v_ibope[pos_result_1_round] == 0 or v_dfolha[pos_result_1_round] == 0):
+        v_error_pool_1round[1] = 0
+    else:   
+        v_error_pool_2round[1] = ((v_ibope[13] - v_ibope[pos_result_2_round]) / v_ibope[pos_result_2_round]) * 100
+        v_error_pool_2round[0] = variation_ibope[13]
+        v_error_pool_1round[1] = ((v_ibope[8] - v_ibope[pos_result_1_round]) / v_ibope[pos_result_1_round]) * 100
+        v_error_pool_1round[0] = variation_ibope[8]
+        
+        if(v_error_pool_1round[1] >= 0):
+            if(v_error_pool_1round[1] < ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[8]
+            if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
+                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[13]
+        else:
+            if(v_error_pool_1round[1] > ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[8]
+            if(v_error_pool_2round[1] > ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
+                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[13]
+    
+    vector_dFrame.append(pd.DataFrame(
+    {
+        'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_male)), 
+        label[0] + "-" + label[1] + "-Variation (DataFolha)": variation_dfolha, label[0] + "-" + label[1] + "-Variation (IBOPE)": variation_ibope,
+        "calc_1round_pool": v_error_pool_1round, "calc_2round_pool" : v_error_pool_2round
+    }))
+
+    return vector_dFrame
 
 def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY,
  legend_posX, legend_posY, plot_error = True, plot_event = True, hspace=0):    
@@ -216,9 +275,6 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     # marker='v',
                     plt.plot('x', g, data=d, color=dic_color[label[2]], marker='X', linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
                     plt.axhline(y=0, color='blue', linestyle='-', alpha=0.9)
-
-                    # text_1Round = str(round(d[g].values[9],1)) + " %"
-                    # text_2Round = str(round(d[g].values[14],1)) + " %"
                     legend_result = "Result Election"
                     text_1Round = ""
                     text_2Round = ""
@@ -235,69 +291,19 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 
                 #Setando Resultado
                 if(set_result_aux == True):  
-                    if(plot_error == False):                        
-                        if(d[g].values[9] != 0 and d[g].values[9] != -100):
-                            plt.scatter(9, y = 0, color='lightskyblue', s=130, alpha=1, label="Error Facebook %") 
-                            plt.text(x = 9 - 0.5 , y = 4, s = str(round(d[g].values[9],1)) + " %", size = 11)
-                        if(d[g].values[14] != -100 and d[g].values[14] != 0):
-                            plt.scatter(14, 0, color='lightskyblue', s=130, alpha=1)
-                            plt.text(x = 14 - 0.5 , y = 4, s = str(round(d[g].values[14],1)) + " %", size = 11)
-                       
-                    if(d[g].values[9] != -100 ):
-                        plt.scatter(9, d[g].values[9], color='darkorange', s=130, alpha=1, label=legend_result) 
-                        plt.text(x = 9 - 0.5 , y =  d[g].values[9] + 3, s = text_1Round, size = 11)
-                            
-                    if(d[g].values[14] != -100 and d[g].values[14] != 0):
-                        plt.scatter(14, d[g].values[14], color='darkorange', s=130, alpha=1)
-                        plt.text(x = 14 - 0.5 , y =  d[g].values[14] + 3, s = text_2Round, size = 11)
-                    
+                    draw_result_graph(plot_error, d, g, text_1Round, text_2Round, legend_result)                    
                     set_result_aux = False
                                
         #Calculando Error                               
         if(plot_error == True and len(v_facebook) > 0):
-            variation_dfolha, variation_ibope = get_variation_graph(v_facebook, v_ibope, v_dfolha)            
-            
-            v_error_pool_2round = [-100]*15
-            v_error_pool_1round = [-100]*15
+            vector_dFrame = cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label)       
 
-            if(v_ibope[14] == 0 or v_dfolha[14] == 0):
-                v_error_pool_2round[1] = 0
-            elif(v_ibope[9] == 0 or v_dfolha[9] == 0):
-                v_error_pool_1round[1] = 0
-            else:   
-                v_error_pool_2round[1] = ((v_ibope[13] - v_ibope[14]) / v_ibope[14]) * 100
-                v_error_pool_2round[0] = variation_ibope[13]
-                v_error_pool_1round[1] = ((v_ibope[8] - v_ibope[9]) / v_ibope[9]) * 100
-                v_error_pool_1round[0] = variation_ibope[8]
-
-                if(v_error_pool_1round[1] >= 0):
-                    if(v_error_pool_1round[1] < ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
-                        v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
-                        v_error_pool_1round[0] = variation_dfolha[8]
-
-                    if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ):
-                        v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
-                        v_error_pool_2round[0] = variation_dfolha[13]
-                else:
-                    if(v_error_pool_1round[1] > ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100):
-                        v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[9]) / v_dfolha[9]) * 100
-                        v_error_pool_1round[0] = variation_dfolha[8]
-
-                    if(v_error_pool_2round[1] > ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100 ):
-                        v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[14]) / v_dfolha[14]) * 100
-                        v_error_pool_2round[0] = variation_dfolha[13]
-
-            vector_dFrame.append(pd.DataFrame(
-            {
-                'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_male)), 
-                label[0] + "-" + label[1] + "-Variation (DataFolha)": variation_dfolha, label[0] + "-" + label[1] + "-Variation (IBOPE)": variation_ibope,
-                "calc_1round_pool": v_error_pool_1round, "calc_2round_pool" : v_error_pool_2round
-            }))
-
+        #Marcando eventos no grafico
         if(plot_event):
             plot_graph_events(range_fim)
         elif(plot_error == False):
             plot_graph_events(range_fim, True)
+               
                
         plt.xticks(range(0, count_x), xticks)   
            
@@ -314,14 +320,11 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         plt.subplots_adjust(hspace=hspace)
 
     # plt.subplots_adjust(top=18)
-
     plt.legend(loc='upper center', bbox_to_anchor=(legend_posX, legend_posY), fancybox=True, shadow=True, ncol=5, prop={'size':'13'})
     plt.suptitle(firstitle) 
     plt.savefig(name, dpi=100)
     
     return vector_dFrame
-    # plot_graph_error(name.replace(".png","") + "_error.png", vector_dFrame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY)
-    # plt.legend(loc='upper center', bbox_to_anchor=(-0.1, -0.21), shadow=True, ncol=2)    
 
 def plot_gender():   
            
@@ -399,14 +402,14 @@ def plot_like():
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
         if(dic["text"] == "Judgment\n   Lula "):
-            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 8, s = dic["text"], size = 9)  
+            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 8, s = dic["text"], size = pos_result_2_round)  
         else:               
-            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 5, s = dic["text"], size = 9)  
+            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 5, s = dic["text"], size = pos_result_2_round)  
 
-    plt.axvline(x=9, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = 9 - dic["negative"], y =  8000000 - 15, s = 'End\n1º Round', size = 9)  
-    plt.axvline(x=14, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = 14 - dic["negative"], y =  8000000 - 15, s = 'End\n2º Round', size = 9)  
+    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - dic["negative"], y =  8000000 - 15, s = 'End\n1º Round', size = pos_result_2_round)  
+    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - dic["negative"], y =  8000000 - 15, s = 'End\n2º Round', size = pos_result_2_round)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -443,14 +446,14 @@ def talking_about():
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
         if(dic["text"] == "Judgment\n   Lula "):
-            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 8, s = dic["text"], size = 9)  
+            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 8, s = dic["text"], size = pos_result_2_round)  
         else:               
-            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = 9)  
+            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = pos_result_2_round)  
 
-    plt.axvline(x=9, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = 9 - dic["negative"], y =  4800000 - 12000, s = 'End\n1º Round', size = 9)  
-    plt.axvline(x=14, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = 14 - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = 9)  
+    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - dic["negative"], y =  4800000 - 12000, s = 'End\n1º Round', size = pos_result_2_round)  
+    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = pos_result_2_round)  
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
