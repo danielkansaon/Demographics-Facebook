@@ -12,8 +12,6 @@ import subprocess
 
 # xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n05", "10\n06",  "10\n08",  "10\n15",  "10\n22",  "10\n26", "10\n27",  "10\n29"]
 
-n_xticks = 33
-
 xticks = ["10\n22", "11\n28", "11\n30", "06\n07", "06\n24", "07\n09", "08\n06", "08\n19", "08\n21", 
 "09\n10", "09\n17", "09\n18", "09\n24", "09\n28", "09\n30", "10\n01", "10\n02", "10\n04", "10\n05",
 "10\n06", "10\n07", "10\n08", "10\n10", "10\n14", "10\n15", "10\n18", "10\n22", "10\n23", "10\n25", 
@@ -37,8 +35,9 @@ error_facebook_2round = []
 error_dfolha_2round = []
 error_ibope_2round = []
 
-pos_result_1_round = 9
-pos_result_2_round = 14
+pos_result_1_round = 21
+pos_result_2_round = 32
+n_xticks = 33
 
 dic_color = {
         "DataFolha":"green",
@@ -58,9 +57,9 @@ dic_index = {
 }
 
 dic_lines = {
-    "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
-    {"x": 2.7, "negative": 0.9, "plus": 4, "text": "Judgment\n   Lula "}, 
-    {"x": 10.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
+    "points": [{"x": 14.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
+    {"x": 8.7, "negative": 0.9, "plus": 4, "text": "Judgment\n   Lula "}, 
+    {"x": 25.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
 }
 
 def formatter_millions(x):
@@ -197,25 +196,25 @@ def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):
     elif(v_ibope[pos_result_1_round] == 0 or v_dfolha[pos_result_1_round] == 0):
         v_error_pool_1round[1] = 0
     else:   
-        v_error_pool_2round[1] = ((v_ibope[13] - v_ibope[pos_result_2_round]) / v_ibope[pos_result_2_round]) * 100
-        v_error_pool_2round[0] = variation_ibope[13]
-        v_error_pool_1round[1] = ((v_ibope[8] - v_ibope[pos_result_1_round]) / v_ibope[pos_result_1_round]) * 100
-        v_error_pool_1round[0] = variation_ibope[8]
+        v_error_pool_2round[1] = ((v_ibope[pos_result_2_round - 1] - v_ibope[pos_result_2_round]) / v_ibope[pos_result_2_round]) * 100
+        v_error_pool_2round[0] = variation_ibope[pos_result_2_round - 1]
+        v_error_pool_1round[1] = ((v_ibope[pos_result_1_round - 1] - v_ibope[pos_result_1_round]) / v_ibope[pos_result_1_round]) * 100
+        v_error_pool_1round[0] = variation_ibope[pos_result_1_round - 1]
         
         if(v_error_pool_1round[1] >= 0):
-            if(v_error_pool_1round[1] < ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
-                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
-                v_error_pool_1round[0] = variation_dfolha[8]
-            if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
-                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
-                v_error_pool_2round[0] = variation_dfolha[13]
+            if(v_error_pool_1round[1] < ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[pos_result_1_round - 1]
+            if(v_error_pool_2round[1] < ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
+                v_error_pool_2round[1] = ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[pos_result_2_round - 1]
         else:
-            if(v_error_pool_1round[1] > ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
-                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
-                v_error_pool_1round[0] = variation_dfolha[8]
-            if(v_error_pool_2round[1] > ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
-                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
-                v_error_pool_2round[0] = variation_dfolha[13]
+            if(v_error_pool_1round[1] > ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[pos_result_1_round - 1]
+            if(v_error_pool_2round[1] > ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100):
+                v_error_pool_2round[1] = ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[pos_result_2_round - 1]
     
     vector_dFrame.append(pd.DataFrame(
     {
@@ -225,6 +224,31 @@ def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):
     }))
 
     return vector_dFrame
+
+def plot_designer_circle_graph(vec, line):
+    if(len(vec) == n_xticks):
+        v_datas = []
+        
+        if 'Distribuition' in line:
+            return
+        if 'Facebook' in line:
+            v_datas = models.data_facebook
+            color = "blue"
+        if 'DataFolha' in line:
+            v_datas = models.data_dfolha
+            color = "green"
+        if 'IBOPE' in line:
+            v_datas = models.data_ibope
+            color = "red"
+
+        for v_date in v_datas:
+            i = 0
+            for date in models.dates_graph:
+                if(v_date == date):
+                    plt.scatter(i, vec[i], color = color, s=30, alpha=1) 
+                    break    
+                i = i + 1
+
 
 def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY,
  legend_posX, legend_posY, plot_error = True, plot_event = True, hspace=0):    
@@ -249,13 +273,13 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         for g in d.drop('x', axis=1):               
             if(g == 'calc_1round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
-                    plt.scatter(8, d[g].values[0], color ='slategrey', s=130, alpha=1, label="Error Pool %")
-                    plt.text(x = 8 - 0.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 11)         
+                    plt.scatter((pos_result_1_round - 1), d[g].values[0], color ='slategrey', s=130, alpha=1, label="Error Pool %")
+                    plt.text(x = (pos_result_1_round - 1) - 0.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 11)         
 
             elif(g == 'calc_2round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
-                    plt.scatter(13, d[g].values[0], color ='slategrey', s=130, alpha=1) 
-                    plt.text(x = 13 - 0.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
+                    plt.scatter((pos_result_2_round - 1), d[g].values[0], color ='slategrey', s=130, alpha=1) 
+                    plt.text(x = (pos_result_2_round - 1) - 0.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
             else:
                 label = g.split("-")
                             
@@ -277,7 +301,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                         else:
                             plt.plot('x', g, data=d, color='darkgoldenrod', ls='--', alpha=1, linewidth=2.0, label='Distribuition Census')
                     else:
-                        plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', marker='o',  alpha=0.8, label=label[2])
+                        plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
                 else:
                     # marker='v',
                     plt.plot('x', g, data=d, color=dic_color[label[2]], marker='X', linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
@@ -300,6 +324,8 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                 if(set_result_aux == True):  
                     draw_result_graph(plot_error, d, g, text_1Round, text_2Round, legend_result)                    
                     set_result_aux = False
+                
+                plot_designer_circle_graph(d[g].values, g)
                                
         #Calculando grafico de erro da eleição                             
         if(plot_error == True and len(v_facebook) > 0):
