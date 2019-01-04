@@ -21,18 +21,12 @@ def read_json(comLula):
     for date in dates_graph:
         vec_data = return_election_by_date(poolElection, date)    
         
-        if(len(vec_data) == 0):
-            for candidate in models.data_reader.candidates:
-                set_value_empty(True, models.return_index(candidate.name))
-                set_value_empty(False, models.return_index(candidate.name))                
-
         set_empty = True
         if(len(vec_data) > 1):
             set_empty = False
 
-        for data in vec_data:
+        for data in vec_data:            
             for candidate in data['candidates']:
-
                 i = models.return_index(candidate['name'])
 
                 if(i >= 0):
@@ -70,8 +64,28 @@ def read_json(comLula):
                         models.data_reader.candidates[i].ibope_medio.append(candidate['education_status']['high_school'])
                         models.data_reader.candidates[i].ibope_superior.append(candidate['education_status']['higher_education'])                    
                     elif(set_empty):
-                        set_value_empty(False, i)                  
-    
+                        set_value_empty(False, i)          
+        
+        if(len(vec_data) == 0):
+            for candidate in models.data_reader.candidates:
+                set_value_empty(True, models.return_index(candidate.name))
+                set_value_empty(False, models.return_index(candidate.name))                
+        else:            
+            achou = False
+            #Seta empty nos candidatos que não estão na pesquisa
+            for data in vec_data:            
+                for candidate in models.data_reader.candidates:
+                    for c in data['candidates']:
+                        if candidate.name == c["name"]:
+                            achou = True
+                            break
+                    if(achou == False):
+                        set_value_empty(True, models.return_index(candidate.name))
+                        set_value_empty(False, models.return_index(candidate.name))
+                    else:
+                        achou = False   
+                break
+
     update_value_empty()
 
 def set_value_empty(datafolha, i):    

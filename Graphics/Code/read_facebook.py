@@ -244,7 +244,6 @@ def load_census():
             models.data_distribuition.census_region_sul.append(census_dict['brazilian_regions']['south']['census'] * 100) 
 
     update_value_empty_census()
-    a = 8
     
 def update_value_empty_census():
 
@@ -280,10 +279,10 @@ def update_value_empty_census():
             models.data_distribuition.census_age_45a54[i] = return_new_value_graph(models.data_distribuition.census_age_45a54, last_i_census, i)
             models.data_distribuition.census_age_acima55[i] = return_new_value_graph(models.data_distribuition.census_age_acima55, last_i_census, i)
         
-            models.data_distribuition.facebook_region_norte_centro_oeste[i] = return_new_value_graph(models.data_distribuition.census_region_norte_centro_oeste, last_i_census, i)
-            models.data_distribuition.facebook_region_nordeste[i] = return_new_value_graph(models.data_distribuition.census_region_nordeste, last_i_census, i)
-            models.data_distribuition.facebook_region_sudeste[i] = return_new_value_graph(models.data_distribuition.census_region_sudeste, last_i_census, i)
-            models.data_distribuition.facebook_region_sul[i] = return_new_value_graph(models.data_distribuition.census_region_sul, last_i_census, i)
+            models.data_distribuition.census_region_norte_centro_oeste[i] = return_new_value_graph(models.data_distribuition.census_region_norte_centro_oeste, last_i_census, i)
+            models.data_distribuition.census_region_nordeste[i] = return_new_value_graph(models.data_distribuition.census_region_nordeste, last_i_census, i)
+            models.data_distribuition.census_region_sudeste[i] = return_new_value_graph(models.data_distribuition.census_region_sudeste, last_i_census, i)
+            models.data_distribuition.census_region_sul[i] = return_new_value_graph(models.data_distribuition.census_region_sul, last_i_census, i)
         else:
             last_i_census = i
 
@@ -297,25 +296,25 @@ def update_value_empty():
         for i in range(0, len(dates_graph)):
 
             #Verifica se o candidato foi para o segundo turno 
-            if(i <= 21 or models.data_reader.candidates[c].round2 == True):            
+            # if(i <= 21 or models.data_reader.candidates[c].round2 == True):            
 
-                if(models.data_reader.candidates[c].facebook_male[i] == -1):
-                    models.data_reader.candidates[c].facebook_male[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_male, last_i, i)                    
-                    models.data_reader.candidates[c].facebook_female[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_female, last_i, i)
-                    models.data_reader.candidates[c].facebook_16a24[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_16a24, last_i, i)
-                    models.data_reader.candidates[c].facebook_25a34[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_25a34, last_i, i)
-                    models.data_reader.candidates[c].facebook_35a44[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_35a44, last_i, i)
-                    models.data_reader.candidates[c].facebook_45a54[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_45a54, last_i, i)
-                    models.data_reader.candidates[c].facebook_55[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_55, last_i, i)
-                    models.data_reader.candidates[c].facebook_norte_coeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_norte_coeste, last_i, i)
-                    models.data_reader.candidates[c].facebook_nordeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_nordeste, last_i, i)
-                    models.data_reader.candidates[c].facebook_sudeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sudeste, last_i, i)
-                    models.data_reader.candidates[c].facebook_sul[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sul, last_i, i)
-                    models.data_reader.candidates[c].facebook_fundamental[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_fundamental, last_i, i)
-                    models.data_reader.candidates[c].facebook_medio[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_medio, last_i, i)
-                    models.data_reader.candidates[c].facebook_superior[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_superior, last_i, i)
-                else:
-                    last_i = i
+            if(models.data_reader.candidates[c].facebook_male[i] == -1):
+                models.data_reader.candidates[c].facebook_male[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_male, last_i, i)                    
+                models.data_reader.candidates[c].facebook_female[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_female, last_i, i)
+                models.data_reader.candidates[c].facebook_16a24[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_16a24, last_i, i)
+                models.data_reader.candidates[c].facebook_25a34[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_25a34, last_i, i)
+                models.data_reader.candidates[c].facebook_35a44[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_35a44, last_i, i)
+                models.data_reader.candidates[c].facebook_45a54[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_45a54, last_i, i)
+                models.data_reader.candidates[c].facebook_55[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_55, last_i, i)
+                models.data_reader.candidates[c].facebook_norte_coeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_norte_coeste, last_i, i)
+                models.data_reader.candidates[c].facebook_nordeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_nordeste, last_i, i)
+                models.data_reader.candidates[c].facebook_sudeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sudeste, last_i, i)
+                models.data_reader.candidates[c].facebook_sul[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sul, last_i, i)
+                models.data_reader.candidates[c].facebook_fundamental[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_fundamental, last_i, i)
+                models.data_reader.candidates[c].facebook_medio[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_medio, last_i, i)
+                models.data_reader.candidates[c].facebook_superior[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_superior, last_i, i)
+            else:
+                last_i = i
 
 def return_new_value_graph(vec, last_i, i):    
     if(return_next_pos_poll(vec, i) == i):

@@ -10,14 +10,13 @@ import os
 import numpy as np
 import subprocess
 
-# xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n05", "10\n06",  "10\n08",  "10\n15",  "10\n22",  "10\n26", "10\n27",  "10\n29"]
+xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n05", "10\n06",  "10\n08",  "10\n15",  "10\n22",  "10\n26", "10\n27",  "10\n29"]
+n_xticks = 15
 
-n_xticks = 33
-
-xticks = ["10\n22", "11\n28", "11\n30", "06\n07", "06\n24", "07\n09", "08\n06", "08\n19", "08\n21", 
-"09\n10", "09\n17", "09\n18", "09\n24", "09\n28", "09\n30", "10\n01", "10\n02", "10\n04", "10\n05",
-"10\n06", "10\n07", "10\n08", "10\n10", "10\n14", "10\n15", "10\n18", "10\n22", "10\n23", "10\n25", 
-"10\n26", "10\n27", "10\n28", "10\n29"]
+# xticks = ["10\n22", "11\n28", "11\n30", "06\n07", "06\n24", "07\n09", "08\n06", "08\n19", "08\n21", 
+# "09\n10", "09\n17", "09\n18", "09\n24", "09\n28", "09\n30", "10\n01", "10\n02", "10\n04", "10\n05",
+# "10\n06", "10\n07", "10\n08", "10\n10", "10\n14", "10\n15", "10\n18", "10\n22", "10\n23", "10\n25", 
+# "10\n26", "10\n27", "10\n28", "10\n29"]
 
 i_bolsonaro = models.return_index("Jair Bolsonaro")
 i_haddad = models.return_index("Fernando Haddad")
@@ -296,12 +295,12 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 
                 v_labels.append(g)
 
-                #Destacando Resultado da eleição no gráfico
+                #Setando Resultado
                 if(set_result_aux == True):  
                     draw_result_graph(plot_error, d, g, text_1Round, text_2Round, legend_result)                    
                     set_result_aux = False
                                
-        #Calculando grafico de erro da eleição                             
+        #Calculando Error                               
         if(plot_error == True and len(v_facebook) > 0):
             vector_dFrame = cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label)       
 
