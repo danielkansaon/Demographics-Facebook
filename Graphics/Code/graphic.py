@@ -228,16 +228,19 @@ def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):
 def plot_designer_circle_graph(vec, line):
     if(len(vec) == n_xticks):
         v_datas = []
-        
+        marker = ''
+
         if 'Distribuition' in line:
-            return
+            return        
+        if 'Variation' in line:
+            marker = 'X'
         if 'Facebook' in line:
             v_datas = models.data_facebook
             color = "blue"
-        if 'DataFolha' in line:
+        elif 'DataFolha' in line:
             v_datas = models.data_dfolha
             color = "green"
-        if 'IBOPE' in line:
+        elif 'IBOPE' in line:
             v_datas = models.data_ibope
             color = "red"
 
@@ -245,7 +248,10 @@ def plot_designer_circle_graph(vec, line):
             i = 0
             for date in models.dates_graph:
                 if(v_date == date):
-                    plt.scatter(i, vec[i], color = color, s=30, alpha=1) 
+                    if marker is not 'X':
+                        plt.scatter(i, vec[i], color = color, s=30, alpha=1)
+                    else:
+                        plt.scatter(i, vec[i], color = color, marker=marker, s=30, alpha=1)
                     break    
                 i = i + 1
 
@@ -304,7 +310,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                         plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2])
                 else:
                     # marker='v',
-                    plt.plot('x', g, data=d, color=dic_color[label[2]], marker='X', linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
+                    plt.plot('x', g, data=d, color=dic_color[label[2]], linewidth=2, linestyle='dashed', alpha=0.6, label=label[2])
                     plt.axhline(y=0, color='blue', linestyle='-', alpha=0.9)
                     legend_result = "Result Election"
                     text_1Round = ""

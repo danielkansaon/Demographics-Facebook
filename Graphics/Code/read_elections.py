@@ -171,7 +171,9 @@ def update_value_empty():
                     last_i_ibope = i
 
 def return_new_value_graph(vec, last_i, i):    
-    if(return_next_pos_poll(vec, i) == i):
+    if (vec[last_i] == -100):
+        return vec[return_next_pos_poll(vec, i)]
+    elif(return_next_pos_poll(vec, i) == i):
         if(vec[i] == -100):
             return vec[last_i]
     else:        
