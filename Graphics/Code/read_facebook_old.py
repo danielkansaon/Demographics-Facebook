@@ -32,7 +32,12 @@ education_status = ['UNDERGRAD','ALUM','SOME_COLLEGE','ASSOCIATE_DEGREE', 'high_
 
 regions = ["northeast", "south", "southeast", "midwest", "north"]
 
-collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05", "18_10_06",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_27", "18_10_29"]
+collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_29"]
+
+dates_graph = ["2017-10-22", "17_11_28", "2017-11-30", "2018-06-07", "2018-06-24", "18_07_09", "18_08_06", "2018-08-19", "2018-08-21", 
+"18_09_10", "18_09_17", "2018-09-18", "18_09_24", "2018-09-28", "2018-09-30", "18_10_01", "2018-10-02", "2018-10-04", "18_10_05",
+"18_10_06", "2018-10-07", "18_10_08", "2018-10-10", "2018-10-14", "18_10_15", "2018-10-18", "18_10_22", "2018-10-23", "2018-10-25", 
+"18_10_26", "18_10_27", "2018-10-28", "18_10_29"]
 
 presids_dict = {
         3:"Fernando Haddad",
@@ -67,7 +72,6 @@ def readJson():
                
     for line in input_file:
         json_line = json.loads(line.strip())
-
         adicionarIdoso = True
 
         for j in json_line:
@@ -76,53 +80,29 @@ def readJson():
         i = return_index(presid_key)
 
         if(i >= 0):  
-            for collected_date in collected_dates:   
+            for collected_date in dates_graph:   
 
                 AdicionarFundamental = True
                 AdicionarMedio = True
                 AdicionarSuperior = True
 
-                if(json_line[presid_key].get(collected_date, '') == ''):     
-                    if(collected_date == "18_10_06" or collected_date == "18_10_27"):
-                        models.data_reader.candidates[i].facebook_male.append(models.data_reader.candidates[i].facebook_male[-1])                
-                        models.data_reader.candidates[i].facebook_female.append(models.data_reader.candidates[i].facebook_female[-1])
-
-                        models.data_reader.candidates[i].facebook_16a24.append(models.data_reader.candidates[i].facebook_16a24[-1])
-                        models.data_reader.candidates[i].facebook_25a34.append(models.data_reader.candidates[i].facebook_25a34[-1])
-                        models.data_reader.candidates[i].facebook_35a44.append(models.data_reader.candidates[i].facebook_35a44[-1])
-                        models.data_reader.candidates[i].facebook_45a54.append(models.data_reader.candidates[i].facebook_45a54[-1])
-                        models.data_reader.candidates[i].facebook_55.append(models.data_reader.candidates[i].facebook_55[-1])
-
-                        models.data_reader.candidates[i].facebook_nordeste.append(models.data_reader.candidates[i].facebook_nordeste[-1])
-                        models.data_reader.candidates[i].facebook_sul.append(models.data_reader.candidates[i].facebook_sul[-1])
-                        models.data_reader.candidates[i].facebook_sudeste.append(models.data_reader.candidates[i].facebook_sudeste[-1])
-                        models.data_reader.candidates[i].facebook_norte_coeste.append(models.data_reader.candidates[i].facebook_norte_coeste[-1])
-
-                        models.data_reader.candidates[i].facebook_likes.append(models.data_reader.candidates[i].facebook_likes[-1])
-                        models.data_reader.candidates[i].facebook_talking_about.append(models.data_reader.candidates[i].facebook_talking_about[-1])
-
-                        models.data_reader.candidates[i].facebook_fundamental.append(models.data_reader.candidates[i].facebook_fundamental[-1])
-                        models.data_reader.candidates[i].facebook_medio.append(models.data_reader.candidates[i].facebook_medio[-1])
-                        models.data_reader.candidates[i].facebook_superior.append(models.data_reader.candidates[i].facebook_superior[-1])
-                    else:
-                        models.data_reader.candidates[i].facebook_male.append(0)
-                        models.data_reader.candidates[i].facebook_female.append(0)
-                        models.data_reader.candidates[i].facebook_16a24.append(0)
-                        models.data_reader.candidates[i].facebook_25a34.append(0)
-                        models.data_reader.candidates[i].facebook_35a44.append(0)
-                        models.data_reader.candidates[i].facebook_45a54.append(0)
-                        models.data_reader.candidates[i].facebook_55.append(0)
-
-                        models.data_reader.candidates[i].facebook_nordeste.append(0)
-                        models.data_reader.candidates[i].facebook_sul.append(0)
-                        models.data_reader.candidates[i].facebook_sudeste.append(0)
-                        models.data_reader.candidates[i].facebook_norte_coeste.append(0)
-                        models.data_reader.candidates[i].facebook_likes.append(0)
-                        models.data_reader.candidates[i].facebook_talking_about.append(0)
-
-                        models.data_reader.candidates[i].facebook_fundamental.append(0)
-                        models.data_reader.candidates[i].facebook_medio.append(0)
-                        models.data_reader.candidates[i].facebook_superior.append(0)
+                if(json_line[presid_key].get(collected_date, '') == ''):                     
+                    models.data_reader.candidates[i].facebook_male.append(-100)
+                    models.data_reader.candidates[i].facebook_female.append(-100)
+                    models.data_reader.candidates[i].facebook_16a24.append(-100)
+                    models.data_reader.candidates[i].facebook_25a34.append(-100)
+                    models.data_reader.candidates[i].facebook_35a44.append(-100)
+                    models.data_reader.candidates[i].facebook_45a54.append(-100)
+                    models.data_reader.candidates[i].facebook_55.append(-100)
+                    models.data_reader.candidates[i].facebook_nordeste.append(-100)
+                    models.data_reader.candidates[i].facebook_sul.append(-100)
+                    models.data_reader.candidates[i].facebook_sudeste.append(-100)
+                    models.data_reader.candidates[i].facebook_norte_coeste.append(-100)
+                    models.data_reader.candidates[i].facebook_likes.append(-100)
+                    models.data_reader.candidates[i].facebook_talking_about.append(-100)
+                    models.data_reader.candidates[i].facebook_fundamental.append(-100)
+                    models.data_reader.candidates[i].facebook_medio.append(-100)
+                    models.data_reader.candidates[i].facebook_superior.append(-100)
                 else:
                     models.data_reader.candidates[i].facebook_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male'] * 100)
                     models.data_reader.candidates[i].facebook_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female'] * 100)
@@ -179,44 +159,44 @@ def readJson():
                             else:
                                 models.data_reader.candidates[i].facebook_superior.append(json_line[presid_key][collected_date]['percent_values_dict']['education_status'][edu] * 100)
                                 AdicionarSuperior = False
-
+    update_value_empty()
 
 def load_census():
     json_file = open(os.getcwd() + '\Graphics\Data\\census_data.json')
     census_dict = json.loads(json_file.readline())
     adicionarIdoso = True
 
-    for collected_date in collected_dates:   
+    for collected_date in dates_graph:   
         
-        if(collected_date == "18_10_06" or collected_date == "18_10_27"):
-            models.data_distribuition.facebook_gender_male.append(models.data_distribuition.facebook_gender_male[-1])
-            models.data_distribuition.facebook_gender_female.append(models.data_distribuition.facebook_gender_female[-1])
+        if collected_date not in collected_dates:
+            models.data_distribuition.facebook_gender_male.append(-100)
+            models.data_distribuition.facebook_gender_female.append(-100)
 
-            models.data_distribuition.facebook_age_16a24.append(models.data_distribuition.facebook_age_16a24[-1])     
-            models.data_distribuition.facebook_age_25a34.append(models.data_distribuition.facebook_age_25a34[-1])
-            models.data_distribuition.facebook_age_35a44.append(models.data_distribuition.facebook_age_35a44[-1])
-            models.data_distribuition.facebook_age_45a54.append(models.data_distribuition.facebook_age_45a54[-1]) 
-            models.data_distribuition.facebook_age_acima55.append(models.data_distribuition.facebook_age_acima55[-1]) 
+            models.data_distribuition.facebook_age_16a24.append(-100)     
+            models.data_distribuition.facebook_age_25a34.append(-100)
+            models.data_distribuition.facebook_age_35a44.append(-100)
+            models.data_distribuition.facebook_age_45a54.append(-100) 
+            models.data_distribuition.facebook_age_acima55.append(-100) 
             
-            models.data_distribuition.facebook_region_sudeste.append(models.data_distribuition.facebook_region_sudeste[-1]) 
-            models.data_distribuition.facebook_region_nordeste.append(models.data_distribuition.facebook_region_nordeste[-1]) 
-            models.data_distribuition.facebook_region_norte_centro_oeste.append(models.data_distribuition.facebook_region_norte_centro_oeste[-1])
-            models.data_distribuition.facebook_region_sul.append(models.data_distribuition.facebook_region_sul[-1]) 
+            models.data_distribuition.facebook_region_sudeste.append(-100) 
+            models.data_distribuition.facebook_region_nordeste.append(-100) 
+            models.data_distribuition.facebook_region_norte_centro_oeste.append(-100)
+            models.data_distribuition.facebook_region_sul.append(-100) 
 
             #CENSUS
-            models.data_distribuition.census_gender_male.append(models.data_distribuition.census_gender_male[-1])
-            models.data_distribuition.census_gender_female.append(models.data_distribuition.census_gender_female[-1])
+            models.data_distribuition.census_gender_male.append(-100)
+            models.data_distribuition.census_gender_female.append(-100)
 
-            models.data_distribuition.census_region_sudeste.append(models.data_distribuition.census_region_sudeste[-1]) 
-            models.data_distribuition.census_region_nordeste.append(models.data_distribuition.census_region_nordeste[-1]) 
-            models.data_distribuition.census_region_norte_centro_oeste.append(models.data_distribuition.census_region_norte_centro_oeste[-1])
-            models.data_distribuition.census_region_sul.append(models.data_distribuition.census_region_sul[-1]) 
+            models.data_distribuition.census_region_sudeste.append(-100) 
+            models.data_distribuition.census_region_nordeste.append(-100) 
+            models.data_distribuition.census_region_norte_centro_oeste.append(-100)
+            models.data_distribuition.census_region_sul.append(-100) 
             
-            models.data_distribuition.census_age_16a24.append(models.data_distribuition.census_age_16a24[-1])
-            models.data_distribuition.census_age_25a34.append(models.data_distribuition.census_age_25a34[-1])
-            models.data_distribuition.census_age_35a44.append(models.data_distribuition.census_age_35a44[-1])
-            models.data_distribuition.census_age_45a54.append(models.data_distribuition.census_age_45a54[-1])
-            models.data_distribuition.census_age_acima55.append(models.data_distribuition.census_age_acima55[-1])         
+            models.data_distribuition.census_age_16a24.append(-100)
+            models.data_distribuition.census_age_25a34.append(-100)
+            models.data_distribuition.census_age_35a44.append(-100)
+            models.data_distribuition.census_age_45a54.append(-100)
+            models.data_distribuition.census_age_acima55.append(-100)         
         else:
             models.data_distribuition.facebook_gender_male.append(census_dict['genders']['male'][collected_date] * 100)
             models.data_distribuition.facebook_gender_female.append(census_dict['genders']['female'][collected_date] * 100)
@@ -262,3 +242,92 @@ def load_census():
             models.data_distribuition.census_region_norte_centro_oeste.append(census_dict['brazilian_regions']['north']['census'] * 100)
             models.data_distribuition.census_region_norte_centro_oeste[-1] += (census_dict['brazilian_regions']['midwest']['census'] * 100) 
             models.data_distribuition.census_region_sul.append(census_dict['brazilian_regions']['south']['census'] * 100) 
+
+    update_value_empty_census()
+    
+def update_value_empty_census():
+
+    last_i_facebook = 0
+    last_i_census = 0
+
+    for i in range(0, len(dates_graph)):
+     
+        #FACEBOOK
+        if(models.data_distribuition.facebook_gender_male[i] == -100):                
+            models.data_distribuition.facebook_gender_male[i] = return_new_value_graph(models.data_distribuition.facebook_gender_male, last_i_facebook, i)                    
+            models.data_distribuition.facebook_gender_female[i] = return_new_value_graph(models.data_distribuition.facebook_gender_female, last_i_facebook, i)
+            models.data_distribuition.facebook_age_16a24[i] = return_new_value_graph(models.data_distribuition.facebook_age_16a24, last_i_facebook, i)
+            models.data_distribuition.facebook_age_25a34[i] = return_new_value_graph(models.data_distribuition.facebook_age_25a34, last_i_facebook, i)
+            models.data_distribuition.facebook_age_35a44[i] = return_new_value_graph(models.data_distribuition.facebook_age_35a44, last_i_facebook, i)
+            models.data_distribuition.facebook_age_45a54[i] = return_new_value_graph(models.data_distribuition.facebook_age_45a54, last_i_facebook, i)
+            models.data_distribuition.facebook_age_acima55[i] = return_new_value_graph(models.data_distribuition.facebook_age_acima55, last_i_facebook, i)
+        
+            models.data_distribuition.facebook_region_norte_centro_oeste[i] = return_new_value_graph(models.data_distribuition.facebook_region_norte_centro_oeste, last_i_facebook, i)
+            models.data_distribuition.facebook_region_nordeste[i] = return_new_value_graph(models.data_distribuition.facebook_region_nordeste, last_i_facebook, i)
+            models.data_distribuition.facebook_region_sudeste[i] = return_new_value_graph(models.data_distribuition.facebook_region_sudeste, last_i_facebook, i)
+            models.data_distribuition.facebook_region_sul[i] = return_new_value_graph(models.data_distribuition.facebook_region_sul, last_i_facebook, i)
+        else:
+            last_i_facebook = i
+        
+        #CENSUS
+        if(models.data_distribuition.census_gender_male[i] == -100):
+            models.data_distribuition.census_gender_male[i] = return_new_value_graph(models.data_distribuition.census_gender_male, last_i_census, i)                    
+            models.data_distribuition.census_gender_female[i] = return_new_value_graph(models.data_distribuition.census_gender_female, last_i_census, i)
+            models.data_distribuition.census_age_16a24[i] = return_new_value_graph(models.data_distribuition.census_age_16a24, last_i_census, i)
+            models.data_distribuition.census_age_25a34[i] = return_new_value_graph(models.data_distribuition.census_age_25a34, last_i_census, i)
+            models.data_distribuition.census_age_35a44[i] = return_new_value_graph(models.data_distribuition.census_age_35a44, last_i_census, i)
+            models.data_distribuition.census_age_45a54[i] = return_new_value_graph(models.data_distribuition.census_age_45a54, last_i_census, i)
+            models.data_distribuition.census_age_acima55[i] = return_new_value_graph(models.data_distribuition.census_age_acima55, last_i_census, i)
+        
+            models.data_distribuition.census_region_norte_centro_oeste[i] = return_new_value_graph(models.data_distribuition.census_region_norte_centro_oeste, last_i_census, i)
+            models.data_distribuition.census_region_nordeste[i] = return_new_value_graph(models.data_distribuition.census_region_nordeste, last_i_census, i)
+            models.data_distribuition.census_region_sudeste[i] = return_new_value_graph(models.data_distribuition.census_region_sudeste, last_i_census, i)
+            models.data_distribuition.census_region_sul[i] = return_new_value_graph(models.data_distribuition.census_region_sul, last_i_census, i)
+        else:
+            last_i_census = i
+
+
+def update_value_empty():
+    for candidate in models.data_reader.candidates:
+        
+        c = models.return_index(candidate.name)
+        last_i = 0
+
+        for i in range(0, len(dates_graph)):
+
+            #Verifica se o candidato foi para o segundo turno 
+            # if(i <= 21 or models.data_reader.candidates[c].round2 == True):            
+
+            if(models.data_reader.candidates[c].facebook_male[i] == -100):
+                models.data_reader.candidates[c].facebook_male[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_male, last_i, i)                    
+                models.data_reader.candidates[c].facebook_female[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_female, last_i, i)
+                models.data_reader.candidates[c].facebook_16a24[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_16a24, last_i, i)
+                models.data_reader.candidates[c].facebook_25a34[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_25a34, last_i, i)
+                models.data_reader.candidates[c].facebook_35a44[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_35a44, last_i, i)
+                models.data_reader.candidates[c].facebook_45a54[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_45a54, last_i, i)
+                models.data_reader.candidates[c].facebook_55[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_55, last_i, i)
+                models.data_reader.candidates[c].facebook_norte_coeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_norte_coeste, last_i, i)
+                models.data_reader.candidates[c].facebook_nordeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_nordeste, last_i, i)
+                models.data_reader.candidates[c].facebook_sudeste[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sudeste, last_i, i)
+                models.data_reader.candidates[c].facebook_sul[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_sul, last_i, i)
+                models.data_reader.candidates[c].facebook_fundamental[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_fundamental, last_i, i)
+                models.data_reader.candidates[c].facebook_medio[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_medio, last_i, i)
+                models.data_reader.candidates[c].facebook_superior[i] = return_new_value_graph(models.data_reader.candidates[c].facebook_superior, last_i, i)
+            else:
+                last_i = i
+
+def return_new_value_graph(vec, last_i, i):    
+    if (vec[last_i] == -100):
+        return vec[return_next_pos_poll(vec, i)]
+    elif(return_next_pos_poll(vec, i) == i):
+        if(vec[i] == -100):
+            return vec[last_i]
+    else:        
+        return (vec[last_i] + vec[return_next_pos_poll(vec, i)]) / 2
+
+def return_next_pos_poll(vec, i_atual):
+    for i in range(i_atual, len(vec)):     
+        if(vec[i] >= 0):
+            return i
+
+    return i_atual

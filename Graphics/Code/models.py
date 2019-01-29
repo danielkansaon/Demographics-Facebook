@@ -76,6 +76,7 @@ class Distribuition:
         self.facebook_age_35a44 = []
         self.facebook_age_45a54 = []
         self.facebook_age_acima55 = []
+        
 
 class Candidate:    
    def __init__(self, name, round2):
@@ -100,8 +101,8 @@ class Candidate:
         self.facebook_fundamental =[]
 
         self.facebook_likes = []
-
         self.facebook_talking_about = []
+        self.facebook_engagement = []
 
         #IBOPE
         self.ibope_male = []
