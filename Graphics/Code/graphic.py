@@ -10,8 +10,8 @@ import os
 import numpy as np
 import subprocess
 
-xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n05", "10\n06",  "10\n08",  "10\n15",  "10\n22",  "10\n26", "10\n27",  "10\n29"]
-n_xticks = 15
+xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n06",  "10\n08",  "10\n15",  "10\n22", "10\n27",  "10\n29"]
+n_xticks = len(xticks)
 
 # xticks = ["10\n22", "11\n28", "11\n30", "06\n07", "06\n24", "07\n09", "08\n06", "08\n19", "08\n21", 
 # "09\n10", "09\n17", "09\n18", "09\n24", "09\n28", "09\n30", "10\n01", "10\n02", "10\n04", "10\n05",
@@ -36,8 +36,8 @@ error_facebook_2round = []
 error_dfolha_2round = []
 error_ibope_2round = []
 
-pos_result_1_round = 9
-pos_result_2_round = 14
+pos_result_1_round = 8
+pos_result_2_round = 12
 
 dic_color = {
         "DataFolha":"green",
@@ -59,7 +59,7 @@ dic_index = {
 dic_lines = {
     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
     {"x": 2.7, "negative": 0.9, "plus": 4, "text": "Judgment\n   Lula "}, 
-    {"x": 10.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
+    {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
 }
 
 def formatter_millions(x):
@@ -196,25 +196,25 @@ def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):
     elif(v_ibope[pos_result_1_round] == 0 or v_dfolha[pos_result_1_round] == 0):
         v_error_pool_1round[1] = 0
     else:   
-        v_error_pool_2round[1] = ((v_ibope[13] - v_ibope[pos_result_2_round]) / v_ibope[pos_result_2_round]) * 100
-        v_error_pool_2round[0] = variation_ibope[13]
-        v_error_pool_1round[1] = ((v_ibope[8] - v_ibope[pos_result_1_round]) / v_ibope[pos_result_1_round]) * 100
-        v_error_pool_1round[0] = variation_ibope[8]
+        v_error_pool_2round[1] = ((v_ibope[pos_result_2_round - 1] - v_ibope[pos_result_2_round]) / v_ibope[pos_result_2_round]) * 100
+        v_error_pool_2round[0] = variation_ibope[pos_result_2_round - 1]
+        v_error_pool_1round[1] = ((v_ibope[pos_result_1_round - 1] - v_ibope[pos_result_1_round]) / v_ibope[pos_result_1_round]) * 100
+        v_error_pool_1round[0] = variation_ibope[pos_result_1_round - 1]
         
         if(v_error_pool_1round[1] >= 0):
-            if(v_error_pool_1round[1] < ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
-                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
-                v_error_pool_1round[0] = variation_dfolha[8]
-            if(v_error_pool_2round[1] < ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
-                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
-                v_error_pool_2round[0] = variation_dfolha[13]
+            if(v_error_pool_1round[1] < ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[pos_result_1_round - 1]
+            if(v_error_pool_2round[1] < ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
+                v_error_pool_2round[1] = ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[pos_result_2_round - 1]
         else:
-            if(v_error_pool_1round[1] > ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
-                v_error_pool_1round[1] = ((v_dfolha[8] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
-                v_error_pool_1round[0] = variation_dfolha[8]
-            if(v_error_pool_2round[1] > ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
-                v_error_pool_2round[1] = ((v_dfolha[13] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
-                v_error_pool_2round[0] = variation_dfolha[13]
+            if(v_error_pool_1round[1] > ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100):
+                v_error_pool_1round[1] = ((v_dfolha[pos_result_1_round - 1] - v_dfolha[pos_result_1_round]) / v_dfolha[pos_result_1_round]) * 100
+                v_error_pool_1round[0] = variation_dfolha[pos_result_1_round - 1]
+            if(v_error_pool_2round[1] > ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100 ):
+                v_error_pool_2round[1] = ((v_dfolha[pos_result_2_round - 1] - v_dfolha[pos_result_2_round]) / v_dfolha[pos_result_2_round]) * 100
+                v_error_pool_2round[0] = variation_dfolha[pos_result_2_round - 1]
     
     vector_dFrame.append(pd.DataFrame(
     {
@@ -248,13 +248,13 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         for g in d.drop('x', axis=1):               
             if(g == 'calc_1round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
-                    plt.scatter(8, d[g].values[0], color ='slategrey', s=130, alpha=1, label="Error Pool %")
-                    plt.text(x = 8 - 0.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 11)         
+                    plt.scatter(pos_result_1_round - 1, d[g].values[0], color ='slategrey', s=130, alpha=1, label="Error Pool %")
+                    plt.text(x = pos_result_1_round - 1.5 , y = d[g].values[0] + 6, s = str(round(d[g].values[1])) + " %", size = 11)         
 
             elif(g == 'calc_2round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
-                    plt.scatter(13, d[g].values[0], color ='slategrey', s=130, alpha=1) 
-                    plt.text(x = 13 - 0.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
+                    plt.scatter(pos_result_2_round - 1, d[g].values[0], color ='slategrey', s=130, alpha=1) 
+                    plt.text(x = pos_result_2_round - 1.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
             else:
                 label = g.split("-")
                             
@@ -461,14 +461,14 @@ def plot_like():
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
         if(dic["text"] == "Judgment\n   Lula "):
-            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 8, s = dic["text"], size = pos_result_2_round)  
+            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 8, s = dic["text"], size = 10)  
         else:               
-            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 5, s = dic["text"], size = pos_result_2_round)  
+            plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 5, s = dic["text"], size = 10)  
 
-    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - dic["negative"], y =  8000000 - 15, s = 'End\n1º Round', size = pos_result_2_round)  
-    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - dic["negative"], y =  8000000 - 15, s = 'End\n2º Round', size = pos_result_2_round)  
+    plt.axvline(x = pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  8000000 - 15, s = 'End\n1º Round', size = 10)  
+    plt.axvline(x = pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8000000 - 15, s = 'End\n2º Round', size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -505,14 +505,14 @@ def talking_about():
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
         if(dic["text"] == "Judgment\n   Lula "):
-            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 8, s = dic["text"], size = pos_result_2_round)  
+            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 8, s = dic["text"], size = 10)  
         else:               
-            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = pos_result_2_round)  
+            plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = 10)  
 
-    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - dic["negative"], y =  4800000 - 12000, s = 'End\n1º Round', size = pos_result_2_round)  
-    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = pos_result_2_round)  
+    plt.axvline(x= pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4800000 - 12000, s = 'End\n1º Round', size = 10)  
+    plt.axvline(x= pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = 10)  
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -554,10 +554,10 @@ def plot_engagement():
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  20000000 - 5, s = dic["text"], size = 10)  
 
-    plt.axvline(x=pos_result_1_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - dic["negative"], y =  20000000 - 15, s = 'End\n1º Round', size = 10)  
-    plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - dic["negative"] - 0.2, y =  20000000 - 15, s = 'End\n2º Round', size = 10)  
+    plt.axvline(x=pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  20000000 - 15, s = 'End\n1º Round', size = 10)  
+    plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  20000000 - 15, s = 'End\n2º Round', size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))

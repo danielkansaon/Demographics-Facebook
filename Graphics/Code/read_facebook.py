@@ -32,7 +32,8 @@ education_status = ['UNDERGRAD','ALUM','SOME_COLLEGE','ASSOCIATE_DEGREE', 'high_
 
 regions = ["northeast", "south", "southeast", "midwest", "north"]
 
-collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05", "18_10_06",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_27", "18_10_29"]
+# collected_dates_old = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05", "18_10_06",  "18_10_08",  "18_10_15",  "18_10_22",  "18_10_26", "18_10_27", "18_10_29"]
+collected_dates = ["17_11_28",  "18_07_09",  "18_08_06",  "18_09_10",  "18_09_17",  "18_09_24",  "18_10_01",  "18_10_05",  "18_10_08",  "18_10_15",  "18_10_22", "18_10_26", "18_10_29"]
 
 presids_dict = {
         3:"Fernando Haddad",
@@ -78,50 +79,25 @@ def readJson():
         if(i >= 0):  
             for collected_date in collected_dates:   
 
-                if(json_line[presid_key].get(collected_date, '') == ''):     
-                    if(collected_date == "18_10_06" or collected_date == "18_10_27"):
-                        models.data_reader.candidates[i].facebook_male.append(models.data_reader.candidates[i].facebook_male[-1])                
-                        models.data_reader.candidates[i].facebook_female.append(models.data_reader.candidates[i].facebook_female[-1])
-
-                        models.data_reader.candidates[i].facebook_16a24.append(models.data_reader.candidates[i].facebook_16a24[-1])
-                        models.data_reader.candidates[i].facebook_25a34.append(models.data_reader.candidates[i].facebook_25a34[-1])
-                        models.data_reader.candidates[i].facebook_35a44.append(models.data_reader.candidates[i].facebook_35a44[-1])
-                        models.data_reader.candidates[i].facebook_45a54.append(models.data_reader.candidates[i].facebook_45a54[-1])
-                        models.data_reader.candidates[i].facebook_55.append(models.data_reader.candidates[i].facebook_55[-1])
-
-                        models.data_reader.candidates[i].facebook_nordeste.append(models.data_reader.candidates[i].facebook_nordeste[-1])
-                        models.data_reader.candidates[i].facebook_sul.append(models.data_reader.candidates[i].facebook_sul[-1])
-                        models.data_reader.candidates[i].facebook_sudeste.append(models.data_reader.candidates[i].facebook_sudeste[-1])
-                        models.data_reader.candidates[i].facebook_norte_coeste.append(models.data_reader.candidates[i].facebook_norte_coeste[-1])
-
-                        models.data_reader.candidates[i].facebook_fundamental.append(models.data_reader.candidates[i].facebook_fundamental[-1])
-                        models.data_reader.candidates[i].facebook_medio.append(models.data_reader.candidates[i].facebook_medio[-1])
-                        models.data_reader.candidates[i].facebook_superior.append(models.data_reader.candidates[i].facebook_superior[-1])
-
-                        models.data_reader.candidates[i].facebook_engagement.append(models.data_reader.candidates[i].facebook_engagement[-1])     
-                        models.data_reader.candidates[i].facebook_likes.append(models.data_reader.candidates[i].facebook_likes[-1])
-                        models.data_reader.candidates[i].facebook_talking_about.append(models.data_reader.candidates[i].facebook_talking_about[-1])
-                    else:
-                        models.data_reader.candidates[i].facebook_male.append(0)
-                        models.data_reader.candidates[i].facebook_female.append(0)
-                        models.data_reader.candidates[i].facebook_16a24.append(0)
-                        models.data_reader.candidates[i].facebook_25a34.append(0)
-                        models.data_reader.candidates[i].facebook_35a44.append(0)
-                        models.data_reader.candidates[i].facebook_45a54.append(0)
-                        models.data_reader.candidates[i].facebook_55.append(0)
-
-                        models.data_reader.candidates[i].facebook_nordeste.append(0)
-                        models.data_reader.candidates[i].facebook_sul.append(0)
-                        models.data_reader.candidates[i].facebook_sudeste.append(0)
-                        models.data_reader.candidates[i].facebook_norte_coeste.append(0)
-
-                        models.data_reader.candidates[i].facebook_fundamental.append(0)
-                        models.data_reader.candidates[i].facebook_medio.append(0)
-                        models.data_reader.candidates[i].facebook_superior.append(0)
-                        
-                        models.data_reader.candidates[i].facebook_likes.append(0)
-                        models.data_reader.candidates[i].facebook_talking_about.append(0)
-                        models.data_reader.candidates[i].facebook_engagement.append(0)
+                if(json_line[presid_key].get(collected_date, '') == ''):                         
+                    models.data_reader.candidates[i].facebook_male.append(0)
+                    models.data_reader.candidates[i].facebook_female.append(0)
+                    models.data_reader.candidates[i].facebook_16a24.append(0)
+                    models.data_reader.candidates[i].facebook_25a34.append(0)
+                    models.data_reader.candidates[i].facebook_35a44.append(0)
+                    models.data_reader.candidates[i].facebook_45a54.append(0)
+                    models.data_reader.candidates[i].facebook_55.append(0)
+                    models.data_reader.candidates[i].facebook_nordeste.append(0)
+                    models.data_reader.candidates[i].facebook_sul.append(0)
+                    models.data_reader.candidates[i].facebook_sudeste.append(0)
+                    models.data_reader.candidates[i].facebook_norte_coeste.append(0)
+                    models.data_reader.candidates[i].facebook_fundamental.append(0)
+                    models.data_reader.candidates[i].facebook_medio.append(0)
+                    models.data_reader.candidates[i].facebook_superior.append(0)
+                    
+                    models.data_reader.candidates[i].facebook_likes.append(0)
+                    models.data_reader.candidates[i].facebook_talking_about.append(0)
+                    models.data_reader.candidates[i].facebook_engagement.append(0)
                 else:
                     models.data_reader.candidates[i].facebook_male.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['male'] * 100)
                     models.data_reader.candidates[i].facebook_female.append(json_line[presid_key][collected_date]['percent_values_dict']['gender']['female'] * 100)
