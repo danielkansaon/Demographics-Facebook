@@ -191,3 +191,5 @@ def complete_data_zero():
             c.dfolha_medio.append(-100)
             c.dfolha_superior.append(-100) 
 
+            c.ibope_score.append(-100)
+            c.dfolha_score.append(-100)

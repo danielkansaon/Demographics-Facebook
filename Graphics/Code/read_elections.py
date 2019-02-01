@@ -20,7 +20,7 @@ def read_json(comLula):
         for candidate in data['candidates']:
 
             i = models.return_index(candidate['name'])
-
+            
             if(i >= 0):
                 if(data['institute'] == 'DataFolha' or data['institute'] == 'Resultado'):             
                     if (data["date"] in data_dfolha):   
@@ -41,6 +41,8 @@ def read_json(comLula):
                         models.data_reader.candidates[i].dfolha_fundamental.append(candidate['education_status']['elementary_school'])  
                         models.data_reader.candidates[i].dfolha_medio.append(candidate['education_status']['high_school'])
                         models.data_reader.candidates[i].dfolha_superior.append(candidate['education_status']['higher_education']) 
+
+                        models.data_reader.candidates[i].dfolha_score.append(candidate['score'])
                         
                 if (data['institute'] == 'IBOPE' or data['institute'] == 'Resultado'): 
                     if (data["date"] in data_ibope):
@@ -61,6 +63,8 @@ def read_json(comLula):
                         models.data_reader.candidates[i].ibope_fundamental.append(candidate['education_status']['elementary_school'])  
                         models.data_reader.candidates[i].ibope_medio.append(candidate['education_status']['high_school'])
                         models.data_reader.candidates[i].ibope_superior.append(candidate['education_status']['higher_education']) 
+
+                        models.data_reader.candidates[i].ibope_score.append(candidate['score'])
 
              # #Repete o resultado da eleição no próximo ponto
                 # if(data['institute'] == 'Resultado'):                        

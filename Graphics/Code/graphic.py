@@ -1,14 +1,17 @@
 from matplotlib.ticker import FuncFormatter
 import read_elections as election
 from scipy.stats import spearmanr
+from scipy.stats.stats import spearmanr
 import read_facebook as facebook
 import matplotlib.pyplot as plt
+
 import data_frames as GFrame
 import pandas as pd
 import models
 import os
 import numpy as np
 import subprocess
+
 
 xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n06",  "10\n08",  "10\n15",  "10\n22", "10\n27",  "10\n29"]
 n_xticks = len(xticks)
@@ -345,10 +348,10 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 def plot_gender():   
            
     count_x = len(models.data_reader.candidates[0].dfolha_male)
-    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.19)
-    plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.19, False, False)
-    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19)
-    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False)    
+    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.19, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
+    plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.19, False, False, 0, [-20, -30, -30, -20, -20, -20], [40, 40, 40, 40, 40, 40])
+    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
+    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False, 0, [-20, -40, -30, -40], [90, 30, 80, 30])    
 
     # for i in v_index:
     #     get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
@@ -372,10 +375,10 @@ def plot_region():
     error_4 = plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 60, count_x, "Marina Silva", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [30, 20, 10, 5], [60, 45, 35, 30])
     plot_graph("region_marina_error.png", error_4, 2, 2, -50, 150, count_x, "Marina Silva - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -40, -40, -15], [40, 30, 50, 140])
 
-    error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 0, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [30, 5, 0, 0], [85, 40, 25, 25])
+    error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 0, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [40, 5, 0, 0], [80, 45, 25, 25])
     plot_graph("region_alckmin_error.png", error_5, 2, 2, -50, 100, count_x, "Geraldo Alckmin - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-10, -40, -40, -25], [30, 100, 30, 100])
 
-    error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [10, 0, 0, 10], [60, 40, 30, 70])
+    error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [10, 0, 0, 10], [55, 45, 30, 70])
     plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-10, -30, -50, -55], [200, 80, 150, 30])
     
     # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
@@ -586,63 +589,68 @@ def cal_correlation():
     #Elenao ate Primeiro Turno - Ruim (5 - 9) ou (6 - 9)
     #Inicio até ele nao - Ruim(0 - 7)
     #Tudo- Ruim(0 - 13)
+    
     for c in models.data_reader.candidates:
-
-        corr, p_value = spearmanr(models.data_reader.candidates[i_ciro].dfolha_male[1:4], models.data_reader.candidates[i_ciro].facebook_male[1:4])
-
+        
         if(c.name not in candidates):
             i = models.return_index(c.name)
+            qtd_ptos = 9
+            pt_ini = 0
 
-            if(False):
-                qtd_ptos = pos_result_2_round + 1
-                pt_ini = 4
-            else:
-                qtd_ptos = 4
-                pt_ini = 0
+            # if(c.name == "Jair Bolsonaro" or c.name == "Fernando Haddad"):
+            #     qtd_ptos = 13
+            #     pt_ini = 0
 
             # if(c.name == "Ciro Gomes"):
+            #     qtd_ptos = 9
             #     pt_ini = 1
 
-            a = models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos]
+            # v = models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos]
+
             print(c.name)
-            corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
-            print('DFolha Male: ' + str(corr))
-            corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
-            print('DFolha Female: ' + str(corr))
-            corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
-            print('IBOPE Male: ' + str(corr))
-            corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
-            print('IBOPE Female: ' + str(corr))
+            # cal_correlacao_gender(pt_ini, qtd_ptos)
+            # cal_correlacao_region(pt_ini, qtd_ptos)
+            cal_correlacao_facebook(i, pt_ini, qtd_ptos)
+           
+def cal_correlacao_gender(i, pt_ini, qtd_ptos):
+    # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
+    print('DFolha Male: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
+    print('DFolha Female: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
+    print('IBOPE Male: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
+    print('IBOPE Female: ' + str(corr))
 
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
-            # print('DFolha Nordeste: ' + str(corr))
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
-            # print('IBOPE Nordeste: ' + str(corr))
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
-            # print('DFolha Sudeste: ' + str(corr))
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
-            # print('IBOPE Sudeste: ' + str(corr))
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
-            # print('DFolha Sul: ' + str(corr))
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
-            # print('IBOPE Sul: ' + str(corr))
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
-            # print('DFolha Centro-Oeste/Norte: ' + str(corr))
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
-            # print('IBOPE Centro-Oeste/Norte: ' + str(corr))
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_engagement, models.data_reader.candidates[i].facebook_likes)
-            # print('Engajamento/Likes: ' + str(corr)) 
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about, models.data_reader.candidates[i].facebook_likes)
-            # print('TalkAbout/Likes: ' + str(corr)) 
-
-            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about, models.data_reader.candidates[i].facebook_engagement)
-            # print('TalkAbout/Engajamento: ' + str(corr)) 
-            
+def cal_correlacao_region(i, pt_ini, qtd_ptos):
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
+    print('DFolha Sudeste: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
+    print('IBOPE Sudeste: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
+    print('DFolha Nordeste: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
+    print('IBOPE Nordeste: ' + str(corr))
     
-    # corr, p_value = spearmanr(models.data_reader.candidates[i_alvaro].dfolha_male, models.data_reader.candidates[i_ciro].facebook_male)
-    # print(corr)
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
+    print('DFolha Centro-Oeste/Norte: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
+    print('IBOPE Centro-Oeste/Norte: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
+    print('DFolha Sul: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
+    print('IBOPE Sul: ' + str(corr))
+
+def cal_correlacao_facebook(i, pt_ini, qtd_ptos):
+    # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_engagement[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_likes[pt_ini:qtd_ptos])
+    # print('Engajamento/Likes: ' + str(corr))
+    # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_likes[pt_ini:qtd_ptos])
+    # print('TalkAbout/Likes: ' + str(corr))
+    # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_engagement[pt_ini:qtd_ptos])
+    # print('TalkAbout/Engajamento: ' + str(corr))
+
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_score[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_talking_about[pt_ini:qtd_ptos])
+    print('Dfolha: ' + str(corr))
+    corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_score[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_talking_about[pt_ini:qtd_ptos])
+    print('Ibope: ' + str(corr)) 
+            
