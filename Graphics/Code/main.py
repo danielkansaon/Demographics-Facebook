@@ -13,9 +13,11 @@ def main():
     # graphic.plot_age()
     #  graphic.plot_education()
     
-    graphic.plot_like()
+    # graphic.plot_like()
     # graphic.talking_about()
     # graphic.plot_engagement()
+
+    graphic.cal_correlation()
 
 if __name__ == "__main__":
     main()

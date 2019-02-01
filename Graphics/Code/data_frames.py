@@ -104,21 +104,22 @@ class Gender:
         'Geraldo Alckmin-Female-Facebook': models.data_reader.candidates[i_alckmin].facebook_female,
         'Geraldo Alckmin-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
         'Geraldo Alckmin-Female-Distribuition Census': models.data_distribuition.census_gender_female
-    }),
-    pd.DataFrame(
-    {
-        'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
-        'Alvaro Dias-Male-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_male, 'Alvaro Dias-Male-IBOPE': models.data_reader.candidates[i_alvaro].ibope_male,
-        'Alvaro Dias-Male-Facebook': models.data_reader.candidates[i_alvaro].facebook_male,
-        'Alvaro Dias-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Alvaro Dias-Male-Distribuition Census': models.data_distribuition.census_gender_male
-    }),
-    pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
-        'Alvaro Dias-Female-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_female, 'Alvaro Dias-Female-IBOPE': models.data_reader.candidates[i_alvaro].ibope_female,
-        'Alvaro Dias-Female-Facebook': models.data_reader.candidates[i_alvaro].facebook_female,
-        'Alvaro Dias-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Alvaro Dias-Female-Distribuition Census': models.data_distribuition.census_gender_female
-    })]
+    })
+    # ,pd.DataFrame(
+    # {
+    #     'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+    #     'Alvaro Dias-Male-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_male, 'Alvaro Dias-Male-IBOPE': models.data_reader.candidates[i_alvaro].ibope_male,
+    #     'Alvaro Dias-Male-Facebook': models.data_reader.candidates[i_alvaro].facebook_male,
+    #     'Alvaro Dias-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+    #     'Alvaro Dias-Male-Distribuition Census': models.data_distribuition.census_gender_male
+    # }),
+    # pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
+    #     'Alvaro Dias-Female-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_female, 'Alvaro Dias-Female-IBOPE': models.data_reader.candidates[i_alvaro].ibope_female,
+    #     'Alvaro Dias-Female-Facebook': models.data_reader.candidates[i_alvaro].facebook_female,
+    #     'Alvaro Dias-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+    #     'Alvaro Dias-Female-Distribuition Census': models.data_distribuition.census_gender_female
+    # })
+    ]
 
 class Region:
     data_frame_bolsonaro = [pd.DataFrame(

@@ -226,13 +226,14 @@ def cal_dataframe_error(vector_dFrame, v_facebook, v_ibope, v_dfolha, label):
     return vector_dFrame
 
 def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, firstitle, set_subtitle, all_subtitle, set_result, figsizeX, figsizeY,
- legend_posX, legend_posY, plot_error = True, plot_event = True, hspace=0):    
+ legend_posX, legend_posY, plot_error = True, plot_event = True, hspace=0, v_range_ini = [], v_range_fim = []):    
     
     fig = plt.figure(figsize=(figsizeX, figsizeY))    
     set_result_aux = set_result
     subtitle_aux = set_subtitle    
     text_1Round = "1º round"
-    text_2Round = "2º round"    
+    text_2Round = "2º round"   
+    count_line_to_axis = 0 
     count_subtitle = 0    
     legend_result = ""
     vector_dFrame = []
@@ -244,7 +245,11 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
    
     for d in data_frame:
         G = fig.add_subplot(line, col, pos)
-        
+
+        if len(v_range_fim) > 0:
+            range_fim = v_range_fim[pos - 1]
+            range_ini = v_range_ini[pos - 1]
+
         for g in d.drop('x', axis=1):               
             if(g == 'calc_1round_pool'):
                 if(d[g].values[0] != 0 and d[g].values[0] != -100):
@@ -315,11 +320,17 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         count_subtitle += 1
         if(count_subtitle == col):
             set_subtitle = subtitle_aux
-            count_subtitle = 0
+            count_subtitle = 0            
+            count_line_to_axis =+ 1
         
+      
+        # if len(v_scale) > 0:
+        #     G.set_ylim(range_ini,v_scale[count_line_to_axis])
+        # else:
         G.set_ylim(range_ini,range_fim)
+
         set_result_aux = True
-        pos += 1 
+        pos += 1         
             
     if(hspace != 0):
         plt.subplots_adjust(hspace=hspace)
@@ -348,24 +359,24 @@ def plot_gender():
 def plot_region():
         
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
+    
+    error_1 = plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 10, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [40, 10, 5, 5], [65, 40, 30, 30])
+    plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 90, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -20, -40, -40], [30, 80, 30, 40] )
 
-    error_1 = plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 5, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 90, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    error_2 = plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 0, 90, count_x, "Fernando Haddad", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [20, 10, 0, 0], [90, 60, 25, 25])
+    plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-40, -60, -50, -50], [85, 40, 60, 60])
 
-    error_2 = plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 5, 90, count_x, "Fernando Haddad", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    error_3 = plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [25, 20, 0, 0], [60, 50, 25, 25])
+    plot_graph("region_ciro_error.png", error_3, 2, 2, -50, 125, count_x, "Ciro Gomes - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -40, -20, -20], [80, 30, 80, 120])
 
-    error_3 = plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 5, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_ciro_error.png", error_3, 2, 2, -50, 125, count_x, "Ciro Gomes - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    error_4 = plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 60, count_x, "Marina Silva", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [30, 20, 10, 5], [60, 45, 35, 30])
+    plot_graph("region_marina_error.png", error_4, 2, 2, -50, 150, count_x, "Marina Silva - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -40, -40, -15], [40, 30, 50, 140])
 
-    error_4 = plot_graph("region_marina.png", GFrame.Region.data_frame_marina, 2, 2, 5, 60, count_x, "Marina Silva", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_marina_error.png", error_4, 2, 2, -50, 150, count_x, "Marina Silva - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 0, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [30, 5, 0, 0], [85, 40, 25, 25])
+    plot_graph("region_alckmin_error.png", error_5, 2, 2, -50, 100, count_x, "Geraldo Alckmin - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-10, -40, -40, -25], [30, 100, 30, 100])
 
-    error_5 = plot_graph("region_alckmin.png", GFrame.Region.data_frame_alckmin, 2, 2, 5, 85, count_x, "Geraldo Alckmin", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_alckmin_error.png", error_5, 2, 2, -50, 100, count_x, "Geraldo Alckmin - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
-
-    error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19)
-    plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False)
+    error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [10, 0, 0, 10], [60, 40, 30, 70])
+    plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-10, -30, -50, -55], [200, 80, 150, 30])
     
     # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
 
@@ -452,7 +463,7 @@ def plot_like():
     plt.plot('x', 'alckmin_like', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
     plt.plot('x', 'marina_like', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_like', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
-    plt.plot('x', 'alvaro_like', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
+    # plt.plot('x', 'alvaro_like', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
     
     plt.xticks(range(0, count_x), xticks)
 
@@ -497,7 +508,7 @@ def talking_about():
     plt.plot('x', 'alckmin_talking', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
     plt.plot('x', 'marina_talking', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_talking', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
-    plt.plot('x', 'alvaro_talking', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')    
+    # plt.plot('x', 'alvaro_talking', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')    
     plt.xticks(range(0, count_x), xticks)
 
     #Eventos    
@@ -510,9 +521,9 @@ def talking_about():
             plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = 10)  
 
     plt.axvline(x= pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4800000 - 12000, s = 'End\n1º Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4800000 - 12008, s = 'End\n1º Round', size = 10)  
     plt.axvline(x= pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = 10)  
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -541,7 +552,7 @@ def plot_engagement():
     plt.plot('x', 'alckmin_engagement', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
     plt.plot('x', 'marina_engagement', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_engagement', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
-    plt.plot('x', 'alvaro_engagement', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
+    # plt.plot('x', 'alvaro_engagement', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
     
     plt.xticks(range(0, count_x), xticks)
 
@@ -550,7 +561,7 @@ def plot_engagement():
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
         if(dic["text"] == "Judgment\n   Lula "):
-            plt.text(x = dic["x"] - dic["negative"], y =  20000000 - 8, s = dic["text"], size = 10)  
+            plt.text(x = dic["x"] - dic["negative"], y =  19000000 - 8, s = dic["text"], size = 10)  
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  20000000 - 5, s = dic["text"], size = 10)  
 
@@ -564,3 +575,74 @@ def plot_engagement():
     plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
 
     plt.show()
+
+def cal_correlation():
+
+    candidates = ["Alvaro Dias", "Lula"]
+
+    #Até o primeiro turno - Bom (0 - 9)
+    #Julgamento Lula até #EleNao - Bom (2 - 7)
+    #Segundo Turno - Ruim (8 - 13)
+    #Elenao ate Primeiro Turno - Ruim (5 - 9) ou (6 - 9)
+    #Inicio até ele nao - Ruim(0 - 7)
+    #Tudo- Ruim(0 - 13)
+    for c in models.data_reader.candidates:
+
+        corr, p_value = spearmanr(models.data_reader.candidates[i_ciro].dfolha_male[1:4], models.data_reader.candidates[i_ciro].facebook_male[1:4])
+
+        if(c.name not in candidates):
+            i = models.return_index(c.name)
+
+            if(False):
+                qtd_ptos = pos_result_2_round + 1
+                pt_ini = 4
+            else:
+                qtd_ptos = 4
+                pt_ini = 0
+
+            # if(c.name == "Ciro Gomes"):
+            #     pt_ini = 1
+
+            a = models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos]
+            print(c.name)
+            corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
+            print('DFolha Male: ' + str(corr))
+            corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
+            print('DFolha Female: ' + str(corr))
+            corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
+            print('IBOPE Male: ' + str(corr))
+            corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
+            print('IBOPE Female: ' + str(corr))
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
+            # print('DFolha Nordeste: ' + str(corr))
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
+            # print('IBOPE Nordeste: ' + str(corr))
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
+            # print('DFolha Sudeste: ' + str(corr))
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sudeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sudeste[pt_ini:qtd_ptos])
+            # print('IBOPE Sudeste: ' + str(corr))
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
+            # print('DFolha Sul: ' + str(corr))
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_sul[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_sul[pt_ini:qtd_ptos])
+            # print('IBOPE Sul: ' + str(corr))
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
+            # print('DFolha Centro-Oeste/Norte: ' + str(corr))
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
+            # print('IBOPE Centro-Oeste/Norte: ' + str(corr))
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_engagement, models.data_reader.candidates[i].facebook_likes)
+            # print('Engajamento/Likes: ' + str(corr)) 
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about, models.data_reader.candidates[i].facebook_likes)
+            # print('TalkAbout/Likes: ' + str(corr)) 
+
+            # corr, p_value = spearmanr(models.data_reader.candidates[i].facebook_talking_about, models.data_reader.candidates[i].facebook_engagement)
+            # print('TalkAbout/Engajamento: ' + str(corr)) 
+            
+    
+    # corr, p_value = spearmanr(models.data_reader.candidates[i_alvaro].dfolha_male, models.data_reader.candidates[i_ciro].facebook_male)
+    # print(corr)
