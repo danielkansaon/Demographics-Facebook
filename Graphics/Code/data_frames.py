@@ -14,6 +14,9 @@ i_marina = models.return_index("Marina Silva")
 i_alckmin = models.return_index("Geraldo Alckmin")
 i_alvaro = models.return_index("Alvaro Dias")
 
+d_pesquisa = 1
+d_facebook = 100000
+
 class Gender:
     data_frame_1 = [pd.DataFrame(
     {
@@ -794,3 +797,66 @@ class Education:
         # 'Alvaro Dias-Ensino Superior-Distribuition Facebook': models.data_distribuition.facebook_education_superior,
         # 'Alvaro Dias-Ensino Superior-Distribuition Census': models.data_distribuition.census_education_superior
     })]
+
+class ScoreVsLike:
+
+    data_frame = [        
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_score)), 
+            'Jair Bolsonaro-Jair Bolsonaro-DataFolha': [x/d_pesquisa for x in models.data_reader.candidates[i_bolsonaro].dfolha_score], 'Jair Bolsonaro-Jair Bolsonaro-IBOPE': [x/d_pesquisa for x in models.data_reader.candidates[i_bolsonaro].ibope_score],
+            'Jair Bolsonaro-Jair Bolsonaro-Facebook':  [x/d_facebook for x in models.data_reader.candidates[i_bolsonaro].facebook_likes]
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_score)), 
+            'Fernando Haddad-Fernando Haddad-DataFolha': [x/d_pesquisa for x in models.data_reader.candidates[i_haddad].dfolha_score], 'Fernando Haddad-Fernando Haddad-IBOPE':  [x/d_pesquisa for x in models.data_reader.candidates[i_haddad].ibope_score],
+            'Fernando Haddad-Fernando Haddad-Facebook':  [x/d_facebook for x in models.data_reader.candidates[i_haddad].facebook_likes]
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_score)), 
+            'Ciro Gomes-Ciro Gomes-DataFolha': [x/d_pesquisa for x in models.data_reader.candidates[i_ciro].dfolha_score], 'Ciro Gomes-Ciro Gomes-IBOPE': [x/d_pesquisa for x in models.data_reader.candidates[i_ciro].ibope_score],
+            'Ciro Gomes-Ciro Gomes-Facebook':  [x/d_facebook for x in models.data_reader.candidates[i_ciro].facebook_likes]
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_score)), 
+            'Marina Silva-Marina Silva-DataFolha': [x/d_pesquisa for x in models.data_reader.candidates[i_ciro].dfolha_score], 'Marina Silva-Marina Silva-IBOPE': [x/d_pesquisa for x in models.data_reader.candidates[i_marina].ibope_score],
+            'Marina Silva-Marina Silva-Facebook':  [x/d_facebook for x in models.data_reader.candidates[i_marina].facebook_likes]
+        }),       
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_score)), 
+            'Geraldo Alckmin-Geraldo Alckmin-DataFolha': [x/d_pesquisa for x in models.data_reader.candidates[i_alckmin].dfolha_score], 'Geraldo Alckmin-Geraldo Alckmin-IBOPE': [x/d_pesquisa for x in models.data_reader.candidates[i_marina].ibope_score],
+            'Geraldo Alckmin-Geraldo Alckmin-Facebook':  [x/d_facebook for x in models.data_reader.candidates[i_marina].facebook_likes]
+        })]
+
+class Score:
+
+    data_frame = [        
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_score)), 
+            'Jair Bolsonaro-Jair Bolsonaro-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_score, 'Jair Bolsonaro-Jair Bolsonaro-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_score
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_score)), 
+            'Fernando Haddad-Fernando Haddad-DataFolha': models.data_reader.candidates[i_haddad].dfolha_score, 'Fernando Haddad-Fernando Haddad-IBOPE':  models.data_reader.candidates[i_haddad].ibope_score
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_score)), 
+            'Ciro Gomes-Ciro Gomes-DataFolha': models.data_reader.candidates[i_ciro].dfolha_score, 'Ciro Gomes-Ciro Gomes-IBOPE': models.data_reader.candidates[i_ciro].ibope_score
+        }),
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_score)), 
+            'Marina Silva-Marina Silva-DataFolha': models.data_reader.candidates[i_ciro].dfolha_score, 'Marina Silva-Marina Silva-IBOPE': models.data_reader.candidates[i_marina].ibope_score
+        }),       
+        pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_score)), 
+            'Geraldo Alckmin-Geraldo Alckmin-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_score, 'Geraldo Alckmin-Geraldo Alckmin-IBOPE': models.data_reader.candidates[i_marina].ibope_score
+        })]

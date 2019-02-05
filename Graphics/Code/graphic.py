@@ -4,7 +4,6 @@ from scipy.stats import spearmanr
 from scipy.stats.stats import spearmanr
 import read_facebook as facebook
 import matplotlib.pyplot as plt
-
 import data_frames as GFrame
 import pandas as pd
 import models
@@ -13,7 +12,7 @@ import numpy as np
 import subprocess
 
 
-xticks = ["17\n11",  "18\n07",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n06",  "10\n08",  "10\n15",  "10\n22", "10\n27",  "10\n29"]
+xticks = ["11\n28",  "07\n09",  "08\n06",  "09\n10",  "09\n17",  "09\n24",  "10\n01",  "10\n06",  "10\n08",  "10\n15",  "10\n22", "10\n27",  "10\n29"]
 n_xticks = len(xticks)
 
 # xticks = ["10\n22", "11\n28", "11\n30", "06\n07", "06\n24", "07\n09", "08\n06", "08\n19", "08\n21", 
@@ -61,8 +60,9 @@ dic_index = {
 
 dic_lines = {
     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
-    {"x": 2.7, "negative": 0.9, "plus": 4, "text": "Judgment\n   Lula "}, 
-    {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"}]
+    {"x": 2.6, "negative": 0.9, "plus": 4, "text": "Stabbed\nBolsonaro"}, 
+    {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"},
+    {"x": 3.4, "negative": 0.2, "plus": 4, "text": "    Lula\n  Replaced"}]
 }
 
 def formatter_millions(x):
@@ -91,9 +91,9 @@ def plot_graph_events(range_fim, graph_error = False):
                 plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
                 if(dic["text"] == "Judgment\n   Lula "):
-                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 8, s = dic["text"], size = 11)  
+                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 8, s = dic["text"], size = 10.5)  
                 else:               
-                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 11)
+                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 10.5)
 
 def get_variation_graph(v_facebook, v_ibope, v_dfolha):
     v_facebook_ibope = []
@@ -463,7 +463,7 @@ def plot_like():
     plt.plot('x', 'bolsonaro_like', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_like', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_like', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
-    plt.plot('x', 'alckmin_like', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
+    plt.plot('x', 'alckmin_like', data=df, marker='o', color="blue", alpha=0.7, label='Geraldo Alckmin')
     plt.plot('x', 'marina_like', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_like', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
     # plt.plot('x', 'alvaro_like', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
@@ -482,7 +482,7 @@ def plot_like():
     plt.axvline(x = pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
     plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  8000000 - 15, s = 'End\n1º Round', size = 10)  
     plt.axvline(x = pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8000000 - 15, s = 'End\n2º Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8300000 - 15, s = 'End\n2º Round', size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -508,7 +508,7 @@ def talking_about():
     plt.plot('x', 'bolsonaro_talking', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_talking', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_talking', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
-    plt.plot('x', 'alckmin_talking', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
+    plt.plot('x', 'alckmin_talking', data=df, marker='o', color="blue", alpha=0.7, label='Geraldo Alckmin')
     plt.plot('x', 'marina_talking', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
     plt.plot('x', 'lula_talking', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
     # plt.plot('x', 'alvaro_talking', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')    
@@ -524,9 +524,9 @@ def talking_about():
             plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = 10)  
 
     plt.axvline(x= pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4800000 - 12008, s = 'End\n1º Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4700000 - 8, s = 'End\n1º Round', size = 10)  
     plt.axvline(x= pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4800000 - 10000, s = 'End\n2º Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4880000 - 10000, s = 'End\n2º Round', size = 10)  
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
@@ -534,27 +534,27 @@ def talking_about():
 
     plt.show()    
 
-def plot_engagement():
+def plot_interest():
         
     df = pd.DataFrame(
         {
             'x': range(0, len(models.data_reader.candidates[i_bolsonaro].facebook_engagement)), 
-            'bolsonaro_engagement': models.data_reader.candidates[i_bolsonaro].facebook_engagement, 'ciro_engagement': models.data_reader.candidates[i_ciro].facebook_engagement,
-            'haddad_engagement': models.data_reader.candidates[i_haddad].facebook_engagement, 'marina_engagement': models.data_reader.candidates[i_marina].facebook_engagement,
-            'alckmin_engagement': models.data_reader.candidates[i_alckmin].facebook_engagement, 'lula_engagement': models.data_reader.candidates[i_lula].facebook_engagement,
-            'alvaro_engagement': models.data_reader.candidates[i_alvaro].facebook_engagement
+            'bolsonaro_interest': models.data_reader.candidates[i_bolsonaro].facebook_engagement, 'ciro_interest': models.data_reader.candidates[i_ciro].facebook_engagement,
+            'haddad_interest': models.data_reader.candidates[i_haddad].facebook_engagement, 'marina_interest': models.data_reader.candidates[i_marina].facebook_engagement,
+            'alckmin_interest': models.data_reader.candidates[i_alckmin].facebook_engagement, 'lula_interest': models.data_reader.candidates[i_lula].facebook_engagement,
+            'alvaro_interest': models.data_reader.candidates[i_alvaro].facebook_engagement
         })
 
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_engagement)
 
     fig, ax = plt.subplots()
-    plt.suptitle('Engagement')  
-    plt.plot('x', 'bolsonaro_engagement', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
-    plt.plot('x', 'haddad_engagement', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
-    plt.plot('x', 'ciro_engagement', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
-    plt.plot('x', 'alckmin_engagement', data=df, marker='o', color="blue", alpha=0.7, label='Alckmin')
-    plt.plot('x', 'marina_engagement', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
-    plt.plot('x', 'lula_engagement', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
+    plt.suptitle('Interest')  
+    plt.plot('x', 'bolsonaro_interest', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
+    plt.plot('x', 'haddad_interest', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
+    plt.plot('x', 'ciro_interest', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
+    plt.plot('x', 'alckmin_interest', data=df, marker='o', color="blue", alpha=0.7, label='Geraldo Alckmin')
+    plt.plot('x', 'marina_interest', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
+    plt.plot('x', 'lula_interest', data=df, marker='o', color="brown", alpha=0.7, label='Lula')
     # plt.plot('x', 'alvaro_engagement', data=df, marker='o', color="black", alpha=0.7, label='Alvaro Dias')
     
     plt.xticks(range(0, count_x), xticks)
@@ -569,15 +569,67 @@ def plot_engagement():
             plt.text(x = dic["x"] - dic["negative"], y =  20000000 - 5, s = dic["text"], size = 10)  
 
     plt.axvline(x=pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  20000000 - 15, s = 'End\n1º Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  19000000 - 8, s = 'End\n1º Round', size = 10)  
     plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  20000000 - 15, s = 'End\n2º Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  19000000 - 8, s = 'End\n2º Round', size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
     plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
 
     plt.show()
+
+def plot_scoreVsLike():
+    count_x = len(models.data_reader.candidates[0].dfolha_score)
+    plot_graph("scoreVSlike.png", GFrame.ScoreVsLike.data_frame, 3, 2, 0, 90, count_x, "Likes x Score", False, True, True, 18, 10, 1.2, -0.20, True, True,
+    0.3, [0, 0, 0, 0, 0], [90, 50, 30, 30, 30])
+    count_x = len(models.data_reader.candidates[i_bolsonaro].dfolha_score)
+
+def plot_score():
+
+    for index in [i_ciro, i_marina, i_alckmin]:
+        for (i, item) in enumerate(models.data_reader.candidates[index].ibope_score):
+            if item < 0:
+                models.data_reader.candidates[index].ibope_score[i] = 0
+        
+    df = pd.DataFrame(
+        {
+            'x': range(0, len(models.data_reader.candidates[i_bolsonaro].ibope_score)), 
+            'bolsonaro_score': models.data_reader.candidates[i_bolsonaro].ibope_score, 'ciro_score': models.data_reader.candidates[i_ciro].ibope_score,
+            'haddad_score': models.data_reader.candidates[i_haddad].ibope_score, 'marina_score': models.data_reader.candidates[i_marina].ibope_score,
+            'alckmin_score': models.data_reader.candidates[i_alckmin].ibope_score
+        })
+
+    count_x = len(models.data_reader.candidates[i_bolsonaro].ibope_score)
+
+    fig, ax = plt.subplots()
+    plt.suptitle('Score')  
+    plt.plot('x', 'bolsonaro_score', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
+    plt.plot('x', 'haddad_score', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
+    plt.plot('x', 'ciro_score', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
+    plt.plot('x', 'alckmin_score', data=df, marker='o', color="blue", alpha=0.7, label='Geraldo Alckmin')
+    plt.plot('x', 'marina_score', data=df, marker='o', color="violet", alpha=0.7, label='Marina Silva')
+    
+    plt.xticks(range(0, count_x), xticks)
+
+    #Eventos    
+    for dic in dic_lines["points"]:
+        plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
+
+        if(dic["text"] == "Judgment\n   Lula "):
+            plt.text(x = dic["x"] - dic["negative"], y =  52, s = dic["text"], size = 10)  
+        else:               
+            plt.text(x = dic["x"] - dic["negative"], y =  52, s = dic["text"], size = 10)  
+
+    plt.axvline(x=pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  52, s = 'End\n1º Round', size = 10)  
+    plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  54, s = 'End\n2º Round', size = 10)  
+    
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
+    plt.ylabel("Score (%)", multialignment='center', color='gray', fontsize=12)
+    plt.show()
+
 
 def cal_correlation():
 
@@ -595,7 +647,7 @@ def cal_correlation():
         if(c.name not in candidates):
             i = models.return_index(c.name)
             qtd_ptos = 9
-            pt_ini = 0
+            pt_ini = 2
 
             # if(c.name == "Jair Bolsonaro" or c.name == "Fernando Haddad"):
             #     qtd_ptos = 13
@@ -605,15 +657,15 @@ def cal_correlation():
             #     qtd_ptos = 9
             #     pt_ini = 1
 
-            # v = models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos]
+            v = models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos]
 
             print(c.name)
-            # cal_correlacao_gender(pt_ini, qtd_ptos)
-            # cal_correlacao_region(pt_ini, qtd_ptos)
-            cal_correlacao_facebook(i, pt_ini, qtd_ptos)
+            cal_correlacao_gender(i, pt_ini, qtd_ptos)
+            # cal_correlacao_region(i, pt_ini, qtd_ptos)
+            # cal_correlacao_facebook(i, pt_ini, qtd_ptos)
            
 def cal_correlacao_gender(i, pt_ini, qtd_ptos):
-    # corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_male[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_male[pt_ini:qtd_ptos])
     print('DFolha Male: ' + str(corr))
     corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_female[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_female[pt_ini:qtd_ptos])
     print('DFolha Female: ' + str(corr))
