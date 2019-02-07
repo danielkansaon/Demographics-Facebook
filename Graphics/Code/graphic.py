@@ -60,9 +60,9 @@ dic_index = {
 
 dic_lines = {
     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
-    {"x": 2.6, "negative": 0.9, "plus": 4, "text": "Stabbed\nBolsonaro"}, 
+    {"x": 2.6, "negative": 0.9, "plus": 4, "text": "Bolsonaro\nStabbed"}, 
     {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"},
-    {"x": 3.4, "negative": 0.2, "plus": 4, "text": "    Lula\n  Replaced"}]
+    {"x": 3.4, "negative": 0.2, "plus": 4, "text": "     Lula\n   Replaced"}]
 }
 
 def formatter_millions(x):
@@ -91,7 +91,7 @@ def plot_graph_events(range_fim, graph_error = False):
                 plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
                 if(dic["text"] == "Judgment\n   Lula "):
-                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 8, s = dic["text"], size = 10.5)  
+                    plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 10, s = dic["text"], size = 10.5)  
                 else:               
                     plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 10.5)
 
@@ -235,8 +235,9 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     set_result_aux = set_result
     subtitle_aux = set_subtitle    
     text_1Round = "1º round"
-    text_2Round = "2º round"   
-    count_line_to_axis = 0 
+    text_2Round = "2º round"       
+    position_label_candidate = 0.83
+    count_line_to_axis = 0     
     count_subtitle = 0    
     legend_result = ""
     vector_dFrame = []
@@ -265,16 +266,17 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     plt.text(x = pos_result_2_round - 1.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
             else:
                 label = g.split("-")
-                            
+
                 if(all_subtitle == False and pos <= col):
                     plt.title(label[1], fontsize=15, color='black', loc='center')
                 elif(all_subtitle == True):
                     plt.title(label[1], fontsize=15, color='black', loc='center')           
 
                 if(set_subtitle == True):                
-                    plt.ylabel(label[0], multialignment='center', color='black', fontsize=14)                
+                    fig.text(0.07, position_label_candidate, label[0], rotation='vertical', color='black', fontsize=14)          
+                    position_label_candidate = position_label_candidate - 0.27          
+                    # plt.ylabel(label[0], multialignment='center', color='black', fontsize=14)
                     set_subtitle = False
-                    # , marker='o'
 
                 #Plotando gráfico base
                 if(plot_error == True):
@@ -325,12 +327,13 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
             set_subtitle = subtitle_aux
             count_subtitle = 0            
             count_line_to_axis =+ 1
-        
-      
-        # if len(v_scale) > 0:
-        #     G.set_ylim(range_ini,v_scale[count_line_to_axis])
-        # else:
+              
         G.set_ylim(range_ini,range_fim)
+
+        if((line + col) - pos < col):
+            plt.xlabel("Date", multialignment='center', color='gray', fontsize=15)
+        
+        plt.ylabel('Percentage (%)', multialignment='center', color='gray', fontsize=15)  
 
         set_result_aux = True
         pos += 1         
@@ -341,17 +344,19 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     # plt.subplots_adjust(top=18)
     plt.legend(loc='upper center', bbox_to_anchor=(legend_posX, legend_posY), fancybox=True, shadow=True, ncol=5, prop={'size':'13'})
     plt.suptitle(firstitle) 
-    plt.savefig(name, dpi=100)
+    # fig.text(0.08, 0.5, 'Percentage (%)', ha='center', va='center', rotation='vertical', color='gray', fontsize=15)
+    # fig.text(0.5, 0.04, 'Date', ha='center', va='center', color='gray', fontsize=15) #Label centralizado (Horizontal)
+    plt.savefig(name, dpi=100)    
     
     return vector_dFrame
 
 def plot_gender():   
            
     count_x = len(models.data_reader.candidates[0].dfolha_male)
-    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.19, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
-    plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.19, False, False, 0, [-20, -30, -30, -20, -20, -20], [40, 40, 40, 40, 40, 40])
-    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.19, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
-    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.19, False, False, 0, [-20, -40, -30, -40], [90, 30, 80, 30])    
+    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.27, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
+    plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.27, False, False, 0, [-20, -30, -30, -20, -20, -20], [40, 40, 40, 40, 40, 40])
+    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.27, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
+    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.27, False, False, 0, [-20, -40, -30, -40], [90, 30, 80, 30])    
 
     # for i in v_index:
     #     get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
@@ -484,9 +489,10 @@ def plot_like():
     plt.axvline(x = pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
     plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8300000 - 15, s = 'End\n2º Round', size = 10)  
     
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.16), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
     plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
 
     plt.show()
 
@@ -528,9 +534,10 @@ def talking_about():
     plt.axvline(x= pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
     plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4880000 - 10000, s = 'End\n2º Round', size = 10)  
 
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
     plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
 
     plt.show()    
 
@@ -573,9 +580,10 @@ def plot_interest():
     plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
     plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  19000000 - 8, s = 'End\n2º Round', size = 10)  
     
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
     plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
 
     plt.show()
 
@@ -626,8 +634,9 @@ def plot_score():
     plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
     plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  54, s = 'End\n2º Round', size = 10)  
     
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.11), fancybox=True, shadow=True, ncol=5)    
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
     plt.ylabel("Score (%)", multialignment='center', color='gray', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
     plt.show()
 
 
