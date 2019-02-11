@@ -331,9 +331,9 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
         G.set_ylim(range_ini,range_fim)
 
         if((line + col) - pos < col):
-            plt.xlabel("Date", multialignment='center', color='gray', fontsize=15)
+            plt.xlabel("Date", multialignment='center', color='black', fontsize=13)
         
-        plt.ylabel('Percentage (%)', multialignment='center', color='gray', fontsize=15)  
+        plt.ylabel('Percentage (%)', multialignment='center', color='black', fontsize=13)  
 
         set_result_aux = True
         pos += 1         
@@ -352,7 +352,7 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
 
 def plot_gender():   
            
-    count_x = len(models.data_reader.candidates[0].dfolha_male)
+    count_x = len(models.data_reader.candidates[0].dfolha_male)    
     error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.27, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
     plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.27, False, False, 0, [-20, -30, -30, -20, -20, -20], [40, 40, 40, 40, 40, 40])
     error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.27, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
@@ -491,8 +491,8 @@ def plot_like():
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.16), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
+    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
 
     plt.show()
 
@@ -536,8 +536,8 @@ def talking_about():
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
+    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
 
     plt.show()    
 
@@ -582,8 +582,8 @@ def plot_interest():
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='gray', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
+    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
 
     plt.show()
 
@@ -635,8 +635,8 @@ def plot_score():
     plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  54, s = 'End\n2º Round', size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
-    plt.ylabel("Score (%)", multialignment='center', color='gray', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='gray', fontsize=12)
+    plt.ylabel("Score (%)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
     plt.show()
 
 
