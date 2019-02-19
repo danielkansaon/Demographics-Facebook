@@ -358,10 +358,10 @@ def plot_gender():
     error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.27, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
     plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.27, False, False, 0, [-20, -40, -30, -40], [90, 30, 80, 30])    
 
-    # for i in v_index:
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_female, models.data_reader.candidates[i].ibope_female, models.data_reader.candidates[i].dfolha_female)
-    #     plot_table_error("gender_" + dic_index[i] + "_error.png")
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_female, models.data_reader.candidates[i].ibope_female, models.data_reader.candidates[i].dfolha_female)
+        plot_table_error("gender_" + dic_index[i] + "_error.png")
    
 
 def plot_region():
