@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json
 import os
 import models
@@ -63,7 +65,7 @@ def return_index(presid_key):
     return -1
 
 def readJson():
-    input_file = open(os.getcwd() + '\Graphics\Data\\audiencia_presidenciaveis.json')
+    input_file = open(os.getcwd() + '/Graphics/Data/audiencia_presidenciaveis.json')
     load_census()
                
     for line in input_file:
@@ -145,7 +147,7 @@ def readJson():
 
 
 def load_census():
-    json_file = open(os.getcwd() + '\Graphics\Data\\census_data.json')
+    json_file = open(os.getcwd() + '/Graphics/Data//census_data.json')
     census_dict = json.loads(json_file.readline())
     adicionarIdoso = True
 

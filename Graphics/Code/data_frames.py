@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import read_elections as election
 import read_facebook as facebook
 import pandas as pd
@@ -143,10 +145,10 @@ class Region:
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
-        'Jair Bolsonaro-North/Center West-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_norte_coeste, 'Jair Bolsonaro-North/Center West-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_norte_coeste,
-        'Jair Bolsonaro-North/Center West-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_norte_coeste,
-        'Jair Bolsonaro-North/Center West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Jair Bolsonaro-North/Center West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Jair Bolsonaro-North/Mid West-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_norte_coeste, 'Jair Bolsonaro-North/Center West-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_norte_coeste,
+        'Jair Bolsonaro-North/Mid West-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_norte_coeste,
+        'Jair Bolsonaro-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Jair Bolsonaro-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
@@ -174,10 +176,10 @@ class Region:
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 
-        'Fernando Haddad-North/Center West-DataFolha': models.data_reader.candidates[i_haddad].dfolha_norte_coeste, 'Fernando Haddad-North/Midwest Oeste-IBOPE': models.data_reader.candidates[i_haddad].ibope_norte_coeste,
-        'Fernando Haddad-North/Center West-Facebook': models.data_reader.candidates[i_haddad].facebook_norte_coeste,
-        'Fernando Haddad-North/Center West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Fernando Haddad-North/Center West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Fernando Haddad-North/Mid West-DataFolha': models.data_reader.candidates[i_haddad].dfolha_norte_coeste, 'Fernando Haddad-North/Mid West-IBOPE': models.data_reader.candidates[i_haddad].ibope_norte_coeste,
+        'Fernando Haddad-North/Mid West-Facebook': models.data_reader.candidates[i_haddad].facebook_norte_coeste,
+        'Fernando Haddad-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Fernando Haddad-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 

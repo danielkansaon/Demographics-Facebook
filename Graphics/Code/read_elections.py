@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import os
 import models
@@ -10,10 +11,10 @@ data_ibope = ["2017-10-22",  "2018-06-24",  "2018-08-19",  "2018-09-10",  "2018-
 
 def read_json(comLula):
     if(comLula == True):
-        with open(os.getcwd() + '\Graphics\Data\PresidentialElection-ComLula.json') as js:
+        with open(os.getcwd() + '/Graphics/Data/PresidentialElection-ComLula.json') as js:
             poolElection = json.load(js)
     else:
-        with open(os.getcwd() + '\Graphics\Data\PresidentialElection-SemLula.json') as js:
+        with open(os.getcwd() + '/Graphics/Data/PresidentialElection-SemLula.json') as js:
             poolElection = json.load(js)
 
     for data in poolElection['elections_poll']:

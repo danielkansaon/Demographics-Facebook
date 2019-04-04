@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Data:
     def __init__(self):
         self.candidates = [Candidate('Jair Bolsonaro', True), Candidate('Fernando Haddad', True), Candidate('Ciro Gomes', False), Candidate('Lula', False), Candidate('Marina Silva', False), Candidate('Geraldo Alckmin', False), Candidate('Alvaro Dias', False)]
