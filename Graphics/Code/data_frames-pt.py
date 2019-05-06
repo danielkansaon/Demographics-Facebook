@@ -21,107 +21,107 @@ class Gender:
     data_frame_1 = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_male)), 
-        'Jair Bolsonaro-Male-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_male, 'Jair Bolsonaro-Male-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_male,
-        'Jair Bolsonaro-Male-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_male, 
-        'Jair Bolsonaro-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Jair Bolsonaro-Male-Distribuition Census': models.data_distribuition.census_gender_male
+        'Jair Bolsonaro-Masculino-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_male, 'Jair Bolsonaro-Masculino-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_male,
+        'Jair Bolsonaro-Masculino-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_male, 
+        'Jair Bolsonaro-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+        'Jair Bolsonaro-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_male)), 
-        'Jair Bolsonaro-Female-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_female, 'Jair Bolsonaro-Female-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_female,
-        'Jair Bolsonaro-Female-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_female,
-        'Jair Bolsonaro-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Jair Bolsonaro-Female-Distribuition Census': models.data_distribuition.census_gender_female
+        'Jair Bolsonaro-Feminino-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_female, 'Jair Bolsonaro-Feminino-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_female,
+        'Jair Bolsonaro-Feminino-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_female,
+        'Jair Bolsonaro-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+        'Jair Bolsonaro-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_male)), 
-        'Fernando Haddad-Male-DataFolha': models.data_reader.candidates[i_haddad].dfolha_male, 'Fernando Haddad-Male-IBOPE': models.data_reader.candidates[i_haddad].ibope_male,
-        'Fernando Haddad-Male-Facebook': models.data_reader.candidates[i_haddad].facebook_male,
-        'Fernando Haddad-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Fernando Haddad-Male-Distribuition Census': models.data_distribuition.census_gender_male
+        'Fernando Haddad-Masculino-DataFolha': models.data_reader.candidates[i_haddad].dfolha_male, 'Fernando Haddad-Masculino-IBOPE': models.data_reader.candidates[i_haddad].ibope_male,
+        'Fernando Haddad-Masculino-Facebook': models.data_reader.candidates[i_haddad].facebook_male,
+        'Fernando Haddad-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+        'Fernando Haddad-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_male)), 
-        'Fernando Haddad-Female-DataFolha': models.data_reader.candidates[i_haddad].dfolha_female, 'Fernando Haddad-Female-IBOPE': models.data_reader.candidates[i_haddad].ibope_female,
-        'Fernando Haddad-Female-Facebook': models.data_reader.candidates[i_haddad].facebook_female,
-        'Fernando Haddad-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Fernando Haddad-Female-Distribuition Census': models.data_distribuition.census_gender_female
+        'Fernando Haddad-Feminino-DataFolha': models.data_reader.candidates[i_haddad].dfolha_female, 'Fernando Haddad-Feminino-IBOPE': models.data_reader.candidates[i_haddad].ibope_female,
+        'Fernando Haddad-Feminino-Facebook': models.data_reader.candidates[i_haddad].facebook_female,
+        'Fernando Haddad-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+        'Fernando Haddad-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
-        'Ciro Gomes-Male-DataFolha': models.data_reader.candidates[i_ciro].dfolha_male, 'Ciro Gomes-Male-IBOPE': models.data_reader.candidates[i_ciro].ibope_male,
-        'Ciro Gomes-Male-Facebook': models.data_reader.candidates[i_ciro].facebook_male,
-        'Ciro Gomes-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Ciro Gomes-Male-Distribuition Census': models.data_distribuition.census_gender_male
+        'Ciro Gomes-Masculino-DataFolha': models.data_reader.candidates[i_ciro].dfolha_male, 'Ciro Gomes-Masculino-IBOPE': models.data_reader.candidates[i_ciro].ibope_male,
+        'Ciro Gomes-Masculino-Facebook': models.data_reader.candidates[i_ciro].facebook_male,
+        'Ciro Gomes-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+        'Ciro Gomes-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_male)), 
-        'Ciro Gomes-Female-DataFolha': models.data_reader.candidates[i_ciro].dfolha_female, 'Ciro Gomes-Female-IBOPE': models.data_reader.candidates[i_ciro].ibope_female,
-        'Ciro Gomes-Female-Facebook': models.data_reader.candidates[i_ciro].facebook_female,
-        'Ciro Gomes-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Ciro Gomes-Female-Distribuition Census': models.data_distribuition.census_gender_female
+        'Ciro Gomes-Feminino-DataFolha': models.data_reader.candidates[i_ciro].dfolha_female, 'Ciro Gomes-Feminino-IBOPE': models.data_reader.candidates[i_ciro].ibope_female,
+        'Ciro Gomes-Feminino-Facebook': models.data_reader.candidates[i_ciro].facebook_female,
+        'Ciro Gomes-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+        'Ciro Gomes-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     })
     # ,
     # pd.DataFrame(
     # {
     #     'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-    #     'Lula-Male-DataFolha': models.data_reader.candidates[i_lula].dfolha_male, 'Lula-Male-IBOPE': models.data_reader.candidates[i_lula].ibope_male,
-    #     'Lula-Male-Facebook': models.data_reader.candidates[i_lula].facebook_male
+    #     'Lula-Masculino-DataFolha': models.data_reader.candidates[i_lula].dfolha_male, 'Lula-Masculino-IBOPE': models.data_reader.candidates[i_lula].ibope_male,
+    #     'Lula-Masculino-Facebook': models.data_reader.candidates[i_lula].facebook_male
     # }),
     # pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_male)), 
-    #     'Lula-Female-DataFolha': models.data_reader.candidates[i_lula].dfolha_female, 'Lula-Female-IBOPE': models.data_reader.candidates[i_lula].ibope_female,
-    #     'Lula-Female-Facebook': models.data_reader.candidates[i_lula].facebook_female
+    #     'Lula-Feminino-DataFolha': models.data_reader.candidates[i_lula].dfolha_female, 'Lula-Feminino-IBOPE': models.data_reader.candidates[i_lula].ibope_female,
+    #     'Lula-Feminino-Facebook': models.data_reader.candidates[i_lula].facebook_female
     # })
     ]
 
     data_frame_2 = [        
         pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_male)), 
-        'Marina Silva-Male-DataFolha': models.data_reader.candidates[i_marina].dfolha_male, 'Marina Silva-Male-IBOPE': models.data_reader.candidates[i_marina].ibope_male,
-        'Marina Silva-Male-Facebook': models.data_reader.candidates[i_marina].facebook_male,
-        'Marina Silva-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Marina Silva-Male-Distribuition Census': models.data_distribuition.census_gender_male
+        'Marina Silva-Masculino-DataFolha': models.data_reader.candidates[i_marina].dfolha_male, 'Marina Silva-Masculino-IBOPE': models.data_reader.candidates[i_marina].ibope_male,
+        'Marina Silva-Masculino-Facebook': models.data_reader.candidates[i_marina].facebook_male,
+        'Marina Silva-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+        'Marina Silva-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_male)), 
-        'Marina Silva-Female-DataFolha': models.data_reader.candidates[i_marina].dfolha_female, 'Marina Silva-Female-IBOPE': models.data_reader.candidates[i_marina].ibope_female,
-        'Marina Silva-Female-Facebook': models.data_reader.candidates[i_marina].facebook_female,
-        'Marina Silva-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Marina Silva-Female-Distribuition Census': models.data_distribuition.census_gender_female
+        'Marina Silva-Feminino-DataFolha': models.data_reader.candidates[i_marina].dfolha_female, 'Marina Silva-Feminino-IBOPE': models.data_reader.candidates[i_marina].ibope_female,
+        'Marina Silva-Feminino-Facebook': models.data_reader.candidates[i_marina].facebook_female,
+        'Marina Silva-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+        'Marina Silva-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_male)), 
-        'Geraldo Alckmin-Male-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_male, 'Geraldo Alckmin-Male-IBOPE': models.data_reader.candidates[i_alckmin].ibope_male,
-        'Geraldo Alckmin-Male-Facebook': models.data_reader.candidates[i_alckmin].facebook_male,
-        'Geraldo Alckmin-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-        'Geraldo Alckmin-Male-Distribuition Census': models.data_distribuition.census_gender_male
+        'Geraldo Alckmin-Masculino-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_male, 'Geraldo Alckmin-Masculino-IBOPE': models.data_reader.candidates[i_alckmin].ibope_male,
+        'Geraldo Alckmin-Masculino-Facebook': models.data_reader.candidates[i_alckmin].facebook_male,
+        'Geraldo Alckmin-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+        'Geraldo Alckmin-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     }),
     pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_male)), 
-        'Geraldo Alckmin-Female-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_female, 'Geraldo Alckmin-Female-IBOPE': models.data_reader.candidates[i_alckmin].ibope_female,
-        'Geraldo Alckmin-Female-Facebook': models.data_reader.candidates[i_alckmin].facebook_female,
-        'Geraldo Alckmin-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-        'Geraldo Alckmin-Female-Distribuition Census': models.data_distribuition.census_gender_female
+        'Geraldo Alckmin-Feminino-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_female, 'Geraldo Alckmin-Feminino-IBOPE': models.data_reader.candidates[i_alckmin].ibope_female,
+        'Geraldo Alckmin-Feminino-Facebook': models.data_reader.candidates[i_alckmin].facebook_female,
+        'Geraldo Alckmin-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+        'Geraldo Alckmin-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     })
     # ,pd.DataFrame(
     # {
     #     'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
-    #     'Alvaro Dias-Male-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_male, 'Alvaro Dias-Male-IBOPE': models.data_reader.candidates[i_alvaro].ibope_male,
-    #     'Alvaro Dias-Male-Facebook': models.data_reader.candidates[i_alvaro].facebook_male,
-    #     'Alvaro Dias-Male-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
-    #     'Alvaro Dias-Male-Distribuition Census': models.data_distribuition.census_gender_male
+    #     'Alvaro Dias-Masculino-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_male, 'Alvaro Dias-Masculino-IBOPE': models.data_reader.candidates[i_alvaro].ibope_male,
+    #     'Alvaro Dias-Masculino-Facebook': models.data_reader.candidates[i_alvaro].facebook_male,
+    #     'Alvaro Dias-Masculino-Distribuition Facebook': models.data_distribuition.facebook_gender_male,
+    #     'Alvaro Dias-Masculino-Distribuition Census': models.data_distribuition.census_gender_male
     # }),
     # pd.DataFrame({'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_male)), 
-    #     'Alvaro Dias-Female-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_female, 'Alvaro Dias-Female-IBOPE': models.data_reader.candidates[i_alvaro].ibope_female,
-    #     'Alvaro Dias-Female-Facebook': models.data_reader.candidates[i_alvaro].facebook_female,
-    #     'Alvaro Dias-Female-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
-    #     'Alvaro Dias-Female-Distribuition Census': models.data_distribuition.census_gender_female
+    #     'Alvaro Dias-Feminino-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_female, 'Alvaro Dias-Feminino-IBOPE': models.data_reader.candidates[i_alvaro].ibope_female,
+    #     'Alvaro Dias-Feminino-Facebook': models.data_reader.candidates[i_alvaro].facebook_female,
+    #     'Alvaro Dias-Feminino-Distribuition Facebook': models.data_distribuition.facebook_gender_female,
+    #     'Alvaro Dias-Feminino-Distribuition Census': models.data_distribuition.census_gender_female
     # })
     ]
 
@@ -129,218 +129,218 @@ class Region:
     data_frame_bolsonaro = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
-        'Jair Bolsonaro-Southeast-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_sudeste, 'Jair Bolsonaro-Southeast-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_sudeste,
-        'Jair Bolsonaro-Southeast-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_sudeste,
-        'Jair Bolsonaro-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Jair Bolsonaro-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Jair Bolsonaro-Sudeste-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_sudeste, 'Jair Bolsonaro-Sudeste-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_sudeste,
+        'Jair Bolsonaro-Sudeste-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_sudeste,
+        'Jair Bolsonaro-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Jair Bolsonaro-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
-        'Jair Bolsonaro-Northeast-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_nordeste, 'Jair Bolsonaro-Northeast-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_nordeste,
-        'Jair Bolsonaro-Northeast-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_nordeste,
-        'Jair Bolsonaro-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Jair Bolsonaro-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Jair Bolsonaro-Nordeste-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_nordeste, 'Jair Bolsonaro-Nordeste-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_nordeste,
+        'Jair Bolsonaro-Nordeste-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_nordeste,
+        'Jair Bolsonaro-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Jair Bolsonaro-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
-        'Jair Bolsonaro-North/Mid West-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_norte_coeste, 'Jair Bolsonaro-North/Mid West-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_norte_coeste,
-        'Jair Bolsonaro-North/Mid West-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_norte_coeste,
-        'Jair Bolsonaro-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Jair Bolsonaro-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Jair Bolsonaro--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_norte_coeste, 'Jair Bolsonaro--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_norte_coeste,
+        'Jair Bolsonaro--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_bolsonaro].facebook_norte_coeste,
+        'Jair Bolsonaro--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Jair Bolsonaro--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_bolsonaro].dfolha_sudeste)), 
-        'Jair Bolsonaro-South-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_sul, 'Jair Bolsonaro-South-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_sul,
-        'Jair Bolsonaro-South-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_sul,
-        'Jair Bolsonaro-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Jair Bolsonaro-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Jair Bolsonaro-Sul-DataFolha': models.data_reader.candidates[i_bolsonaro].dfolha_sul, 'Jair Bolsonaro-Sul-IBOPE': models.data_reader.candidates[i_bolsonaro].ibope_sul,
+        'Jair Bolsonaro-Sul-Facebook': models.data_reader.candidates[i_bolsonaro].facebook_sul,
+        'Jair Bolsonaro-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Jair Bolsonaro-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_haddad = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 
-        'Fernando Haddad-Southeast-DataFolha': models.data_reader.candidates[i_haddad].dfolha_sudeste, 'Fernando Haddad-Southeast-IBOPE': models.data_reader.candidates[i_haddad].ibope_sudeste,
-        'Fernando Haddad-Southeast-Facebook': models.data_reader.candidates[i_haddad].facebook_sudeste,
-        'Fernando Haddad-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Fernando Haddad-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Fernando Haddad-Sudeste-DataFolha': models.data_reader.candidates[i_haddad].dfolha_sudeste, 'Fernando Haddad-Sudeste-IBOPE': models.data_reader.candidates[i_haddad].ibope_sudeste,
+        'Fernando Haddad-Sudeste-Facebook': models.data_reader.candidates[i_haddad].facebook_sudeste,
+        'Fernando Haddad-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Fernando Haddad-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 
-        'Fernando Haddad-Northeast-DataFolha': models.data_reader.candidates[i_haddad].dfolha_nordeste, 'Fernando Haddad-Northeast-IBOPE': models.data_reader.candidates[i_haddad].ibope_nordeste,
-        'Fernando Haddad-Northeast-Facebook': models.data_reader.candidates[i_haddad].facebook_nordeste,
-        'Fernando Haddad-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Fernando Haddad-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Fernando Haddad-Nordeste-DataFolha': models.data_reader.candidates[i_haddad].dfolha_nordeste, 'Fernando Haddad-Nordeste-IBOPE': models.data_reader.candidates[i_haddad].ibope_nordeste,
+        'Fernando Haddad-Nordeste-Facebook': models.data_reader.candidates[i_haddad].facebook_nordeste,
+        'Fernando Haddad-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Fernando Haddad-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 
-        'Fernando Haddad-North/Mid West-DataFolha': models.data_reader.candidates[i_haddad].dfolha_norte_coeste, 'Fernando Haddad-North/Mid West-IBOPE': models.data_reader.candidates[i_haddad].ibope_norte_coeste,
-        'Fernando Haddad-North/Mid West-Facebook': models.data_reader.candidates[i_haddad].facebook_norte_coeste,
-        'Fernando Haddad-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Fernando Haddad-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Fernando Haddad--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_haddad].dfolha_norte_coeste, 'Fernando Haddad--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_haddad].ibope_norte_coeste,
+        'Fernando Haddad--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_haddad].facebook_norte_coeste,
+        'Fernando Haddad--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Fernando Haddad--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_haddad].dfolha_sudeste)), 
-        'Fernando Haddad-South-DataFolha': models.data_reader.candidates[i_haddad].dfolha_sul, 'Fernando Haddad-South-IBOPE': models.data_reader.candidates[i_haddad].ibope_sul,
-        'Fernando Haddad-South-Facebook': models.data_reader.candidates[i_haddad].facebook_sul,
-        'Fernando Haddad-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Fernando Haddad-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Fernando Haddad-Sul-DataFolha': models.data_reader.candidates[i_haddad].dfolha_sul, 'Fernando Haddad-Sul-IBOPE': models.data_reader.candidates[i_haddad].ibope_sul,
+        'Fernando Haddad-Sul-Facebook': models.data_reader.candidates[i_haddad].facebook_sul,
+        'Fernando Haddad-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Fernando Haddad-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_lula = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_sudeste)), 
-        'Lula-Southeast-DataFolha': models.data_reader.candidates[i_lula].dfolha_sudeste, 'Lula-Southeast-IBOPE': models.data_reader.candidates[i_lula].ibope_sudeste,
-        'Lula-Southeast-Facebook': models.data_reader.candidates[i_lula].facebook_sudeste,
-        'Lula-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Lula-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Lula-Sudeste-DataFolha': models.data_reader.candidates[i_lula].dfolha_sudeste, 'Lula-Sudeste-IBOPE': models.data_reader.candidates[i_lula].ibope_sudeste,
+        'Lula-Sudeste-Facebook': models.data_reader.candidates[i_lula].facebook_sudeste,
+        'Lula-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Lula-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_sudeste)), 
-        'Lula-Northeast-DataFolha': models.data_reader.candidates[i_lula].dfolha_nordeste, 'Lula-Northeast-IBOPE': models.data_reader.candidates[i_lula].ibope_nordeste,
-        'Lula-Northeast-Facebook': models.data_reader.candidates[i_lula].facebook_nordeste,
-        'Lula-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Lula-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Lula-Nordeste-DataFolha': models.data_reader.candidates[i_lula].dfolha_nordeste, 'Lula-Nordeste-IBOPE': models.data_reader.candidates[i_lula].ibope_nordeste,
+        'Lula-Nordeste-Facebook': models.data_reader.candidates[i_lula].facebook_nordeste,
+        'Lula-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Lula-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_sudeste)), 
-        'Lula-North/Mid West-DataFolha': models.data_reader.candidates[i_lula].dfolha_norte_coeste, 'Lula-North/Mid West-IBOPE': models.data_reader.candidates[i_lula].ibope_norte_coeste,
-        'Lula-North/Mid West-Facebook': models.data_reader.candidates[i_lula].facebook_norte_coeste,
-        'Lula-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Lula-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Lula--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_lula].dfolha_norte_coeste, 'Lula--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_lula].ibope_norte_coeste,
+        'Lula--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_lula].facebook_norte_coeste,
+        'Lula--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Lula--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_lula].dfolha_sudeste)), 
-        'Lula-South-DataFolha': models.data_reader.candidates[i_lula].dfolha_sul, 'Lula-South-IBOPE': models.data_reader.candidates[i_lula].ibope_sul,
-        'Lula-South-Facebook': models.data_reader.candidates[i_lula].facebook_sul,
-        'Lula-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Lula-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Lula-Sul-DataFolha': models.data_reader.candidates[i_lula].dfolha_sul, 'Lula-Sul-IBOPE': models.data_reader.candidates[i_lula].ibope_sul,
+        'Lula-Sul-Facebook': models.data_reader.candidates[i_lula].facebook_sul,
+        'Lula-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Lula-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_ciro = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_sudeste)), 
-        'Ciro Gomes-Southeast-DataFolha': models.data_reader.candidates[i_ciro].dfolha_sudeste, 'Ciro Gomes-Southeast-IBOPE': models.data_reader.candidates[i_ciro].ibope_sudeste,
-        'Ciro Gomes-Southeast-Facebook': models.data_reader.candidates[i_ciro].facebook_sudeste,
-        'Ciro Gomes-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Ciro Gomes-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Ciro Gomes-Sudeste-DataFolha': models.data_reader.candidates[i_ciro].dfolha_sudeste, 'Ciro Gomes-Sudeste-IBOPE': models.data_reader.candidates[i_ciro].ibope_sudeste,
+        'Ciro Gomes-Sudeste-Facebook': models.data_reader.candidates[i_ciro].facebook_sudeste,
+        'Ciro Gomes-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Ciro Gomes-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_sudeste)), 
-        'Ciro Gomes-Northeast-DataFolha': models.data_reader.candidates[i_ciro].dfolha_nordeste, 'Ciro Gomes-Northeast-IBOPE': models.data_reader.candidates[i_ciro].ibope_nordeste,
-        'Ciro Gomes-Northeast-Facebook': models.data_reader.candidates[i_ciro].facebook_nordeste,
-        'Ciro Gomes-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Ciro Gomes-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Ciro Gomes-Nordeste-DataFolha': models.data_reader.candidates[i_ciro].dfolha_nordeste, 'Ciro Gomes-Nordeste-IBOPE': models.data_reader.candidates[i_ciro].ibope_nordeste,
+        'Ciro Gomes-Nordeste-Facebook': models.data_reader.candidates[i_ciro].facebook_nordeste,
+        'Ciro Gomes-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Ciro Gomes-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_sudeste)), 
-        'Ciro Gomes-North/Mid West-DataFolha': models.data_reader.candidates[i_ciro].dfolha_norte_coeste, 'Ciro Gomes-North/Mid West-IBOPE': models.data_reader.candidates[i_ciro].ibope_norte_coeste,
-        'Ciro Gomes-North/Mid West-Facebook': models.data_reader.candidates[i_ciro].facebook_norte_coeste,
-        'Ciro Gomes-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Ciro Gomes-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Ciro Gomes--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_ciro].dfolha_norte_coeste, 'Ciro Gomes--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_ciro].ibope_norte_coeste,
+        'Ciro Gomes--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_ciro].facebook_norte_coeste,
+        'Ciro Gomes--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Ciro Gomes--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_ciro].dfolha_sudeste)), 
-        'Ciro Gomes-South-DataFolha': models.data_reader.candidates[i_ciro].dfolha_sul, 'Ciro Gomes-South-IBOPE': models.data_reader.candidates[i_ciro].ibope_sul,
-        'Ciro Gomes-South-Facebook': models.data_reader.candidates[i_ciro].facebook_sul,
-        'Ciro Gomes-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Ciro Gomes-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Ciro Gomes-Sul-DataFolha': models.data_reader.candidates[i_ciro].dfolha_sul, 'Ciro Gomes-Sul-IBOPE': models.data_reader.candidates[i_ciro].ibope_sul,
+        'Ciro Gomes-Sul-Facebook': models.data_reader.candidates[i_ciro].facebook_sul,
+        'Ciro Gomes-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Ciro Gomes-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_marina = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_sudeste)), 
-        'Marina Silva-Southeast-DataFolha': models.data_reader.candidates[i_marina].dfolha_sudeste, 'Ciro Gomes-Southeast-IBOPE': models.data_reader.candidates[i_marina].ibope_sudeste,
-        'Marina Silva-Southeast-Facebook': models.data_reader.candidates[i_marina].facebook_sudeste,
-        'Marina Silva-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Marina Silva-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Marina Silva-Sudeste-DataFolha': models.data_reader.candidates[i_marina].dfolha_sudeste, 'Ciro Gomes-Sudeste-IBOPE': models.data_reader.candidates[i_marina].ibope_sudeste,
+        'Marina Silva-Sudeste-Facebook': models.data_reader.candidates[i_marina].facebook_sudeste,
+        'Marina Silva-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Marina Silva-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_sudeste)), 
-        'Marina Silva-Northeast-DataFolha': models.data_reader.candidates[i_marina].dfolha_nordeste, 'Marina Silva-Northeast-IBOPE': models.data_reader.candidates[i_marina].ibope_nordeste,
-        'Marina Silva-Northeast-Facebook': models.data_reader.candidates[i_marina].facebook_nordeste,
-        'Marina Silva-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Marina Silva-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Marina Silva-Nordeste-DataFolha': models.data_reader.candidates[i_marina].dfolha_nordeste, 'Marina Silva-Nordeste-IBOPE': models.data_reader.candidates[i_marina].ibope_nordeste,
+        'Marina Silva-Nordeste-Facebook': models.data_reader.candidates[i_marina].facebook_nordeste,
+        'Marina Silva-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Marina Silva-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_sudeste)), 
-        'Marina Silva-North/Mid West-DataFolha': models.data_reader.candidates[i_marina].dfolha_norte_coeste, 'Marina Silva-North/Mid West-IBOPE': models.data_reader.candidates[i_marina].ibope_norte_coeste,
-        'Marina Silva-North/Mid West-Facebook': models.data_reader.candidates[i_marina].facebook_norte_coeste,
-        'Marina Silva-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Marina Silva-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Marina Silva--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_marina].dfolha_norte_coeste, 'Marina Silva--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_marina].ibope_norte_coeste,
+        'Marina Silva--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_marina].facebook_norte_coeste,
+        'Marina Silva--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Marina Silva--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_marina].dfolha_sudeste)), 
-        'Marina Silva-South-DataFolha': models.data_reader.candidates[i_marina].dfolha_sul, 'Marina Silva-South-IBOPE': models.data_reader.candidates[i_marina].ibope_sul,
-        'Marina Silva-South-Facebook': models.data_reader.candidates[i_marina].facebook_sul,
-        'Marina Silva-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Marina Silva-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Marina Silva-Sul-DataFolha': models.data_reader.candidates[i_marina].dfolha_sul, 'Marina Silva-Sul-IBOPE': models.data_reader.candidates[i_marina].ibope_sul,
+        'Marina Silva-Sul-Facebook': models.data_reader.candidates[i_marina].facebook_sul,
+        'Marina Silva-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Marina Silva-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_alckmin = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_sudeste)), 
-        'Geraldo Alckmin-Southeast-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sudeste, 'Geraldo Alckmin-Southeast-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sudeste,
-        'Geraldo Alckmin-Southeast-Facebook': models.data_reader.candidates[i_alckmin].facebook_sudeste,
-        'Geraldo Alckmin-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Geraldo Alckmin-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Geraldo Alckmin-Sudeste-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sudeste, 'Geraldo Alckmin-Sudeste-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sudeste,
+        'Geraldo Alckmin-Sudeste-Facebook': models.data_reader.candidates[i_alckmin].facebook_sudeste,
+        'Geraldo Alckmin-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Geraldo Alckmin-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_sudeste)), 
-        'Geraldo Alckmin-Northeast-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_nordeste, 'Geraldo Alckmin-Northeast-IBOPE': models.data_reader.candidates[i_alckmin].ibope_nordeste,
-        'Geraldo Alckmin-Northeast-Facebook': models.data_reader.candidates[i_alckmin].facebook_nordeste,
-        'Geraldo Alckmin-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Geraldo Alckmin-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Geraldo Alckmin-Nordeste-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_nordeste, 'Geraldo Alckmin-Nordeste-IBOPE': models.data_reader.candidates[i_alckmin].ibope_nordeste,
+        'Geraldo Alckmin-Nordeste-Facebook': models.data_reader.candidates[i_alckmin].facebook_nordeste,
+        'Geraldo Alckmin-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Geraldo Alckmin-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_sudeste)), 
-        'Geraldo Alckmin-North/Mid West-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_norte_coeste, 'Geraldo Alckmin-North/Mid West-IBOPE': models.data_reader.candidates[i_alckmin].ibope_norte_coeste,
-        'Geraldo Alckmin-North/Mid West-Facebook': models.data_reader.candidates[i_alckmin].facebook_norte_coeste,
-        'Geraldo Alckmin-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Geraldo Alckmin-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Geraldo Alckmin--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_alckmin].dfolha_norte_coeste, 'Geraldo Alckmin--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_alckmin].ibope_norte_coeste,
+        'Geraldo Alckmin--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_alckmin].facebook_norte_coeste,
+        'Geraldo Alckmin--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Geraldo Alckmin--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_alckmin].dfolha_sudeste)), 
-        'Geraldo Alckmin-South-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sul, 'Geraldo Alckmin-South-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sul,
-        'Geraldo Alckmin-South-Facebook': models.data_reader.candidates[i_alckmin].facebook_sul,
-        'Geraldo Alckmin-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Geraldo Alckmin-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Geraldo Alckmin-Sul-DataFolha': models.data_reader.candidates[i_alckmin].dfolha_sul, 'Geraldo Alckmin-Sul-IBOPE': models.data_reader.candidates[i_alckmin].ibope_sul,
+        'Geraldo Alckmin-Sul-Facebook': models.data_reader.candidates[i_alckmin].facebook_sul,
+        'Geraldo Alckmin-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Geraldo Alckmin-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
     data_frame_alvaro = [pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
-        'Alvaro Dias-Southeast-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sudeste, 'Alvaro Dias-Southeast-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sudeste,
-        'Alvaro Dias-Southeast-Facebook': models.data_reader.candidates[i_alvaro].facebook_sudeste,
-        'Alvaro Dias-Southeast-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
-        'Alvaro Dias-Southeast-Distribuition Census': models.data_distribuition.census_region_sudeste
+        'Alvaro Dias-Sudeste-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sudeste, 'Alvaro Dias-Sudeste-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sudeste,
+        'Alvaro Dias-Sudeste-Facebook': models.data_reader.candidates[i_alvaro].facebook_sudeste,
+        'Alvaro Dias-Sudeste-Distribuition Facebook': models.data_distribuition.facebook_region_sudeste,
+        'Alvaro Dias-Sudeste-Distribuition Census': models.data_distribuition.census_region_sudeste
     }),
     pd.DataFrame(
     {
         'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
-        'Alvaro Dias-Northeast-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_nordeste, 'Alvaro Dias-Northeast-IBOPE': models.data_reader.candidates[i_alvaro].ibope_nordeste,
-        'Alvaro Dias-Northeast-Facebook': models.data_reader.candidates[i_alvaro].facebook_nordeste,
-        'Alvaro Dias-Northeast-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
-        'Alvaro Dias-Northeast-Distribuition Census': models.data_distribuition.census_region_nordeste
+        'Alvaro Dias-Nordeste-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_nordeste, 'Alvaro Dias-Nordeste-IBOPE': models.data_reader.candidates[i_alvaro].ibope_nordeste,
+        'Alvaro Dias-Nordeste-Facebook': models.data_reader.candidates[i_alvaro].facebook_nordeste,
+        'Alvaro Dias-Nordeste-Distribuition Facebook': models.data_distribuition.facebook_region_nordeste,
+        'Alvaro Dias-Nordeste-Distribuition Census': models.data_distribuition.census_region_nordeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
-        'Alvaro Dias-North/Mid West-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_norte_coeste, 'Geraldo Alckmin-North/Mid West-IBOPE': models.data_reader.candidates[i_alvaro].ibope_norte_coeste,
-        'Alvaro Dias-North/Mid West-Facebook': models.data_reader.candidates[i_alvaro].facebook_norte_coeste,
-        'Alvaro Dias-North/Mid West-Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
-        'Alvaro Dias-North/Mid West-Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
+        'Alvaro Dias--Norte/Centro_Oeste--DataFolha': models.data_reader.candidates[i_alvaro].dfolha_norte_coeste, 'Geraldo Alckmin--Norte/Centro_Oeste--IBOPE': models.data_reader.candidates[i_alvaro].ibope_norte_coeste,
+        'Alvaro Dias--Norte/Centro_Oeste--Facebook': models.data_reader.candidates[i_alvaro].facebook_norte_coeste,
+        'Alvaro Dias--Norte/Centro_Oeste--Distribuition Facebook': models.data_distribuition.facebook_region_norte_centro_oeste,
+        'Alvaro Dias--Norte/Centro_Oeste--Distribuition Census': models.data_distribuition.census_region_norte_centro_oeste
     }),
     pd.DataFrame({
         'x': range(0, len(models.data_reader.candidates[i_alvaro].dfolha_sudeste)), 
-        'Alvaro Dias-South-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sul, 'Alvaro Dias-South-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sul,
-        'Alvaro Dias-South-Facebook': models.data_reader.candidates[i_alvaro].facebook_sul,
-        'Alvaro Dias-South-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
-        'Alvaro Dias-South-Distribuition Census': models.data_distribuition.census_region_sul
+        'Alvaro Dias-Sul-DataFolha': models.data_reader.candidates[i_alvaro].dfolha_sul, 'Alvaro Dias-Sul-IBOPE': models.data_reader.candidates[i_alvaro].ibope_sul,
+        'Alvaro Dias-Sul-Facebook': models.data_reader.candidates[i_alvaro].facebook_sul,
+        'Alvaro Dias-Sul-Distribuition Facebook': models.data_distribuition.facebook_region_sul,
+        'Alvaro Dias-Sul-Distribuition Census': models.data_distribuition.census_region_sul
     })]
 
 class Age:

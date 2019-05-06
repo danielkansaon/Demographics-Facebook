@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from matplotlib.ticker import FuncFormatter
 import read_elections as election
 from scipy.stats import spearmanr
@@ -60,12 +58,29 @@ dic_index = {
         i_alvaro:"alvaro_dias"
 }
 
+# Ingles
+# dic_lines = {
+#     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
+#     {"x": 2.6, "negative": 0.9, "plus": 4, "text": "Bolsonaro\nStabbed"}, 
+#     {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"},
+#     {"x": 3.4, "negative": 0.2, "plus": 4, "text": "     Lula\n   Replaced"}]
+# }
+
 dic_lines = {
     "points": [{"x": 5.8, "negative": 0.6, "plus": 7, "text": "#EleNao"}, 
-    {"x": 2.6, "negative": 0.9, "plus": 4, "text": "Bolsonaro\nStabbed"}, 
-    {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protests"},
-    {"x": 3.4, "negative": 0.2, "plus": 4, "text": "     Lula\n   Replaced"}]
+    {"x": 2.1, "negative": 0.9, "plus": 4, "text": "Bolsonaro\nEsfaqueado"}, 
+    {"x": pos_result_1_round + 1.8, "negative": 0.6, "plus": 7, "text": "Protestos"},
+    {"x": 3.1, "negative": 0.2, "plus": 4, "text": "     Lula\n   Substituído"}]
 }
+
+ #Ingles
+    # t_end_1round = "End\n1st Round"
+    # t_end_2round = "End\n2st Round"
+    # t_judg_lula = "Judgment\n   Lula"
+
+t_end_1round = "Fim\n1º Turno"
+t_end_2round = "Fim\n2º Turno"
+t_judg_lula = "Julgamento\n   Lula "
 
 def formatter_millions(x):
     return '%1.0f' % (x/1000000)
@@ -82,17 +97,18 @@ def calculate_correlattion(ibope, dfolha, facebook, resultado):
 
     return v
 
-def plot_graph_events(range_fim, graph_error = False):
+def plot_graph_events(range_fim, graph_error = False):      
+
     if(graph_error == True):
-        plt.text(x = pos_result_1_round - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n1st Round", size = 11)
-        plt.text(x = pos_result_2_round - 0.8, y = range_fim - (range_fim * 0.20), s = "End\n2nd Round", size = 11)  
+        plt.text(x = pos_result_1_round - 0.8, y = range_fim - (range_fim * 0.20), s = t_end_1round, size = 11)
+        plt.text(x = pos_result_2_round - 0.8, y = range_fim - (range_fim * 0.20), s = t_end_2round, size = 11)  
         plt.axvline(x=pos_result_1_round, color='gray', linestyle='--', alpha=0.5)
         plt.axvline(x=pos_result_2_round, color='gray', linestyle='--', alpha=0.5)
     else:
         for dic in dic_lines["points"]:
                 plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
-                if(dic["text"] == "Judgment\n   Lula "):
+                if(dic["text"] == t_judg_lula):
                     plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 10, s = dic["text"], size = 10.5)  
                 else:               
                     plt.text(x = dic["x"] - dic["negative"], y =  range_fim - 5, s = dic["text"], size = 10.5)
@@ -235,9 +251,18 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     
     fig = plt.figure(figsize=(figsizeX, figsizeY))    
     set_result_aux = set_result
-    subtitle_aux = set_subtitle    
-    text_1Round = "1st round"
-    text_2Round = "2nd round"       
+    subtitle_aux = set_subtitle   
+
+    # Ingles 
+    # text_1Round = "1st round"
+    # text_2Round = "2nd round" 
+    # label_dist_face = "Distribuition Facebook" 
+    # label_dist_census = "Distribuition Census" 
+    text_1Round = "1º turno"
+    text_2Round = "2º turno" 
+    label_dist_face = "Distribuição Facebook" 
+    label_dist_census = "Distribuição Census" 
+
     position_label_candidate = 0.83
     count_line_to_axis = 0     
     count_subtitle = 0    
@@ -268,6 +293,10 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     plt.text(x = pos_result_2_round - 1.5 , y = d[g].values[0] + 5, s = str(round(d[g].values[1])) + " %", size = 11)    
             else:
                 label = g.split("-")
+                
+                #Ingles
+                # if label[1] == "Norte/Centro_Oeste":
+                #     label[1] = "Norte/Centro-Oeste"
 
                 if(all_subtitle == False and pos <= col):
                     plt.title(label[1], fontsize=15, color='black', loc='center')
@@ -281,12 +310,12 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
                     set_subtitle = False
 
                 #Plotando gráfico base
-                if(plot_error == True):
+                if(plot_error == True):                  
                     if 'Distribuition' in label[2]:
                         if 'Facebook' in label[2]:
-                            plt.plot('x', g, data=d, color='lightskyblue', ls='--', alpha=1, linewidth=2.0, label='Distribuition Facebook')
+                            plt.plot('x', g, data=d, color='lightskyblue', ls='--', alpha=1, linewidth=2.0, label= label_dist_face)
                         else:
-                            plt.plot('x', g, data=d, color='darkgoldenrod', ls='--', alpha=1, linewidth=2.0, label='Distribuition Census')
+                            plt.plot('x', g, data=d, color='darkgoldenrod', ls='--', alpha=1, linewidth=2.0, label= label_dist_census)
                     else:
                         plt.plot('x', g, data=d, color=dic_color[label[2]], ls='-', alpha=0.8, label=label[2]) #marker='o',
                 else:
@@ -332,10 +361,14 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
               
         G.set_ylim(range_ini,range_fim)
 
-        if((line + col) - pos < col):
-            plt.xlabel("Date", multialignment='center', color='black', fontsize=13)
+        if(((line + col) - pos) < col):
+            #Ingles
+            # plt.xlabel("Date", multialignment='center', color='black', fontsize=13)
+            plt.xlabel("Data", multialignment='center', color='black', fontsize=13)
         
-        plt.ylabel('Percentage (%)', multialignment='center', color='black', fontsize=13)  
+        #Ingles
+        # plt.ylabel('Percentage (%)', multialignment='center', color='black', fontsize=13)
+        plt.ylabel('Porcentagem (%)', multialignment='center', color='black', fontsize=13)  
 
         set_result_aux = True
         pos += 1         
@@ -353,12 +386,16 @@ def plot_graph(name, data_frame, line, col, range_ini, range_fim, count_x, first
     return vector_dFrame
 
 def plot_gender():   
-           
-    count_x = len(models.data_reader.candidates[0].dfolha_male)    
-    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, "Gender", True, False, True, 18, 10, -0.1, -0.27, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
+
+    #Ingles
+    # firsttitle = "Gender"
+    firsttitle = "Gênero"
+    count_x = len(models.data_reader.candidates[0].dfolha_male)        
+    
+    error_1 = plot_graph("gender_1.png", GFrame.Gender.data_frame_1, 3, 2, 0, 80, count_x, firsttitle, True, False, True, 18, 10, -0.1, -0.27, True, True, 0, [40, 25, 30, 30, 35, 35], [80, 65, 70, 70, 70, 70] )
     plot_graph("gender_1_error.png", error_1, 3, 2, -50, 50, count_x, "Variation Polls", True, False, True, 19, 10,-0.1, -0.27, False, False, 0, [-20, -30, -30, -20, -20, -20], [40, 40, 40, 40, 40, 40])
-    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, "Gender", True, False, True, 19, 10, -0.1, -0.27, True, True, 0, [30, 45, 30, 40], [70, 75, 70, 70])
-    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.27, False, False, 0, [-20, -40, -30, -40], [90, 30, 80, 30])    
+    error_2 = plot_graph("gender_2.png", GFrame.Gender.data_frame_2, 3, 2, 0, 80, count_x, firsttitle, True, False, True, 19, 10, -0.1, -0.27, True, True, 0, [30, 45, 30, 40], [ 70, 75, 70, 70])
+    plot_graph("gender_2_error.png", error_2, 3, 2, -40, 90, count_x, "Variation Polls", True, False, True, 19, 10, -0.1, -0.27, False, False, 0, [-20, -40, -30, -40], [ 90, 30, 80, 30])    
 
     for i in v_index:
         get_error_agregatte(models.data_reader.candidates[i].facebook_male, models.data_reader.candidates[i].ibope_male, models.data_reader.candidates[i].dfolha_male)
@@ -371,10 +408,10 @@ def plot_region():
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_sul) 
     
     error_1 = plot_graph("region_bolsonaro.png", GFrame.Region.data_frame_bolsonaro, 2, 2, 10, 60, count_x, "Jair Bolsonaro", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [40, 10, 5, 5], [65, 40, 30, 30])
-    plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 90, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -20, -40, -40], [30, 80, 30, 40] )
+    # plot_graph("region_bolsonaro_error.png", error_1, 2, 2, -50, 90, count_x, "Jair Bolsonaro - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -20, -40, -40], [30, 80, 30, 40] )
 
     error_2 = plot_graph("region_haddad.png", GFrame.Region.data_frame_haddad, 2, 2, 0, 90, count_x, "Fernando Haddad", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [20, 10, 0, 0], [90, 60, 25, 25])
-    plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-40, -60, -50, -50], [85, 40, 60, 60])
+    # plot_graph("region_haddad_error.png", error_2, 2, 2, -75, 90, count_x, "Fernando Haddad - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-40, -60, -50, -50], [85, 40, 60, 60])
 
     # error_3 = plot_graph("region_ciro.png", GFrame.Region.data_frame_ciro, 2, 2, 0, 60, count_x, "Ciro Gomes", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [25, 20, 0, 0], [60, 50, 25, 25])
     # plot_graph("region_ciro_error.png", error_3, 2, 2, -50, 125, count_x, "Ciro Gomes - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-20, -40, -20, -20], [80, 30, 80, 120])
@@ -388,14 +425,14 @@ def plot_region():
     # error_6 = plot_graph("region_alvaro.png", GFrame.Region.data_frame_alvaro, 2, 2, 0, 70, count_x, "Alvaro Dias", False, True, True, 18, 10, -0.1, -0.19, True, True, 0, [10, 0, 0, 10], [55, 45, 30, 70])
     # plot_graph("region_alvaro_error.png", error_6, 2, 2, -50, 200, count_x, "Alvaro Dias - Variation Polls", False, True, True, 18, 10, -0.1, -0.19, False, False, 0, [-10, -30, -50, -55], [200, 80, 150, 30])
     
-    # # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
+    # plot_graph("region_lula.png", data_frame_lula, 2, 2, 5, 60, count_x, "Lula", False, True, True, 18, 10)
 
-    # for i in v_index:
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_nordeste, models.data_reader.candidates[i].ibope_nordeste, models.data_reader.candidates[i].dfolha_nordeste)
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_norte_coeste, models.data_reader.candidates[i].ibope_norte_coeste, models.data_reader.candidates[i].dfolha_norte_coeste)
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_sul, models.data_reader.candidates[i].ibope_sul, models.data_reader.candidates[i].dfolha_sul)
-    #     get_error_agregatte(models.data_reader.candidates[i].facebook_sudeste, models.data_reader.candidates[i].ibope_sudeste, models.data_reader.candidates[i].dfolha_sudeste)
-    #     plot_table_error("region_" + dic_index[i] + "_error.png")
+    for i in v_index:
+        get_error_agregatte(models.data_reader.candidates[i].facebook_nordeste, models.data_reader.candidates[i].ibope_nordeste, models.data_reader.candidates[i].dfolha_nordeste)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_norte_coeste, models.data_reader.candidates[i].ibope_norte_coeste, models.data_reader.candidates[i].dfolha_norte_coeste)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_sul, models.data_reader.candidates[i].ibope_sul, models.data_reader.candidates[i].dfolha_sul)
+        get_error_agregatte(models.data_reader.candidates[i].facebook_sudeste, models.data_reader.candidates[i].ibope_sudeste, models.data_reader.candidates[i].dfolha_sudeste)
+        plot_table_error("region_" + dic_index[i] + "_error.png")
 
 def plot_age():
     count_x = len(models.data_reader.candidates[i_bolsonaro].dfolha_16a24)
@@ -466,7 +503,9 @@ def plot_like():
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_likes)
 
     fig, ax = plt.subplots()
-    plt.suptitle('Nº Likes')  
+    #Ingles
+    # plt.suptitle('Nº Likes')
+    plt.suptitle('Nº de Curtidas')  
     plt.plot('x', 'bolsonaro_like', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_like', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_like', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
@@ -481,20 +520,25 @@ def plot_like():
     for dic in dic_lines["points"]:
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
-        if(dic["text"] == "Judgment\n   Lula "):
+        if(dic["text"] == t_judg_lula):
             plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 8, s = dic["text"], size = 10)  
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  8000000 - 5, s = dic["text"], size = 10)  
 
     plt.axvline(x = pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  8000000 - 15, s = 'End\n1st Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  8000000 - 15, s = t_end_1round, size = 10)  
     plt.axvline(x = pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8300000 - 15, s = 'End\n2nd Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.5- dic["negative"], y =  8300000 - 15, s = t_end_2round, size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.16), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+    
+    #Ingles
+    # plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    # plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+
+    plt.ylabel("Milhões (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Data", multialignment='center', color='black', fontsize=12)
 
     plt.show()
 
@@ -512,7 +556,9 @@ def talking_about():
 
     fig, ax = plt.subplots()
     
-    plt.suptitle('Talking About')  
+    #Ingles
+    # plt.suptitle('Talking About')
+    plt.suptitle('Pessoas Falando Sobre os Candidatos')  
     plt.plot('x', 'bolsonaro_talking', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_talking', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_talking', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
@@ -526,20 +572,25 @@ def talking_about():
     for dic in dic_lines["points"]:
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
-        if(dic["text"] == "Judgment\n   Lula "):
+        if(dic["text"] == t_judg_lula):
             plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 8, s = dic["text"], size = 10)  
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  4700000 - 3, s = dic["text"], size = 10)  
 
     plt.axvline(x= pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4700000 - 8, s = 'End\n1st Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  4700000 - 8, s = t_end_1round, size = 10)  
     plt.axvline(x= pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4880000 - 10000, s = 'End\n2nd Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.6 - dic["negative"], y =  4880000 - 10000, s = t_end_2round, size = 10)  
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+    
+    #Ingles
+    # plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    # plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+
+    plt.ylabel("Milhões (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Data", multialignment='center', color='black', fontsize=12)
 
     plt.show()    
 
@@ -557,7 +608,9 @@ def plot_interest():
     count_x = len(models.data_reader.candidates[i_bolsonaro].facebook_engagement)
 
     fig, ax = plt.subplots()
-    plt.suptitle('Interest')  
+    #Ingles
+    # plt.suptitle('Interest')  
+    plt.suptitle('Interesse')  
     plt.plot('x', 'bolsonaro_interest', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_interest', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_interest', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
@@ -572,20 +625,24 @@ def plot_interest():
     for dic in dic_lines["points"]:
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
-        if(dic["text"] == "Judgment\n   Lula "):
+        if(dic["text"] == t_judg_lula):
             plt.text(x = dic["x"] - dic["negative"], y =  19000000 - 8, s = dic["text"], size = 10)  
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  20000000 - 5, s = dic["text"], size = 10)  
 
     plt.axvline(x=pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  19000000 - 8, s = 'End\n1st Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  19000000 - 8, s = t_end_1round, size = 10)  
     plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  19000000 - 8, s = 'End\n2nd Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  19000000 - 8, s = t_end_2round, size = 10)  
     
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
     ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: formatter_millions(int(x))))
-    plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+
+    #Ingles
+    # plt.ylabel("Millions (m)", multialignment='center', color='black', fontsize=12)
+    # plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+    plt.ylabel("Milhões (m)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Data", multialignment='center', color='black', fontsize=12)
 
     plt.show()
 
@@ -613,7 +670,9 @@ def plot_score():
     count_x = len(models.data_reader.candidates[i_bolsonaro].ibope_score)
 
     fig, ax = plt.subplots()
-    plt.suptitle('Score')  
+    # Ingles
+    # plt.suptitle('Score')
+    plt.suptitle('Intenção de Voto')  
     plt.plot('x', 'bolsonaro_score', data=df, marker='o', color="green", ls='-', alpha=0.7, label='Jair Bolsonaro')
     plt.plot('x', 'haddad_score', data=df, marker='o', color="red", alpha=0.7, label='Fernando Haddad')  
     plt.plot('x', 'ciro_score', data=df, marker='o', color="orange", alpha=0.7, label='Ciro Gomes')
@@ -626,20 +685,25 @@ def plot_score():
     for dic in dic_lines["points"]:
         plt.axvline(x=dic["x"], color='gray', linestyle='--', alpha=0.5)
 
-        if(dic["text"] == "Judgment\n   Lula "):
+        if(dic["text"] == t_judg_lula):
             plt.text(x = dic["x"] - dic["negative"], y =  52, s = dic["text"], size = 10)  
         else:               
             plt.text(x = dic["x"] - dic["negative"], y =  52, s = dic["text"], size = 10)  
 
     plt.axvline(x=pos_result_1_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  52, s = 'End\n1st Round', size = 10)  
+    plt.text(x = pos_result_1_round - 0.5 - dic["negative"], y =  52, s = t_end_1round, size = 10)  
     plt.axvline(x=pos_result_2_round - 0.5, color='gray', linestyle='--', alpha=0.5) 
-    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  54, s = 'End\n2nd Round', size = 10)  
+    plt.text(x = pos_result_2_round - 0.5 - dic["negative"], y =  54, s = t_end_2round, size = 10)  
     
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)    
-    plt.ylabel("Score (%)", multialignment='center', color='black', fontsize=12)
-    plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), fancybox=True, shadow=True, ncol=5)
+    # Data    
+    # plt.ylabel("Score (%)", multialignment='center', color='black', fontsize=12)
+    # plt.xlabel("Date", multialignment='center', color='black', fontsize=12)
+    plt.ylabel("Pontuação (%)", multialignment='center', color='black', fontsize=12)
+    plt.xlabel("Data", multialignment='center', color='black', fontsize=12)
+
     plt.show()
+
 
 def cal_correlation():
 
@@ -694,8 +758,7 @@ def cal_correlacao_region(i, pt_ini, qtd_ptos):
     corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_nordeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_nordeste[pt_ini:qtd_ptos])
     print('IBOPE Nordeste: ' + str(corr))
     
-    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_c
-    [pt_ini:qtd_ptos])
+    corr, p_value = spearmanr(models.data_reader.candidates[i].dfolha_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
     print('DFolha Centro-Oeste/Norte: ' + str(corr))
     corr, p_value = spearmanr(models.data_reader.candidates[i].ibope_norte_coeste[pt_ini:qtd_ptos], models.data_reader.candidates[i].facebook_norte_coeste[pt_ini:qtd_ptos])
     print('IBOPE Centro-Oeste/Norte: ' + str(corr))
